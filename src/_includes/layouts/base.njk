@@ -18,6 +18,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#070b14">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  {%- if page.url == "/" %}
+  <script type="application/ld+json">{{ profile | personJsonLd(resume) | safe }}</script>
+  {%- endif %}
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}: {{ site.updatesTitle }}" href="/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

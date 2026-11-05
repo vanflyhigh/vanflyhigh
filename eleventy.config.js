@@ -78,6 +78,38 @@ export default function (eleventyConfig) {
     String(html || "").replace(/\b(src|href)="(\/[^"/][^"]*|\/)"/g, (_, attr, path) => `${attr}="${origin}${joinPrefix(path)}"`),
   );
 
+  // Structured data (schema.org) so search engines understand who the site is about.
+  eleventyConfig.addFilter("personJsonLd", (profile = {}, resume = {}) => {
+    const abs = (path) => (/^https?:\/\//i.test(path || "") ? path : origin + joinPrefix(path || "/"));
+    const job = (resume.experience || [])[0];
+    const sameAs = (profile.contacts || [])
+      .map((c) => String((c && c.url) || "").trim())
+      .filter((u) => /^https?:\/\//i.test(u));
+    const data = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": abs("/") + "#person",
+          name: profile.name,
+          alternateName: profile.shortName,
+          jobTitle: profile.role,
+          description: profile.summary,
+          url: abs("/"),
+          image: profile.photo ? abs(profile.photo) : undefined,
+          email: profile.email ? `mailto:${profile.email}` : undefined,
+          homeLocation: profile.location ? { "@type": "Place", name: profile.location } : undefined,
+          worksFor: job ? { "@type": "Organization", name: job.organization } : undefined,
+          alumniOf: (resume.education || []).map((e) => ({ "@type": "EducationalOrganization", name: e.school })),
+          knowsAbout: [...((resume.skills || {}).professional || []), ...((resume.skills || {}).tools || [])],
+          sameAs: sameAs.length ? sameAs : undefined,
+        },
+        { "@type": "WebSite", "@id": abs("/") + "#website", url: abs("/"), name: profile.name, publisher: { "@id": abs("/") + "#person" } },
+      ],
+    };
+    return JSON.stringify(data).replace(/</g, "\\u003c");
+  });
+
   eleventyConfig.addFilter("md", (text) => (text ? md.render(String(text)) : ""));
   eleventyConfig.addFilter("mdInline", (text) => (text ? md.renderInline(String(text)) : ""));
 
