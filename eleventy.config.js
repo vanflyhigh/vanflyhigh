@@ -3,7 +3,10 @@ import markdownIt from "markdown-it";
 
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 const pathPrefix = process.env.PATH_PREFIX || "/";
-const origin = (process.env.SITE_ORIGIN || "http://localhost:8080").replace(/\/$/, "");
+// GitHub Pages serves every site over HTTPS, so always link with https:// (except local previews).
+const origin = (process.env.SITE_ORIGIN || "http://localhost:8080")
+  .replace(/\/$/, "")
+  .replace(/^http:\/\/(?!localhost|127\.0\.0\.1)/i, "https://");
 
 // Markdown for posts and CMS text: line breaks behave like Blogger/Tumblr.
 const md = markdownIt({ html: true, linkify: true, typographer: true, breaks: true });
