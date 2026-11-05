@@ -14,7 +14,7 @@ bodyClass: page-contact
     <h1 class="page-title">Let's connect</h1>
     <p class="page-lead">Email is the fastest way to reach me for work. You can also find me on the platforms below.</p>
     {%- set st = profile | statusInfo %}
-    <p class="status-pill status-{{ st.key }}"><span class="status-light" aria-hidden="true"></span>{{ st.label }}{% if st.note %} · {{ st.note }}{% endif %}</p>
+    <p class="status-pill status-{{ st.key }}"><span class="status-light" aria-hidden="true"></span>{{ st.label }}{% if st.hireable and st.jobTypes | length %} · {{ st.jobTypes | join(" / ") }}{% endif %}{% if st.note %} · {{ st.note }}{% endif %}</p>
   </div>
 </section>
 

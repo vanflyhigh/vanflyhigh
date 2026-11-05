@@ -20,6 +20,10 @@
   "resumeFile": "/files/Van-Fontanilla-Resume.pdf",
   "status": "open",
   "statusNote": "",
+  "jobTypes": [
+    "full-time",
+    "part-time"
+  ],
   "contacts": [],
   "highlights": [
     {

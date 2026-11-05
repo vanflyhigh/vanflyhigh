@@ -127,12 +127,20 @@ collections:
             label: Status (home page)
             widget: select
             default: open
-            hint: Busy and On vacation hide the Hire me buttons; your resume stays reachable from the menu.
+            hint: Busy and On vacation hide the Hire me button; your resume stays in the menu.
             options:
               - { label: Open to opportunities, value: open }
-              - { label: Open to opportunities (part-time), value: part-time }
               - { label: Busy, value: busy }
               - { label: On vacation, value: vacation }
+          - name: jobTypes
+            label: Job preference (shown when Open to opportunities)
+            widget: select
+            multiple: true
+            required: false
+            default: [full-time, part-time]
+            options:
+              - { label: Full-time, value: full-time }
+              - { label: Part-time, value: part-time }
           - name: statusNote
             label: Status note (optional)
             widget: string

@@ -25,12 +25,19 @@ bodyClass: page-home
           <h2 id="status-title">Status</h2>
           <span class="card-icon card-icon-status">{{ icon(st.icon) }}</span>
         </header>
-        <div class="status-now">
-          <div>
-            <p class="status-label"><span class="status-light" aria-hidden="true"></span><span>{{ st.label }}</span></p>
-            {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
+        <div class="status-top">
+          <p class="status-label"><span class="status-light" aria-hidden="true"></span><span>{{ st.label }}</span></p>
+          {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
+          {%- if st.hireable and st.jobTypes | length %}
+          <div class="job-pref">
+            <span class="status-tile-label">Job preference</span>
+            <ul class="job-tags">
+              {%- for t in st.jobTypes %}<li>{{ icon("check") }}{{ t }}</li>{% endfor %}
+            </ul>
           </div>
+          {%- endif %}
         </div>
+        <div class="status-bottom">
         <ul class="status-tiles">
           <li hidden data-local-time-wrap>
             <span class="status-tile-label">{{ icon("clock") }}Local time</span>
@@ -47,6 +54,7 @@ bodyClass: page-home
           <a class="btn btn-hire" href="/resume/">Hire me</a>
           {%- endif %}
           <a class="btn btn-ghost" href="/contact/">Contact me</a>
+        </div>
         </div>
       </section>
 

@@ -138,13 +138,20 @@ export default function (eleventyConfig) {
   // Work status chosen in the admin. Busy / vacation hide the "Hire me" buttons.
   const STATUSES = {
     open: { label: "Open to opportunities", hireable: true, icon: "briefcase" },
-    "part-time": { label: "Open to opportunities (part-time)", hireable: true, icon: "briefcase" },
     busy: { label: "Busy", hireable: false, icon: "clock" },
     vacation: { label: "On vacation", hireable: false, icon: "sun" },
   };
+  const JOB_TYPES = { "full-time": "Full-time", "part-time": "Part-time" };
   eleventyConfig.addFilter("statusInfo", (profile = {}) => {
+    // "part-time" was an older status option; it now means open + a part-time preference.
     const key = STATUSES[profile.status] ? profile.status : "open";
-    return { key, ...STATUSES[key], note: String(profile.statusNote || "").trim() };
+    const types = Array.isArray(profile.jobTypes) ? profile.jobTypes : profile.status === "part-time" ? ["part-time"] : [];
+    return {
+      key,
+      ...STATUSES[key],
+      note: String(profile.statusNote || "").trim(),
+      jobTypes: Object.keys(JOB_TYPES).filter((t) => types.includes(t)).map((t) => JOB_TYPES[t]),
+    };
   });
   eleventyConfig.addFilter("withUrl", (links) => (links || []).filter((l) => l.url));
   eleventyConfig.addFilter("prettyUrl", (url) =>
