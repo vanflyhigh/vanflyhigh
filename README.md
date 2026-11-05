@@ -2,8 +2,8 @@
 
 My personal website: a portfolio built from my resume, plus **Life Updates**, a photo blog (like Blogger or Tumblr) that I post to from a private admin dashboard.
 
-- **Live site:** https://vanflyhigh.github.io/vanflyhigh/
-- **Admin dashboard:** https://vanflyhigh.github.io/vanflyhigh/admin/
+- **Live site:** https://vanfontanilla.com
+- **Admin dashboard:** https://vanfontanilla.com/admin/
 
 | Page | What's on it |
 | --- | --- |
@@ -34,7 +34,7 @@ The site publishes from `main`. On GitHub:
 2. Under **Build and deployment → Source**, choose **GitHub Actions**.
 3. Go to the **Actions** tab, open **Deploy site**, and click **Run workflow** (or push any change to `main`).
 
-After about a minute the site is live at `https://vanflyhigh.github.io/vanflyhigh/`.
+After about a minute the site is live. (It now uses the custom domain **vanfontanilla.com**; the old `vanflyhigh.github.io/vanflyhigh` address redirects there.)
 
 ### 3. Create your admin key (a GitHub access token)
 
@@ -49,7 +49,7 @@ The dashboard signs in with a GitHub token that can only edit this one repositor
 
 ### 4. Sign in
 
-Open **https://vanflyhigh.github.io/vanflyhigh/admin/**, click **Sign In Using Access Token**, and paste the token. Your browser remembers you.
+Open **https://vanfontanilla.com/admin/**, click **Sign In Using Access Token**, and paste the token. Your browser remembers you.
 
 > **On your phone:** once you're signed in on a computer, open your account menu (top right of the dashboard) and choose **Sign In with Mobile**, then scan the QR code with your phone. Or just paste the token on your phone.
 

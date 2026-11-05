@@ -17,8 +17,8 @@ backend:
 
 app_title: Van's Admin
 logo:
-  src: https://vanflyhigh.github.io/vanflyhigh/favicon.svg
-site_url: https://vanflyhigh.github.io/vanflyhigh
+  src: https://vanfontanilla.com/favicon.svg
+site_url: https://vanfontanilla.com
 show_preview_links: true
 
 media_folder: src/images/uploads
