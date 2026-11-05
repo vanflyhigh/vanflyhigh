@@ -3,7 +3,8 @@ layout: layouts/base.njk
 bodyClass: page-home
 ---
 {%- from "partials/macros.njk" import icon %}
-{%- set latest = collections.updates | limit(3) %}
+{%- set latest = collections.updates | limit(4) %}
+{%- set st = profile | statusInfo %}
 {%- set current = resume.experience[0] %}
 {%- set tags = profile.taglines if (profile.taglines and profile.taglines | length) else [profile.role] %}
 
@@ -17,6 +18,37 @@ bodyClass: page-home
       <figure class="card card-photo">
         <img src="{{ profile.photo }}" alt="Portrait of {{ profile.name }}" width="360" height="360" data-position="{{ profile.photoPosition or 'center' }}">
       </figure>
+
+      {#- Status: the big card at the top -#}
+      <section class="card card-status status-{{ st.key }}" id="status" aria-labelledby="status-title">
+        <header class="card-head">
+          <h2 id="status-title">Status</h2>
+          <span class="card-icon card-icon-status">{{ icon(st.icon) }}</span>
+        </header>
+        <div class="status-now">
+          <div>
+            <p class="status-label"><span class="status-light" aria-hidden="true"></span><span>{{ st.label }}</span></p>
+            {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
+          </div>
+        </div>
+        <ul class="status-tiles">
+          <li hidden data-local-time-wrap>
+            <span class="status-tile-label">{{ icon("clock") }}Local time</span>
+            <strong data-local-time data-tz="{{ site.timezone }}"></strong>
+            <span class="status-tile-sub">Philippines (UTC+8)</span>
+          </li>
+          <li>
+            <span class="status-tile-label">{{ icon("pin") }}Based in</span>
+            <strong class="status-tile-place">{{ profile.location }}</strong>
+          </li>
+        </ul>
+        <div class="status-actions{% if not st.hireable %} is-single{% endif %}">
+          {%- if st.hireable %}
+          <a class="btn btn-hire" href="/resume/">Hire me</a>
+          {%- endif %}
+          <a class="btn btn-ghost" href="/contact/">Contact me</a>
+        </div>
+      </section>
 
       {#- Moving ribbons with the roles -#}
       <div class="card card-ribbon">
@@ -81,7 +113,7 @@ bodyClass: page-home
             </a>
           </li>
           {%- endfor %}
-          {%- for i in range(latest | length, 3) %}
+          {%- for i in range(latest | length, 4) %}
           <li class="thumb-soon" aria-hidden="true"><span class="thumb-media thumb-empty"></span><span class="thumb-title">More soon</span></li>
           {%- endfor %}
         </ul>
@@ -125,31 +157,6 @@ bodyClass: page-home
       </section>
       {%- endif %}
 
-      {#- Status -#}
-      {%- set st = profile | statusInfo %}
-      <section class="card card-status status-{{ st.key }}" id="status" aria-labelledby="status-title">
-        <header class="card-head">
-          <h2 id="status-title">Status</h2>
-          <span class="card-icon">{{ icon(st.icon) }}</span>
-        </header>
-        <div class="status-now">
-          <span class="status-light" aria-hidden="true"></span>
-          <div>
-            <p class="status-label">{{ st.label }}</p>
-            {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
-          </div>
-        </div>
-        <ul class="status-facts">
-          <li>{{ icon("pin") }}<span>{{ profile.location }}</span></li>
-          <li hidden data-local-time-wrap>{{ icon("clock") }}<span><span data-local-time data-tz="{{ site.timezone }}"></span> local time</span></li>
-        </ul>
-        <div class="status-actions">
-          {%- if st.hireable %}
-          <a class="btn btn-hire btn-block" href="/resume/">Hire me</a>
-          {%- endif %}
-          <a class="btn btn-ghost btn-block" href="/contact/">Contact me</a>
-        </div>
-      </section>
     </div>
   </div>
 </section>

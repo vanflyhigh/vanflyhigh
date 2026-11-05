@@ -241,7 +241,7 @@ figure { margin: 0; }
 .bento {
   display: grid; gap: 12px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "ribbon" "skills" "featured" "status" "updates" "services" "interests";
+  grid-template-areas: "photo" "status" "ribbon" "skills" "featured" "updates" "services" "interests";
 }
 .card-photo { grid-area: photo; }
 .card-ribbon { grid-area: ribbon; }
@@ -258,8 +258,8 @@ figure { margin: 0; }
     grid-template-areas:
       "photo photo photo ribbon ribbon ribbon"
       "photo photo photo skills skills skills"
-      "featured featured featured featured featured featured"
       "status status status status status status"
+      "featured featured featured featured featured featured"
       "updates updates updates updates updates updates"
       "services services services services services services"
       "interests interests interests interests interests interests";
@@ -269,9 +269,9 @@ figure { margin: 0; }
   .bento {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-areas:
-      "photo photo photo ribbon ribbon ribbon featured featured featured featured featured featured"
-      "photo photo photo skills skills skills featured featured featured featured featured featured"
-      "updates updates updates updates updates updates updates updates status status status status"
+      "photo photo photo ribbon ribbon ribbon status status status status status status"
+      "photo photo photo skills skills skills status status status status status status"
+      "featured featured featured featured featured featured featured updates updates updates updates updates"
       "services services services services services services services services interests interests interests interests";
   }
 }
@@ -409,21 +409,43 @@ figure { margin: 0; }
 }
 @keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
 
-.card-status { display: flex; flex-direction: column; }
-.card-status .card-icon { color: var(--status); }
-.status-now {
-  display: flex; align-items: flex-start; gap: 14px; padding: 16px; border-radius: 14px;
-  background: color-mix(in srgb, var(--status) 9%, var(--surface-2));
-  border: 1px solid color-mix(in srgb, var(--status) 32%, transparent);
+.card-status {
+  display: flex; flex-direction: column; gap: 14px; padding: 22px;
+  border-color: color-mix(in srgb, var(--status) 30%, var(--line));
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--status) 16%, transparent), transparent 60%),
+    var(--surface);
 }
-.status-now .status-light { margin-top: 7px; }
-.status-label { font-family: var(--font-head); font-weight: 700; font-size: 1.12rem; line-height: 1.3; }
-.status-note { color: var(--ink-2); font-size: 0.9rem; margin-top: 4px; }
-.status-facts { list-style: none; display: grid; gap: 8px; margin: 16px 0 18px; color: var(--muted); font-size: 0.88rem; }
-.status-facts li { display: flex; align-items: flex-start; gap: 8px; }
-.status-facts li[hidden] { display: none; }
-.status-facts svg { width: 16px; height: 16px; flex: none; margin-top: 2px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.status-actions { margin-top: auto; display: grid; gap: 8px; }
+.card-status:hover { border-color: color-mix(in srgb, var(--status) 55%, transparent); }
+.card-status .card-head { margin-bottom: 0; }
+.card-icon-status {
+  color: var(--status); border: 1px solid color-mix(in srgb, var(--status) 50%, transparent);
+  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--status) 70%, transparent);
+}
+.status-now {
+  flex: 1; min-height: 120px; display: flex; align-items: center; gap: 18px; padding: 24px 22px; border-radius: 16px;
+  background: color-mix(in srgb, var(--status) 10%, var(--surface-2));
+  border: 1px solid color-mix(in srgb, var(--status) 35%, transparent);
+}
+.status-label {
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--font-head); font-weight: 800; line-height: 1.12; letter-spacing: -0.015em;
+  font-size: clamp(1.45rem, 1.05rem + 1.5vw, 2.2rem);
+}
+.status-label .status-light { width: 18px; height: 18px; }
+.status-note { color: var(--ink-2); font-size: 1rem; margin-top: 8px; padding-left: 34px; }
+
+.status-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.status-tiles li { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.status-tiles li[hidden] { display: none; }
+.status-tile-label { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.status-tile-label svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.status-tiles strong { font-family: var(--font-head); font-weight: 700; font-size: 1.6rem; line-height: 1.15; }
+.status-tiles .status-tile-place { font-size: 1.02rem; line-height: 1.35; }
+.status-tile-sub { color: var(--muted); font-size: 0.8rem; }
+
+.status-actions { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+.status-actions .btn { min-height: 50px; }
 
 .status-pill {
   display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
@@ -434,7 +456,8 @@ figure { margin: 0; }
 .status-pill .status-light { width: 10px; height: 10px; }
 
 /* Life updates thumbnails */
-.thumbs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.thumbs { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (min-width: 680px) and (max-width: 1039px) { .thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .thumb { display: grid; gap: 8px; text-decoration: none; }
 .thumb-soon { display: grid; gap: 8px; align-content: start; }
 .thumb-media {
