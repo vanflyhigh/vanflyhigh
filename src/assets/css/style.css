@@ -180,7 +180,6 @@ figure { margin: 0; }
 }
 
 .header-actions { display: flex; align-items: center; gap: 8px; }
-.header-actions .btn-hire[aria-current="page"] { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
 .nav-toggle { display: none; }
 
 .theme-toggle .icon-sun { display: none; }

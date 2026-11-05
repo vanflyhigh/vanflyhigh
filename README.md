@@ -8,7 +8,7 @@ My personal website: a portfolio built from my resume, plus **Life Updates**, a 
 | Page | What's on it |
 | --- | --- |
 | `/` | Home: photo, roles, skills, current role, status, latest life updates, what I do, interests |
-| `/resume/` | **Hire me**: full resume with Print resume and PDF download |
+| `/resume/` | Full resume with a PDF view/download button |
 | `/contact/` | Email, location, resume and every social/contact link |
 | `/updates/` | Life Updates feed with photo grids, captions, tags and a lightbox |
 | `/updates/<post>/` | A single post with every photo and caption |
@@ -81,7 +81,7 @@ In `/admin/` → **Status, Profile & Resume**:
   - **Job preference**: tick Full-time and/or Part-time; shown under your status while you're open to opportunities.
   - **Profile photo** and its position in the frame, name, job title, ribbon words, current-role description, location, email, phone.
   - **Contact & social links**: add Facebook, Facebook Page, Instagram, Steam, LinkedIn, TikTok, Discord and more. They appear on the **Contact** page; the first five with a link also show on the home page. Leave the link empty to show a username with a **Copy** button (handy for Discord).
-  - **Resume PDF**: used by the **Print resume** and **View / download PDF** buttons.
+  - **Resume PDF**: used by the **View / download PDF** button on the Resume page.
   - Highlight numbers, **What I do** cards, and **Interests** (pick an icon for each).
 - **Resume**: jobs, responsibilities, education, certifications, skills, and languages.
 - **Site Settings**: site title, the description shown on Google and in link previews, blog name, and intro.

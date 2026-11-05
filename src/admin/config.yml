@@ -182,7 +182,7 @@ collections:
             widget: string
             required: false
           - name: resumeFile
-            label: Resume PDF (for the Print resume and Download buttons)
+            label: Resume PDF (for the View / download PDF button)
             widget: file
             required: false
             accept: application/pdf

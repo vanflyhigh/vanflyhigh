@@ -1,4 +1,4 @@
-// Small enhancements: theme toggle, mobile menu, photo lightbox, print, copy link.
+// Small enhancements: theme toggle, mobile menu, photo lightbox, copy buttons, local time.
 (function () {
   "use strict";
 
@@ -48,54 +48,6 @@
   }
 
   // ---------- Print + copy link ----------
-  document.querySelectorAll("[data-print]").forEach((btn) => btn.addEventListener("click", () => window.print()));
-
-  // "Print resume": load the resume PDF in a hidden frame and open the print dialog for it.
-  // Phones and Safari can't print a PDF that way, so there the link simply opens the PDF,
-  // and the browser's PDF viewer has its own print/share button.
-  const ua = navigator.userAgent;
-  const isTouchMac = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(ua) || isTouchMac;
-  const isSafari = /^((?!chrome|chromium|crios|fxios|edg|android).)*safari/i.test(ua);
-  document.querySelectorAll("[data-print-pdf]").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      if (isMobile || isSafari) return;
-      e.preventDefault();
-      const url = link.href;
-      const old = document.getElementById("pdf-print-frame");
-      if (old) old.remove();
-      const frame = document.createElement("iframe");
-      frame.id = "pdf-print-frame";
-      frame.title = "Resume PDF for printing";
-      frame.style.cssText = "position:fixed;right:0;bottom:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none";
-      frame.addEventListener("load", () => {
-        setTimeout(() => {
-          try {
-            frame.contentWindow.focus();
-            frame.contentWindow.print();
-          } catch (err) {
-            window.open(url, "_blank", "noopener");
-          }
-        }, 400);
-      });
-      frame.src = url;
-      document.body.appendChild(frame);
-    });
-  });
-
-  document.querySelectorAll("[data-copy-link]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const original = btn.textContent;
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        btn.textContent = "Link copied!";
-      } catch (e) {
-        btn.textContent = "Copy failed";
-      }
-      setTimeout(() => (btn.textContent = original), 1800);
-    });
-  });
-
   // Local time in La Union on the Status card.
   document.querySelectorAll("[data-local-time]").forEach((el) => {
     try {
