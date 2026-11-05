@@ -3,8 +3,8 @@ title: Yo! First Website Featuring "Me" (vanfontanilla.com)
 date: 2026-11-05T09:00:00+08:00
 photos:
   - image: /images/uploads/20261105-first-website-photo-a0b995b94735.webp
-    caption: ''
-    alt: ''
+    caption: Laptop pa yan siya! Hehe
+    alt: Actual Work Setup with the "Bantay"
 tags:
   - hello
 draft: false
