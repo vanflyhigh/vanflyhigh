@@ -12,10 +12,10 @@ bodyClass: page-resume
     <p class="page-lead">{{ profile.summary }}</p>
     <div class="hero-actions no-print">
       {%- if profile.resumeFile %}
-      <a class="btn btn-primary" href="{{ profile.resumeFile }}" download>Download PDF</a>
+      <a class="btn btn-primary" href="{{ profile.resumeFile }}" target="_blank" rel="noopener" data-print-pdf>Print resume</a>
+      <a class="btn btn-ghost" href="{{ profile.resumeFile }}" target="_blank" rel="noopener">View / download PDF</a>
       {%- endif %}
       <a class="btn {% if profile.resumeFile %}btn-ghost{% else %}btn-primary{% endif %}" href="mailto:{{ profile.email }}">Email me</a>
-      <button class="btn btn-ghost" type="button" data-print>Print this page</button>
     </div>
   </div>
 </section>

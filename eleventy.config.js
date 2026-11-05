@@ -24,6 +24,7 @@ export default function (eleventyConfig) {
     "src/assets": "assets",
     "src/images": "images",
     "src/admin": "admin",
+    "src/files": "files",
     "src/favicon.svg": "favicon.svg",
   });
 
@@ -100,6 +101,17 @@ export default function (eleventyConfig) {
     if (typeof pageUrl !== "string" || itemUrl.includes("#")) return false;
     return itemUrl === "/" ? pageUrl === "/" : pageUrl.startsWith(itemUrl);
   });
+  // Facebook / Instagram / LinkedIn links that have been filled in (adds https:// if missing).
+  eleventyConfig.addFilter("socialLinks", (profile = {}) =>
+    [
+      { key: "facebook", label: "Facebook", icon: "facebook" },
+      { key: "instagram", label: "Instagram", icon: "instagram" },
+      { key: "linkedin", label: "LinkedIn", icon: "linkedin" },
+    ]
+      .map((s) => ({ ...s, url: String(profile[s.key] || "").trim() }))
+      .filter((s) => s.url)
+      .map((s) => ({ ...s, url: /^https?:\/\//i.test(s.url) ? s.url : `https://${s.url.replace(/^\/+/, "")}` })),
+  );
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
   eleventyConfig.addFilter("cleanTags", (tags) =>
     (Array.isArray(tags) ? tags : []).filter((t) => typeof t === "string" && t.trim()).map((t) => t.trim()),

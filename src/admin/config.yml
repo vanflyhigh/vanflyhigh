@@ -140,10 +140,6 @@ collections:
           - { name: name, label: Full name, widget: string }
           - { name: shortName, label: Short name (logo & nav), widget: string }
           - { name: role, label: Job title, widget: string }
-          - name: headline
-            label: Short intro (About card on the home page)
-            widget: text
-            hint: "Shown after \"Hi, I'm Van.\" Keep it to one or two sentences."
           - name: taglines
             label: Ribbon words (moving banner on the home page)
             label_singular: Word
@@ -163,23 +159,33 @@ collections:
             widget: string
             required: false
           - name: resumeFile
-            label: Resume PDF (optional, adds a Download button)
+            label: Resume PDF (for the Print resume and Download buttons)
             widget: file
             required: false
             accept: application/pdf
+            choose_url: false
+            media_folder: /src/files
+            public_folder: /files
+            hint: Upload a new PDF here whenever you update your resume.
           - name: availability
             label: Status badge (leave empty to hide)
             widget: string
             required: false
-          - name: socials
-            label: Social links
-            label_singular: Link
-            widget: list
+          - name: facebook
+            label: Facebook link
+            widget: string
             required: false
-            summary: "{{fields.label}}"
-            fields:
-              - { name: label, label: Label, widget: string, hint: "e.g. LinkedIn, Facebook, Instagram" }
-              - { name: url, label: URL, widget: string }
+            hint: "Paste your full profile link, e.g. https://www.facebook.com/yourname. Leave empty to hide the icon."
+          - name: instagram
+            label: Instagram link
+            widget: string
+            required: false
+            hint: "e.g. https://www.instagram.com/yourname"
+          - name: linkedin
+            label: LinkedIn link
+            widget: string
+            required: false
+            hint: "e.g. https://www.linkedin.com/in/yourname"
           - name: highlights
             label: Highlight numbers (Current Role card)
             label_singular: Highlight

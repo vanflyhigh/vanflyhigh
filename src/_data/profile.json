@@ -2,7 +2,6 @@
   "name": "Van David Niccolo Fontanilla",
   "shortName": "Van Fontanilla",
   "role": "IT Professional",
-  "headline": "I keep hospital networks running, turn data into decisions, and bring a designer's eye to everything I build.",
   "taglines": [
     "IT Professional",
     "Network & Security",
@@ -18,14 +17,11 @@
   "location": "San Fernando City, La Union, Philippines",
   "email": "vanfontanillavf@gmail.com",
   "phone": "",
-  "resumeFile": "",
+  "resumeFile": "/files/Van-Fontanilla-Resume.pdf",
   "availability": "Open to IT opportunities",
-  "socials": [
-    {
-      "label": "GitHub",
-      "url": "https://github.com/vanflyhigh"
-    }
-  ],
+  "facebook": "",
+  "instagram": "",
+  "linkedin": "",
   "highlights": [
     {
       "value": "~10",

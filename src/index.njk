@@ -2,10 +2,10 @@
 layout: layouts/base.njk
 bodyClass: page-home
 ---
-{%- from "partials/macros.njk" import icon, socialIcon %}
+{%- from "partials/macros.njk" import icon %}
 {%- set latest = collections.updates | limit(3) %}
 {%- set current = resume.experience[0] %}
-{%- set firstName = profile.name | firstWords(1) %}
+{%- set socialLinks = profile | socialLinks %}
 {%- set tags = profile.taglines if (profile.taglines and profile.taglines | length) else [profile.role] %}
 
 <section class="home">
@@ -64,19 +64,6 @@ bodyClass: page-home
       </section>
       {%- endif %}
 
-      {#- About -#}
-      <section class="card card-about" aria-labelledby="about-title">
-        <header class="card-head">
-          <h2 id="about-title">About</h2>
-          <a class="card-icon card-icon-link" href="/resume/" aria-label="Read my full resume">{{ icon("arrow") }}</a>
-        </header>
-        <p><strong>Hi, I'm {{ firstName }}.</strong> {{ profile.headline }}</p>
-        <p>Currently based in {{ profile.location }}.</p>
-        {%- if profile.availability %}
-        <p class="avail"><span class="status-dot" aria-hidden="true"></span>{{ profile.availability }}</p>
-        {%- endif %}
-      </section>
-
       {#- Life updates -#}
       <section class="card card-updates" aria-labelledby="updates-title">
         <header class="card-head">
@@ -99,23 +86,6 @@ bodyClass: page-home
           <li class="thumb-soon" aria-hidden="true"><span class="thumb-media thumb-empty"></span><span class="thumb-title">More soon</span></li>
           {%- endfor %}
         </ul>
-      </section>
-
-      {#- Experience -#}
-      <section class="card card-exp" aria-labelledby="exp-title">
-        <header class="card-head">
-          <h2 id="exp-title"><a href="/resume/">Experience</a></h2>
-          <span class="card-icon">{{ icon("briefcase") }}</span>
-        </header>
-        <ol class="exp-list">
-          {%- for job in resume.experience %}
-          <li>
-            <span class="exp-role">{{ job.role }}</span>
-            <span class="exp-years">{{ job.start }}{% if job.end and job.end != job.start %}–{{ job.end }}{% endif %}</span>
-            <span class="exp-org">{{ job.organization }}</span>
-          </li>
-          {%- endfor %}
-        </ol>
       </section>
 
       {#- What I do -#}
@@ -145,12 +115,13 @@ bodyClass: page-home
           <h2 id="contact-title">Contact</h2>
           <span class="card-icon">{{ icon("mail") }}</span>
         </header>
+        {%- if profile.availability %}
+        <p class="avail"><span class="status-dot" aria-hidden="true"></span>{{ profile.availability }}</p>
+        {%- endif %}
         <ul class="social-row">
           <li><a class="social-btn" href="mailto:{{ profile.email }}" aria-label="Email">{{ icon("mail") }}</a></li>
-          {%- for social in profile.socials %}
-          {%- if social.url %}
-          <li><a class="social-btn" href="{{ social.url }}" target="_blank" rel="me noopener" aria-label="{{ social.label }}">{{ socialIcon(social) }}</a></li>
-          {%- endif %}
+          {%- for social in socialLinks %}
+          <li><a class="social-btn" href="{{ social.url }}" target="_blank" rel="me noopener" aria-label="{{ social.label }}">{{ icon(social.icon) }}</a></li>
           {%- endfor %}
         </ul>
         <a class="contact-email" href="mailto:{{ profile.email }}">{{ profile.email }}</a>

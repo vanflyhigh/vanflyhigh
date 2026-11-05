@@ -241,15 +241,13 @@ figure { margin: 0; }
 .bento {
   display: grid; gap: 12px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "about" "ribbon" "skills" "featured" "updates" "exp" "services" "contact";
+  grid-template-areas: "photo" "ribbon" "skills" "featured" "updates" "contact" "services";
 }
 .card-photo { grid-area: photo; }
 .card-ribbon { grid-area: ribbon; }
 .card-skills { grid-area: skills; }
 .card-featured { grid-area: featured; }
-.card-about { grid-area: about; }
 .card-updates { grid-area: updates; }
-.card-exp { grid-area: exp; }
 .card-services { grid-area: services; }
 .card-contact { grid-area: contact; }
 
@@ -260,9 +258,8 @@ figure { margin: 0; }
       "photo photo photo ribbon ribbon ribbon"
       "photo photo photo skills skills skills"
       "featured featured featured featured featured featured"
-      "about about about contact contact contact"
       "updates updates updates updates updates updates"
-      "exp exp exp exp exp exp"
+      "contact contact contact contact contact contact"
       "services services services services services services";
   }
 }
@@ -272,8 +269,8 @@ figure { margin: 0; }
     grid-template-areas:
       "photo photo photo ribbon ribbon ribbon featured featured featured featured featured featured"
       "photo photo photo skills skills skills featured featured featured featured featured featured"
-      "about about about updates updates updates updates updates exp exp exp exp"
-      "services services services services services services services services contact contact contact contact";
+      "updates updates updates updates updates updates updates updates contact contact contact contact"
+      "services services services services services services services services services services services services";
   }
 }
 
@@ -370,11 +367,8 @@ figure { margin: 0; }
 @keyframes flow { to { stroke-dashoffset: -24; } }
 @keyframes pulse { 50% { opacity: 0.35; } }
 
-/* About */
-.card-about p { color: var(--ink-2); font-size: 0.95rem; }
-.card-about p + p { margin-top: 12px; }
-.card-about strong { color: var(--ink); }
-.card-about .avail { display: flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 500; }
+/* Availability badge (contact card) */
+.avail { display: flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 500; font-size: 0.92rem; margin-bottom: 14px; }
 .status-dot {
   width: 9px; height: 9px; border-radius: 50%; background: var(--good); flex: none;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--good) 22%, transparent);
@@ -405,16 +399,10 @@ figure { margin: 0; }
 .thumb:hover .thumb-title { color: var(--ink); }
 .thumb-soon .thumb-title { color: var(--muted); }
 
-/* Experience */
-.exp-list { list-style: none; display: grid; gap: 14px; }
-.exp-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1px 12px; }
-.exp-role { font-weight: 600; font-size: 0.9rem; line-height: 1.35; }
-.exp-years { grid-column: 2; grid-row: 1; font-size: 0.78rem; font-weight: 600; color: var(--accent-2-ink); white-space: nowrap; padding-top: 1px; }
-.exp-org { grid-column: 1 / -1; font-size: 0.8rem; color: var(--muted); line-height: 1.35; }
-
 /* What I do */
 .services { list-style: none; display: grid; gap: 14px; }
 @media (min-width: 560px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; } }
+@media (min-width: 1040px) { .services { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 22px; } }
 .services li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
 .services h3 { font-size: 0.95rem; font-weight: 600; }
 .services p { font-size: 0.85rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
