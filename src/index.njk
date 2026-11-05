@@ -19,43 +19,67 @@ bodyClass: page-home
         <img src="{{ profile.photo }}" alt="Portrait of {{ profile.name }}" width="360" height="360" data-position="{{ profile.photoPosition or 'center' }}">
       </figure>
 
-      {#- Status: the big card at the top -#}
+      {#- Status: compact box -#}
       <section class="card card-status status-{{ st.key }}" id="status" aria-labelledby="status-title">
         <header class="card-head">
           <h2 id="status-title">Status</h2>
           <span class="card-icon card-icon-status">{{ icon(st.icon) }}</span>
         </header>
-        <div class="status-top">
-          <p class="status-label"><span class="status-light" aria-hidden="true"></span><span>{{ st.label }}</span></p>
-          {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
-          {%- if st.hireable and st.jobTypes | length %}
-          <div class="job-pref">
-            <span class="status-tile-label">Job preference</span>
-            <ul class="job-tags">
-              {%- for t in st.jobTypes %}<li>{{ icon("check") }}{{ t }}</li>{% endfor %}
-            </ul>
-          </div>
-          {%- endif %}
-        </div>
-        <div class="status-bottom">
-        <ul class="status-tiles">
-          <li hidden data-local-time-wrap>
-            <span class="status-tile-label">{{ icon("clock") }}Local time</span>
-            <strong data-local-time data-tz="{{ site.timezone }}"></strong>
-            <span class="status-tile-sub">Philippines (UTC+8)</span>
-          </li>
-          <li>
-            <span class="status-tile-label">{{ icon("pin") }}Based in</span>
-            <strong class="status-tile-place">{{ profile.location }}</strong>
-          </li>
+        <p class="status-label"><span class="status-light" aria-hidden="true"></span><span>{{ st.label }}</span></p>
+        {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
+        {%- if st.hireable and st.jobTypes | length %}
+        <ul class="job-tags" aria-label="Job preference">
+          {%- for t in st.jobTypes %}<li>{{ icon("check") }}{{ t }}</li>{% endfor %}
         </ul>
-        <div class="status-actions{% if not st.hireable %} is-single{% endif %}">
-          {%- if st.hireable %}
-          <a class="btn btn-hire" href="/resume/">Hire me</a>
-          {%- endif %}
-          <a class="btn btn-ghost" href="/contact/">Contact me</a>
-        </div>
-        </div>
+        {%- endif %}
+        <p class="status-time" hidden data-local-time-wrap>{{ icon("clock") }}<span><span data-local-time data-tz="{{ site.timezone }}"></span> in La Union</span></p>
+        {%- if st.hireable %}
+        <a class="btn btn-hire btn-small btn-block status-btn" href="/resume/">Hire me</a>
+        {%- else %}
+        <a class="btn btn-ghost btn-small btn-block status-btn" href="/contact/">Contact me</a>
+        {%- endif %}
+      </section>
+
+      {#- Life updates: the big card at the top -#}
+      <section class="card card-updates" aria-labelledby="updates-title">
+        <header class="card-head">
+          <h2 id="updates-title"><a href="/updates/">{{ site.updatesTitle }}</a></h2>
+          <a class="link-arrow" href="/updates/">See all <span aria-hidden="true">→</span></a>
+        </header>
+        {%- if latest | length %}
+        {%- set hero = latest[0] %}
+        {%- set heroPhotos = hero.data.photos | validPhotos %}
+        {%- set heroCover = heroPhotos | first %}
+        <a class="update-hero" href="{{ hero.url }}">
+          <span class="update-hero-media{% if not heroCover %} thumb-empty{% endif %}">
+            {%- if heroCover %}<img src="{{ heroCover.image }}" alt="{{ heroCover.alt or heroCover.caption or hero.data.title }}" decoding="async">{% else %}{{ icon("images") }}{% endif %}
+          </span>
+          {%- if heroPhotos | length > 1 %}<span class="update-hero-count">{{ heroPhotos | length }} photos</span>{% endif %}
+          <span class="update-hero-text">
+            <span class="update-hero-badge">Latest</span>
+            <strong>{{ hero.data.title }}</strong>
+            <time datetime="{{ hero.date | isoDate }}">{{ hero.date | readableDate(site.timezone) }}</time>
+          </span>
+        </a>
+        <ul class="thumbs">
+          {%- for post in latest.slice(1, 4) %}
+          {%- set cover = (post.data.photos | validPhotos) | first %}
+          <li>
+            <a class="thumb" href="{{ post.url }}">
+              <span class="thumb-media{% if not cover %} thumb-empty{% endif %}">
+                {%- if cover %}<img src="{{ cover.image }}" alt="" loading="lazy" decoding="async">{% else %}{{ icon("images") }}{% endif %}
+              </span>
+              <span class="thumb-title">{{ post.data.title }}</span>
+            </a>
+          </li>
+          {%- endfor %}
+          {%- for i in range(latest | length, 4) %}
+          <li class="thumb-soon" aria-hidden="true"><span class="thumb-media thumb-empty"></span><span class="thumb-title">More soon</span></li>
+          {%- endfor %}
+        </ul>
+        {%- else %}
+        <p class="empty-state">No updates yet. Check back soon!</p>
+        {%- endif %}
       </section>
 
       {#- Moving ribbons with the roles -#}
@@ -103,29 +127,6 @@ bodyClass: page-home
       </section>
       {%- endif %}
 
-      {#- Life updates -#}
-      <section class="card card-updates" aria-labelledby="updates-title">
-        <header class="card-head">
-          <h2 id="updates-title"><a href="/updates/">{{ site.updatesTitle }}</a></h2>
-          <a class="card-icon card-icon-link" href="/updates/" aria-label="See all {{ site.updatesTitle }}">{{ icon("images") }}</a>
-        </header>
-        <ul class="thumbs">
-          {%- for post in latest %}
-          {%- set cover = (post.data.photos | validPhotos) | first %}
-          <li>
-            <a class="thumb" href="{{ post.url }}">
-              <span class="thumb-media{% if not cover %} thumb-empty{% endif %}">
-                {%- if cover %}<img src="{{ cover.image }}" alt="" loading="lazy" decoding="async">{% else %}{{ icon("images") }}{% endif %}
-              </span>
-              <span class="thumb-title">{{ post.data.title }}</span>
-            </a>
-          </li>
-          {%- endfor %}
-          {%- for i in range(latest | length, 4) %}
-          <li class="thumb-soon" aria-hidden="true"><span class="thumb-media thumb-empty"></span><span class="thumb-title">More soon</span></li>
-          {%- endfor %}
-        </ul>
-      </section>
 
       {#- What I do -#}
       {%- if profile.services | length %}

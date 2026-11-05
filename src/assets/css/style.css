@@ -240,7 +240,7 @@ figure { margin: 0; }
 .bento {
   display: grid; gap: 12px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "status" "ribbon" "skills" "featured" "updates" "services" "interests";
+  grid-template-areas: "photo" "status" "updates" "ribbon" "featured" "skills" "interests" "services";
 }
 .card-photo { grid-area: photo; }
 .card-ribbon { grid-area: ribbon; }
@@ -256,22 +256,22 @@ figure { margin: 0; }
     grid-template-columns: repeat(6, minmax(0, 1fr));
     grid-template-areas:
       "photo photo photo ribbon ribbon ribbon"
-      "photo photo photo skills skills skills"
-      "status status status status status status"
-      "featured featured featured featured featured featured"
+      "photo photo photo status status status"
       "updates updates updates updates updates updates"
-      "services services services services services services"
-      "interests interests interests interests interests interests";
+      "featured featured featured featured featured featured"
+      "skills skills skills interests interests interests"
+      "services services services services services services";
   }
 }
 @media (min-width: 1040px) {
   .bento {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-areas:
-      "photo photo photo ribbon ribbon ribbon status status status status status status"
-      "photo photo photo skills skills skills status status status status status status"
-      "featured featured featured featured featured featured featured updates updates updates updates updates"
-      "services services services services services services services services interests interests interests interests";
+      "photo photo photo ribbon ribbon ribbon updates updates updates updates updates updates"
+      "photo photo photo status status status updates updates updates updates updates updates"
+      "featured featured featured featured featured featured featured featured skills skills skills skills"
+      "featured featured featured featured featured featured featured featured interests interests interests interests"
+      "services services services services services services services services services services services services";
   }
 }
 
@@ -324,14 +324,14 @@ figure { margin: 0; }
 /* Featured (current role) */
 .card-featured { padding: 20px 22px 22px; display: flex; flex-direction: column; }
 .featured-body {
-  flex: 1; display: grid; gap: 18px 22px; align-content: space-between;
+  flex: 1; display: grid; gap: 22px 24px; align-content: center;
   grid-template-areas: "visual" "text" "stats";
 }
 .featured-visual { grid-area: visual; }
 .featured-text { grid-area: text; }
 .featured-body .mini-stats { grid-area: stats; margin-top: 0; }
 @media (min-width: 560px) {
-  .featured-body { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-areas: "visual text" "stats stats"; align-items: center; }
+  .featured-body { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); grid-template-areas: "visual text" "stats stats"; align-items: center; }
 }
 .featured-visual {
   padding: 8px; border-radius: 16px;
@@ -407,47 +407,36 @@ figure { margin: 0; }
 @keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
 
 .card-status {
-  display: flex; flex-direction: column; gap: 14px; padding: 22px;
+  display: flex; flex-direction: column; gap: 10px; padding: 18px;
   border-color: color-mix(in srgb, var(--status) 30%, var(--line));
   background:
-    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--status) 16%, transparent), transparent 60%),
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--status) 14%, transparent), transparent 60%),
     var(--surface);
 }
 .card-status:hover { border-color: color-mix(in srgb, var(--status) 55%, transparent); }
-.card-status .card-head { margin-bottom: 0; }
+.card-status .card-head { margin-bottom: 2px; }
 .card-icon-status {
   color: var(--status); border: 1px solid color-mix(in srgb, var(--status) 50%, transparent);
   box-shadow: 0 0 18px -4px color-mix(in srgb, var(--status) 70%, transparent);
 }
-.status-top { display: grid; gap: 10px; }
 .status-label {
-  display: flex; align-items: center; gap: 12px;
-  font-family: var(--font-head); font-weight: 600; font-size: 1.15rem; line-height: 1.3;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-weight: 600; font-size: 1rem; line-height: 1.3;
 }
-.status-label .status-light { width: 11px; height: 11px; }
-.status-note { color: var(--muted); font-size: 0.92rem; padding-left: 23px; margin-top: -4px; }
-.job-pref { display: grid; gap: 8px; margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
-.job-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.status-label .status-light { width: 10px; height: 10px; }
+.status-note { color: var(--muted); font-size: 0.84rem; line-height: 1.45; padding-left: 20px; margin-top: -4px; }
+.job-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
 .job-tags li {
-  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 9px; border-radius: 9px;
-  font-size: 0.88rem; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 7px; border-radius: 8px;
+  font-size: 0.8rem; font-weight: 600;
   background: color-mix(in srgb, var(--status) 12%, transparent); color: var(--ink);
   border: 1px solid color-mix(in srgb, var(--status) 35%, transparent);
 }
-.job-tags svg { width: 15px; height: 15px; fill: none; stroke: var(--status); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.status-bottom { margin-top: auto; display: grid; gap: 12px; }
-
-.status-tiles { list-style: none; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
-.status-tiles li { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
-.status-tiles li[hidden] { display: none; }
-.status-tile-label { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.status-tile-label svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.status-tiles strong { font-family: var(--font-head); font-weight: 600; font-size: 1.2rem; line-height: 1.2; }
-.status-tiles .status-tile-place { font-size: 0.95rem; line-height: 1.35; }
-.status-tile-sub { color: var(--muted); font-size: 0.8rem; }
-
-.status-actions { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
-.status-actions .btn { min-height: 46px; }
+.job-tags svg { width: 13px; height: 13px; fill: none; stroke: var(--status); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.status-time { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.82rem; }
+.status-time[hidden] { display: none; }
+.status-time svg { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.status-btn { margin-top: auto; }
 
 .status-pill {
   display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
@@ -457,18 +446,39 @@ figure { margin: 0; }
 }
 .status-pill .status-light { width: 10px; height: 10px; }
 
-/* Life updates thumbnails */
-.thumbs { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-@media (min-width: 680px) and (max-width: 1039px) { .thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Life updates: big latest post + thumbnails */
+.card-updates { display: flex; flex-direction: column; }
+.card-updates .card-head h2 { font-size: 1.15rem; }
+.update-hero {
+  position: relative; display: block; flex: 1; min-height: 240px; border-radius: 14px; overflow: hidden;
+  text-decoration: none; color: #fff; border: 1px solid var(--line); isolation: isolate;
+}
+.update-hero-media { position: absolute; inset: 0; display: grid; place-items: center; background: var(--surface-3); color: var(--muted); z-index: -2; }
+.update-hero-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.update-hero-media svg { width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.update-hero:hover .update-hero-media img { transform: scale(1.04); }
+.update-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 40%, rgb(3 6 12 / 0.82)); }
+.update-hero-text { position: absolute; left: 18px; right: 18px; bottom: 16px; display: grid; gap: 4px; justify-items: start; }
+.update-hero-text strong { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); line-height: 1.2; text-shadow: 0 2px 12px rgb(0 0 0 / 0.4); }
+.update-hero-text time { font-size: 0.84rem; color: rgb(255 255 255 / 0.8); }
+.update-hero-badge {
+  padding: 3px 9px; border-radius: 7px; margin-bottom: 4px;
+  background: var(--accent); color: var(--on-accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.update-hero-count {
+  position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 999px;
+  background: rgb(0 0 0 / 0.6); color: #fff; font-size: 0.76rem; font-weight: 600;
+}
+.thumbs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
 .thumb { display: grid; gap: 8px; text-decoration: none; }
 .thumb-soon { display: grid; gap: 8px; align-content: start; }
 .thumb-media {
-  display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden;
+  display: grid; place-items: center; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden;
   background: var(--surface-3); border: 1px solid var(--line); color: var(--muted);
 }
 .thumb-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
 .thumb:hover .thumb-media img { transform: scale(1.05); }
-.thumb-media svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.thumb-media svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .thumb-empty {
   background:
     radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
@@ -477,8 +487,8 @@ figure { margin: 0; }
 }
 .thumb-soon .thumb-empty { opacity: 0.5; border-style: dashed; background: transparent; }
 .thumb-title {
-  font-size: 0.85rem; color: var(--ink-2); line-height: 1.35;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 0.82rem; color: var(--ink-2); line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
 }
 .thumb:hover .thumb-title { color: var(--ink); }
 .thumb-soon .thumb-title { color: var(--muted); }
@@ -486,6 +496,7 @@ figure { margin: 0; }
 /* What I do */
 .services { list-style: none; display: grid; gap: 14px; }
 @media (min-width: 560px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; } }
+@media (min-width: 1040px) { .services { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 22px; } }
 .services li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
 .services h3 { font-size: 0.95rem; font-weight: 600; }
 .services p { font-size: 0.85rem; color: var(--muted); margin-top: 3px; line-height: 1.5; }
