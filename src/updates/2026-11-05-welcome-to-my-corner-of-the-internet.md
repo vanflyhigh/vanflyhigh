@@ -1,7 +1,10 @@
 ---
 title: Yo! First Website Featuring "Me" (vanfontanilla.com)
 date: 2026-11-05T09:00:00+08:00
-photos: []
+photos:
+  - image: /images/uploads/20261105-first-website-photo-a0b995b94735.webp
+    caption: ''
+    alt: ''
 tags:
   - hello
 draft: false
