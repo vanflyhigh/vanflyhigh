@@ -115,20 +115,33 @@ collections:
 
   # ------------------------------------------------------------ site content
   - name: content
-    label: Website Content
-    icon: badge
-    description: Your profile, resume, and site settings.
+    label: Profile Photo, Info & Resume
+    icon: account_circle
+    description: Change your profile photo, about me, contact details, resume, and site settings.
     files:
       - name: profile
-        label: Profile & Home Page
+        label: Profile Photo & About Me
         file: src/_data/profile.json
         fields:
+          - name: photo
+            label: Profile photo
+            widget: image
+            choose_url: false
+            hint: "Shown in the circle on the home page and in link previews. A square photo (at least 600 × 600) looks best."
+          - name: photoPosition
+            label: Photo position in the circle
+            widget: select
+            default: center
+            hint: If the top of your head is cut off, choose Top.
+            options:
+              - { label: Center, value: center }
+              - { label: Top, value: top }
+              - { label: Bottom, value: bottom }
           - { name: name, label: Full name, widget: string }
           - { name: shortName, label: Short name (logo & nav), widget: string }
           - { name: role, label: Job title, widget: string }
           - { name: headline, label: Home page headline, widget: text }
           - { name: summary, label: About me / summary, widget: text }
-          - { name: photo, label: Profile photo, widget: image }
           - { name: location, label: Location, widget: string }
           - { name: email, label: Email, widget: string }
           - name: phone

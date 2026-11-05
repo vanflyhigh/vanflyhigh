@@ -286,7 +286,9 @@ button { font: inherit; color: inherit; }
   background: #fff; border: 6px solid color-mix(in srgb, var(--panel-ink) 12%, transparent);
   outline: 2px solid var(--accent); outline-offset: 6px; margin: 6px;
 }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero-photo img[data-position="top"] { object-position: 50% 0%; }
+.hero-photo img[data-position="bottom"] { object-position: 50% 100%; }
 .hero-facts { margin: 26px 0 0; display: grid; gap: 14px; }
 .hero-facts div { display: grid; gap: 2px; }
 .hero-facts dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--panel-muted); font-weight: 600; }

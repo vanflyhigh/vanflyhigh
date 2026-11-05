@@ -25,7 +25,7 @@ bodyClass: page-home
 
     <aside class="hero-card" aria-label="Profile summary">
       <div class="hero-photo">
-        <img src="{{ profile.photo }}" alt="Portrait of {{ profile.name }}" width="360" height="360">
+        <img src="{{ profile.photo }}" alt="Portrait of {{ profile.name }}" width="360" height="360" data-position="{{ profile.photoPosition or 'center' }}">
       </div>
       <dl class="hero-facts">
         <div>
