@@ -5,4 +5,6 @@ export default {
   pathPrefix: process.env.PATH_PREFIX || "/",
   isProduction: process.env.ELEVENTY_RUN_MODE === "build",
   year: new Date().getFullYear(),
+  // Changes on every build so browsers fetch the new CSS/JS instead of a cached copy.
+  version: Date.now().toString(36),
 };
