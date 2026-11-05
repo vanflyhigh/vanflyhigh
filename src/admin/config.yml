@@ -140,7 +140,21 @@ collections:
           - { name: name, label: Full name, widget: string }
           - { name: shortName, label: Short name (logo & nav), widget: string }
           - { name: role, label: Job title, widget: string }
-          - { name: headline, label: Home page headline, widget: text }
+          - name: headline
+            label: Short intro (About card on the home page)
+            widget: text
+            hint: "Shown after \"Hi, I'm Van.\" Keep it to one or two sentences."
+          - name: taglines
+            label: Ribbon words (moving banner on the home page)
+            label_singular: Word
+            widget: list
+            required: false
+            field: { name: tagline, label: Word or phrase, widget: string }
+          - name: featuredText
+            label: Current role description (home page)
+            widget: text
+            required: false
+            hint: Your current job title and workplace come from the Resume section.
           - { name: summary, label: About me / summary, widget: text }
           - { name: location, label: Location, widget: string }
           - { name: email, label: Email, widget: string }
@@ -167,7 +181,7 @@ collections:
               - { name: label, label: Label, widget: string, hint: "e.g. LinkedIn, Facebook, Instagram" }
               - { name: url, label: URL, widget: string }
           - name: highlights
-            label: Highlight numbers (home page)
+            label: Highlight numbers (Current Role card)
             label_singular: Highlight
             widget: list
             required: false
@@ -176,7 +190,7 @@ collections:
               - { name: value, label: Number, widget: string }
               - { name: label, label: Label, widget: string }
           - name: services
-            label: What I do (home page cards)
+            label: What I do (home page)
             label_singular: Card
             widget: list
             required: false

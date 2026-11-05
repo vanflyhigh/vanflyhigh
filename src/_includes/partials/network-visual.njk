@@ -1,0 +1,65 @@
+{#- Decorative network-status panel for the "Current Role" card. -#}
+<svg class="net" viewBox="0 0 320 210" role="img" aria-label="Illustration of a hospital network: internet, firewall, core switch, servers, Wi-Fi, workstations and VoIP phones, all online">
+  <rect class="net-bg" x="0" y="0" width="320" height="210" rx="12"/>
+  <g class="net-bar">
+    <circle cx="16" cy="15" r="3.2" class="dot-r"/>
+    <circle cx="27" cy="15" r="3.2" class="dot-y"/>
+    <circle cx="38" cy="15" r="3.2" class="dot-g"/>
+    <text x="160" y="18.5" text-anchor="middle" class="net-title">network-status</text>
+  </g>
+  <line x1="0" y1="29" x2="320" y2="29" class="net-rule"/>
+
+  <!-- links -->
+  <g class="net-links">
+    <path d="M160 58 V84"/>
+    <path d="M160 104 V122"/>
+    <path d="M140 132 H82"/>
+    <path d="M180 132 H238"/>
+    <path d="M150 142 L96 170"/>
+    <path d="M170 142 L224 170"/>
+  </g>
+  <g class="net-flow">
+    <path d="M160 58 V84"/>
+    <path d="M160 104 V122"/>
+    <path d="M140 132 H82"/>
+    <path d="M180 132 H238"/>
+    <path d="M150 142 L96 170"/>
+    <path d="M170 142 L224 170"/>
+  </g>
+
+  <!-- nodes -->
+  <g class="net-node">
+    <rect x="124" y="38" width="72" height="20" rx="6"/>
+    <text x="160" y="51.5" text-anchor="middle">Internet</text>
+  </g>
+  <g class="net-node net-node-accent">
+    <rect x="124" y="84" width="72" height="20" rx="6"/>
+    <text x="160" y="97.5" text-anchor="middle">Firewall</text>
+  </g>
+  <g class="net-node net-node-core">
+    <rect x="132" y="122" width="56" height="20" rx="6"/>
+    <text x="160" y="135.5" text-anchor="middle">Core</text>
+  </g>
+  <g class="net-node">
+    <rect x="20" y="122" width="62" height="20" rx="6"/>
+    <text x="51" y="135.5" text-anchor="middle">Servers</text>
+  </g>
+  <g class="net-node">
+    <rect x="238" y="122" width="62" height="20" rx="6"/>
+    <text x="269" y="135.5" text-anchor="middle">Wi-Fi</text>
+  </g>
+  <g class="net-node">
+    <rect x="44" y="170" width="84" height="20" rx="6"/>
+    <text x="86" y="183.5" text-anchor="middle">Workstations</text>
+  </g>
+  <g class="net-node">
+    <rect x="192" y="170" width="84" height="20" rx="6"/>
+    <text x="234" y="183.5" text-anchor="middle">VoIP phones</text>
+  </g>
+
+  <g class="net-status">
+    <rect x="214" y="38" width="94" height="20" rx="10"/>
+    <circle cx="226" cy="48" r="3.5" class="net-pulse"/>
+    <text x="234" y="51.5">All systems up</text>
+  </g>
+</svg>

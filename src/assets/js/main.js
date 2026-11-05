@@ -5,8 +5,8 @@
   const root = document.documentElement;
 
   // ---------- Theme toggle ----------
-  const prefersDark = () => window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const currentTheme = () => root.getAttribute("data-theme") || (prefersDark() ? "dark" : "light");
+  // Dark is the site's default look; the toggle lets visitors switch to light.
+  const currentTheme = () => (root.getAttribute("data-theme") === "light" ? "light" : "dark");
 
   document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
     const sync = () => {
