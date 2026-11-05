@@ -7,8 +7,9 @@ My personal website: a portfolio built from my resume, plus **Life Updates**, a 
 
 | Page | What's on it |
 | --- | --- |
-| `/` | Home: intro, photo, highlights, what I do, experience, latest life updates, contact |
-| `/resume/` | Full resume: experience, education, certifications, skills, languages (printable) |
+| `/` | Home: photo, roles, skills, current role, status, latest life updates, what I do, interests |
+| `/resume/` | **Hire me**: full resume with Print resume and PDF download |
+| `/contact/` | Email, location, resume and every social/contact link |
 | `/updates/` | Life Updates feed with photo grids, captions, tags and a lightbox |
 | `/updates/<post>/` | A single post with every photo and caption |
 | `/feed.xml` | RSS/Atom feed so people can follow my updates |
@@ -73,13 +74,18 @@ Good to know:
 
 ## Editing the rest of the site
 
-In `/admin/` → **Website Content**:
+In `/admin/` → **Status, Profile & Resume**:
 
-- **Profile & Home Page**: name, job title, headline, about me, profile photo, email, phone, social links (add LinkedIn, Facebook, Instagram…), the highlight numbers, and the "What I do" cards. You can also upload a **Resume PDF** to show a *Download PDF* button.
+- **Status, Profile Photo & Contacts**
+  - **Status**: Open to opportunities, Open (part-time), Busy, or On vacation, plus an optional note. *Busy* and *On vacation* hide every **Hire me** button (your resume stays in the menu).
+  - **Profile photo** and its position in the frame, name, job title, ribbon words, current-role description, location, email, phone.
+  - **Contact & social links**: add Facebook, Facebook Page, Instagram, Steam, LinkedIn, TikTok, Discord and more. They appear on the **Contact** page; the first five with a link also show on the home page. Leave the link empty to show a username with a **Copy** button (handy for Discord).
+  - **Resume PDF**: used by the **Print resume** and **View / download PDF** buttons.
+  - Highlight numbers, **What I do** cards, and **Interests** (pick an icon for each).
 - **Resume**: jobs, responsibilities, education, certifications, skills, and languages.
-- **Site Settings**: site title, description shown on Google and in link previews, blog name, and intro.
+- **Site Settings**: site title, the description shown on Google and in link previews, blog name, and intro.
 
-> Your **phone number is hidden** by default, since the site is public. Add it under **Profile → Phone** if you want it shown.
+> Your **phone number is hidden** on the site by default. Add it under **Phone** if you want it shown. The resume PDF includes it, so upload a copy without it if you'd rather keep it private.
 
 ---
 

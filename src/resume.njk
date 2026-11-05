@@ -7,7 +7,7 @@ bodyClass: page-resume
 ---
 <section class="page-hero">
   <div class="container">
-    <p class="section-label">Hire me · Resume</p>
+    <p class="section-label">{% if (profile | statusInfo).hireable %}Hire me · {% endif %}Resume</p>
     <h1 class="page-title">{{ profile.name }}</h1>
     <p class="page-lead">{{ profile.summary }}</p>
     <div class="hero-actions no-print">

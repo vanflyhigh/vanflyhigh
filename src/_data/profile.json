@@ -18,10 +18,9 @@
   "email": "vanfontanillavf@gmail.com",
   "phone": "",
   "resumeFile": "/files/Van-Fontanilla-Resume.pdf",
-  "availability": "Open to IT opportunities",
-  "facebook": "",
-  "instagram": "",
-  "linkedin": "",
+  "status": "open",
+  "statusNote": "",
+  "contacts": [],
   "highlights": [
     {
       "value": "~10",
@@ -56,6 +55,28 @@
       "title": "Design & Multimedia",
       "description": "Photography, graphic design, and marketing materials, with a designer's eye for clean, usable systems.",
       "icon": "design"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Gaming",
+      "icon": "gaming"
+    },
+    {
+      "name": "Gym",
+      "icon": "gym"
+    },
+    {
+      "name": "Travel",
+      "icon": "travel"
+    },
+    {
+      "name": "Coffee",
+      "icon": "coffee"
+    },
+    {
+      "name": "Photography",
+      "icon": "camera"
     }
   ]
 }

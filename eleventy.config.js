@@ -101,16 +101,54 @@ export default function (eleventyConfig) {
     if (typeof pageUrl !== "string" || itemUrl.includes("#")) return false;
     return itemUrl === "/" ? pageUrl === "/" : pageUrl.startsWith(itemUrl);
   });
-  // Facebook / Instagram / LinkedIn links that have been filled in (adds https:// if missing).
-  eleventyConfig.addFilter("socialLinks", (profile = {}) =>
-    [
-      { key: "facebook", label: "Facebook", icon: "facebook" },
-      { key: "instagram", label: "Instagram", icon: "instagram" },
-      { key: "linkedin", label: "LinkedIn", icon: "linkedin" },
-    ]
-      .map((s) => ({ ...s, url: String(profile[s.key] || "").trim() }))
-      .filter((s) => s.url)
-      .map((s) => ({ ...s, url: /^https?:\/\//i.test(s.url) ? s.url : `https://${s.url.replace(/^\/+/, "")}` })),
+  // Contact & social links from the admin, with a display name and icon per platform.
+  const PLATFORMS = {
+    facebook: { name: "Facebook", icon: "facebook" },
+    "facebook-page": { name: "Facebook Page", icon: "facebook" },
+    instagram: { name: "Instagram", icon: "instagram" },
+    linkedin: { name: "LinkedIn", icon: "linkedin" },
+    steam: { name: "Steam", icon: "steam" },
+    tiktok: { name: "TikTok", icon: "tiktok" },
+    youtube: { name: "YouTube", icon: "youtube" },
+    x: { name: "X (Twitter)", icon: "x" },
+    discord: { name: "Discord", icon: "discord" },
+    messenger: { name: "Messenger", icon: "messenger" },
+    whatsapp: { name: "WhatsApp", icon: "whatsapp" },
+    viber: { name: "Viber", icon: "viber" },
+    telegram: { name: "Telegram", icon: "telegram" },
+    github: { name: "GitHub", icon: "github" },
+    website: { name: "Website", icon: "globe" },
+    other: { name: "Link", icon: "link" },
+  };
+  eleventyConfig.addFilter("contactLinks", (list) =>
+    (Array.isArray(list) ? list : [])
+      .filter((c) => c && (String(c.url || "").trim() || String(c.handle || "").trim()))
+      .map((c) => {
+        const key = PLATFORMS[c.platform] ? c.platform : "other";
+        const meta = PLATFORMS[key];
+        let url = String(c.url || "").trim();
+        if (url && !/^(https?:|mailto:|tel:|viber:|steam:)/i.test(url)) url = `https://${url.replace(/^\/+/, "")}`;
+        const handle = String(c.handle || "").trim();
+        const pretty = url.replace(/^https?:\/\/(www\.)?/i, "").replace(/\/$/, "");
+        return key === "other"
+          ? { key, icon: meta.icon, name: handle || meta.name, detail: pretty, url, copy: url ? "" : handle }
+          : { key, icon: meta.icon, name: meta.name, detail: handle || pretty, url, copy: url ? "" : handle };
+      }),
+  );
+  // Work status chosen in the admin. Busy / vacation hide the "Hire me" buttons.
+  const STATUSES = {
+    open: { label: "Open to opportunities", hireable: true, icon: "briefcase" },
+    "part-time": { label: "Open to opportunities (part-time)", hireable: true, icon: "briefcase" },
+    busy: { label: "Busy", hireable: false, icon: "clock" },
+    vacation: { label: "On vacation", hireable: false, icon: "sun" },
+  };
+  eleventyConfig.addFilter("statusInfo", (profile = {}) => {
+    const key = STATUSES[profile.status] ? profile.status : "open";
+    return { key, ...STATUSES[key], note: String(profile.statusNote || "").trim() };
+  });
+  eleventyConfig.addFilter("withUrl", (links) => (links || []).filter((l) => l.url));
+  eleventyConfig.addFilter("prettyUrl", (url) =>
+    String(url || "").replace(/^https?:\/\/(www\.)?/i, "").replace(/\/$/, ""),
   );
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
   eleventyConfig.addFilter("cleanTags", (tags) =>

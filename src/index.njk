@@ -5,7 +5,6 @@ bodyClass: page-home
 {%- from "partials/macros.njk" import icon %}
 {%- set latest = collections.updates | limit(3) %}
 {%- set current = resume.experience[0] %}
-{%- set socialLinks = profile | socialLinks %}
 {%- set tags = profile.taglines if (profile.taglines and profile.taglines | length) else [profile.role] %}
 
 <section class="home">
@@ -109,25 +108,47 @@ bodyClass: page-home
       </section>
       {%- endif %}
 
-      {#- Contact -#}
-      <section class="card card-contact" id="contact" aria-labelledby="contact-title">
+      {#- Interests -#}
+      {%- if profile.interests | length %}
+      <section class="card card-interests" aria-labelledby="interests-title">
         <header class="card-head">
-          <h2 id="contact-title">Contact</h2>
-          <span class="card-icon">{{ icon("mail") }}</span>
+          <h2 id="interests-title">Interests</h2>
+          <span class="card-icon">{{ icon("heart") }}</span>
         </header>
-        {%- if profile.availability %}
-        <p class="avail"><span class="status-dot" aria-hidden="true"></span>{{ profile.availability }}</p>
-        {%- endif %}
-        <ul class="social-row">
-          <li><a class="social-btn" href="mailto:{{ profile.email }}" aria-label="Email">{{ icon("mail") }}</a></li>
-          {%- for social in socialLinks %}
-          <li><a class="social-btn" href="{{ social.url }}" target="_blank" rel="me noopener" aria-label="{{ social.label }}">{{ icon(social.icon) }}</a></li>
+        <ul class="interests">
+          {%- for item in profile.interests %}
+          {%- if item.name %}
+          <li><span class="interest-icon">{{ icon(item.icon or "star") }}</span>{{ item.name }}</li>
+          {%- endif %}
           {%- endfor %}
         </ul>
-        <a class="contact-email" href="mailto:{{ profile.email }}">{{ profile.email }}</a>
-        {%- if profile.phone %}<a class="contact-line" href="{{ profile.phone | telHref }}">{{ profile.phone }}</a>{% endif %}
-        <p class="contact-line">{{ icon("pin") }}{{ profile.location }}</p>
-        <a class="btn btn-hire btn-block" href="/resume/">Hire me</a>
+      </section>
+      {%- endif %}
+
+      {#- Status -#}
+      {%- set st = profile | statusInfo %}
+      <section class="card card-status status-{{ st.key }}" id="status" aria-labelledby="status-title">
+        <header class="card-head">
+          <h2 id="status-title">Status</h2>
+          <span class="card-icon">{{ icon(st.icon) }}</span>
+        </header>
+        <div class="status-now">
+          <span class="status-light" aria-hidden="true"></span>
+          <div>
+            <p class="status-label">{{ st.label }}</p>
+            {%- if st.note %}<p class="status-note">{{ st.note }}</p>{% endif %}
+          </div>
+        </div>
+        <ul class="status-facts">
+          <li>{{ icon("pin") }}<span>{{ profile.location }}</span></li>
+          <li hidden data-local-time-wrap>{{ icon("clock") }}<span><span data-local-time data-tz="{{ site.timezone }}"></span> local time</span></li>
+        </ul>
+        <div class="status-actions">
+          {%- if st.hireable %}
+          <a class="btn btn-hire btn-block" href="/resume/">Hire me</a>
+          {%- endif %}
+          <a class="btn btn-ghost btn-block" href="/contact/">Contact me</a>
+        </div>
       </section>
     </div>
   </div>

@@ -96,6 +96,40 @@
     });
   });
 
+  // Local time in La Union on the Status card.
+  document.querySelectorAll("[data-local-time]").forEach((el) => {
+    try {
+      const fmt = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: el.getAttribute("data-tz") || "Asia/Manila" });
+      const tick = () => (el.textContent = fmt.format(new Date()));
+      tick();
+      setInterval(tick, 30000);
+      const wrap = el.closest("[data-local-time-wrap]");
+      if (wrap) wrap.hidden = false;
+    } catch (e) {
+      /* unknown time zone: leave the line hidden */
+    }
+  });
+
+  // Copy an email address / username to the clipboard.
+  document.querySelectorAll("[data-copy-text]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const label = btn.querySelector("span") || btn;
+      const original = label.textContent;
+      try {
+        await navigator.clipboard.writeText(btn.getAttribute("data-copy-text"));
+        btn.classList.add("is-copied");
+        if (label !== btn) label.textContent = "Copied!";
+        else btn.setAttribute("title", "Copied!");
+      } catch (e) {
+        if (label !== btn) label.textContent = "Copy failed";
+      }
+      setTimeout(() => {
+        btn.classList.remove("is-copied");
+        if (label !== btn) label.textContent = original;
+      }, 1800);
+    });
+  });
+
   // ---------- Lightbox ----------
   const dialog = document.querySelector("[data-lightbox]");
   if (!dialog || typeof dialog.showModal !== "function") return;

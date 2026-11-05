@@ -115,14 +115,29 @@ collections:
 
   # ------------------------------------------------------------ site content
   - name: content
-    label: Profile Photo, Info & Resume
+    label: Status, Profile & Resume
     icon: account_circle
-    description: Change your profile photo, about me, contact details, resume, and site settings.
+    description: Set your status, change your profile photo and contact links, update your resume, and edit site settings.
     files:
       - name: profile
-        label: Profile Photo & About Me
+        label: Status, Profile Photo & Contacts
         file: src/_data/profile.json
         fields:
+          - name: status
+            label: Status (home page)
+            widget: select
+            default: open
+            hint: Busy and On vacation hide the Hire me buttons; your resume stays reachable from the menu.
+            options:
+              - { label: Open to opportunities, value: open }
+              - { label: Open to opportunities (part-time), value: part-time }
+              - { label: Busy, value: busy }
+              - { label: On vacation, value: vacation }
+          - name: statusNote
+            label: Status note (optional)
+            widget: string
+            required: false
+            hint: "e.g. Available for weekend projects, or Back on December 2"
           - name: photo
             label: Profile photo
             widget: image
@@ -167,25 +182,46 @@ collections:
             media_folder: /src/files
             public_folder: /files
             hint: Upload a new PDF here whenever you update your resume.
-          - name: availability
-            label: Status badge (leave empty to hide)
-            widget: string
+          - name: contacts
+            label: Contact & social links (Contact page)
+            label_singular: Link
+            widget: list
             required: false
-          - name: facebook
-            label: Facebook link
-            widget: string
-            required: false
-            hint: "Paste your full profile link, e.g. https://www.facebook.com/yourname. Leave empty to hide the icon."
-          - name: instagram
-            label: Instagram link
-            widget: string
-            required: false
-            hint: "e.g. https://www.instagram.com/yourname"
-          - name: linkedin
-            label: LinkedIn link
-            widget: string
-            required: false
-            hint: "e.g. https://www.linkedin.com/in/yourname"
+            collapsed: auto
+            summary: "{{fields.platform}} · {{fields.handle}}"
+            hint: Add Facebook, your Facebook Page, Instagram, Steam, and anything else. Drag to reorder. The first five with a link also show as icons on the home page.
+            fields:
+              - name: platform
+                label: Platform
+                widget: select
+                default: facebook
+                options:
+                  - { label: Facebook, value: facebook }
+                  - { label: Facebook Page, value: facebook-page }
+                  - { label: Instagram, value: instagram }
+                  - { label: LinkedIn, value: linkedin }
+                  - { label: Steam, value: steam }
+                  - { label: TikTok, value: tiktok }
+                  - { label: YouTube, value: youtube }
+                  - { label: X (Twitter), value: x }
+                  - { label: Discord, value: discord }
+                  - { label: Messenger, value: messenger }
+                  - { label: WhatsApp, value: whatsapp }
+                  - { label: Viber, value: viber }
+                  - { label: Telegram, value: telegram }
+                  - { label: GitHub, value: github }
+                  - { label: Website, value: website }
+                  - { label: Other, value: other }
+              - name: handle
+                label: Name or username (shown on the card)
+                widget: string
+                required: false
+                hint: "e.g. @vanfontanilla, or the name of your Facebook Page. For Other, this is the card's title."
+              - name: url
+                label: Link
+                widget: string
+                required: false
+                hint: "Full link, e.g. https://www.facebook.com/yourname. Leave empty to show the username with a Copy button instead (handy for Discord or a Steam friend code)."
           - name: highlights
             label: Highlight numbers (Current Role card)
             label_singular: Highlight
@@ -215,6 +251,38 @@ collections:
                   - { label: Design, value: design }
                   - { label: Tech support, value: support }
                   - { label: Code, value: code }
+                  - { label: Star, value: star }
+
+          - name: interests
+            label: Interests (home page)
+            label_singular: Interest
+            widget: list
+            required: false
+            collapsed: auto
+            summary: "{{fields.name}}"
+            hint: Add as many as you like and drag to reorder.
+            fields:
+              - { name: name, label: Interest, widget: string, hint: "e.g. Gaming, Gym, Travel" }
+              - name: icon
+                label: Icon
+                widget: select
+                default: star
+                options:
+                  - { label: Gaming (controller), value: gaming }
+                  - { label: Gym (dumbbell), value: gym }
+                  - { label: Travel (plane), value: travel }
+                  - { label: Coffee, value: coffee }
+                  - { label: Photography (camera), value: camera }
+                  - { label: Music, value: music }
+                  - { label: Reading (book), value: book }
+                  - { label: Movies (film), value: film }
+                  - { label: Hiking (mountain), value: mountain }
+                  - { label: Beach / Surfing (waves), value: wave }
+                  - { label: Food, value: food }
+                  - { label: Pets (paw), value: paw }
+                  - { label: Cycling (bike), value: bike }
+                  - { label: Tech (code), value: code }
+                  - { label: Heart, value: heart }
                   - { label: Star, value: star }
 
       - name: resume

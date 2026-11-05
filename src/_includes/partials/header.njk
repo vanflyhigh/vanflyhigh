@@ -1,8 +1,18 @@
+{%- set st = profile | statusInfo %}
+{%- if st.hireable %}
 {%- set nav = [
   { label: "Home", url: "/" },
   { label: site.updatesTitle, url: "/updates/" },
-  { label: "Contact", url: "/#contact" }
+  { label: "Contact", url: "/contact/" }
 ] %}
+{%- else %}
+{%- set nav = [
+  { label: "Home", url: "/" },
+  { label: "Resume", url: "/resume/" },
+  { label: site.updatesTitle, url: "/updates/" },
+  { label: "Contact", url: "/contact/" }
+] %}
+{%- endif %}
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="{{ profile.shortName }}, home">
@@ -18,7 +28,9 @@
       </ul>
     </nav>
     <div class="header-actions">
+      {%- if st.hireable %}
       <a class="btn btn-hire btn-small" href="/resume/"{% if "/resume/" | isActiveNav(page.url) %} aria-current="page"{% endif %}>Hire me</a>
+      {%- endif %}
       <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/></svg>

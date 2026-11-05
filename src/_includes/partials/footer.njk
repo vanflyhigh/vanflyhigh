@@ -9,9 +9,7 @@
     </div>
     <ul class="footer-links">
       <li><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>
-      {%- for social in profile | socialLinks %}
-      <li><a href="{{ social.url }}" rel="me noopener" target="_blank">{{ social.label }}</a></li>
-      {%- endfor %}
+      <li><a href="/contact/">All contacts</a></li>
       <li><a href="/feed.xml">RSS feed</a></li>
     </ul>
   </div>

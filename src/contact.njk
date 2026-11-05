@@ -1,0 +1,95 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: How to reach Van David Niccolo Fontanilla by email, social media, and more.
+permalink: /contact/
+bodyClass: page-contact
+---
+{%- from "partials/macros.njk" import icon %}
+{%- set links = profile.contacts | contactLinks %}
+
+<section class="page-hero page-hero-center">
+  <div class="container narrow">
+    <p class="section-label">Contact</p>
+    <h1 class="page-title">Let's connect</h1>
+    <p class="page-lead">Email is the fastest way to reach me for work. You can also find me on the platforms below.</p>
+    {%- set st = profile | statusInfo %}
+    <p class="status-pill status-{{ st.key }}"><span class="status-light" aria-hidden="true"></span>{{ st.label }}{% if st.note %} · {{ st.note }}{% endif %}</p>
+  </div>
+</section>
+
+<div class="container contact-page">
+  <div class="contact-main">
+    {#- Email: the main way to get in touch -#}
+    <section class="card contact-primary" aria-labelledby="email-title">
+      <span class="contact-icon contact-icon-lg">{{ icon("mail") }}</span>
+      <div class="contact-primary-text">
+        <h2 id="email-title">Email</h2>
+        <a class="contact-big" href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+      </div>
+      <div class="contact-primary-actions">
+        <a class="btn btn-primary" href="mailto:{{ profile.email }}">Send an email</a>
+        <button class="btn btn-ghost" type="button" data-copy-text="{{ profile.email }}">{{ icon("copy") }}<span>Copy</span></button>
+      </div>
+    </section>
+
+    <div class="contact-minis">
+    {%- if profile.phone %}
+    <section class="card contact-mini" aria-labelledby="phone-title">
+      <span class="contact-icon">{{ icon("phone") }}</span>
+      <div>
+        <h2 id="phone-title">Phone</h2>
+        <a href="{{ profile.phone | telHref }}">{{ profile.phone }}</a>
+      </div>
+    </section>
+    {%- endif %}
+
+    <section class="card contact-mini" aria-labelledby="loc-title">
+      <span class="contact-icon">{{ icon("pin") }}</span>
+      <div>
+        <h2 id="loc-title">Based in</h2>
+        <p>{{ profile.location }}</p>
+      </div>
+    </section>
+
+    <section class="card contact-mini contact-hire" aria-labelledby="hire-title">
+      <span class="contact-icon">{{ icon("briefcase") }}</span>
+      <div>
+        <h2 id="hire-title">Resume</h2>
+        <p><a href="/resume/">See my resume</a>{% if profile.resumeFile %} · <a href="{{ profile.resumeFile }}" target="_blank" rel="noopener">PDF</a>{% endif %}</p>
+      </div>
+    </section>
+    </div>
+  </div>
+
+  {%- if links | length %}
+  <section class="contact-socials" aria-labelledby="socials-title">
+    <h2 id="socials-title" class="contact-section-title">Find me online</h2>
+    <ul class="social-grid">
+      {%- for link in links %}
+      <li>
+        {%- if link.url %}
+        <a class="social-card brand-{{ link.key }}" href="{{ link.url }}" target="_blank" rel="me noopener">
+          <span class="social-card-icon">{{ icon(link.icon) }}</span>
+          <span class="social-card-text">
+            <strong>{{ link.name }}</strong>
+            {%- if link.detail %}<span>{{ link.detail }}</span>{% endif %}
+          </span>
+          <span class="social-card-go" aria-hidden="true">{{ icon("external") }}</span>
+        </a>
+        {%- else %}
+        <div class="social-card brand-{{ link.key }}">
+          <span class="social-card-icon">{{ icon(link.icon) }}</span>
+          <span class="social-card-text">
+            <strong>{{ link.name }}</strong>
+            <span>{{ link.copy }}</span>
+          </span>
+          <button class="social-card-go social-card-copy" type="button" data-copy-text="{{ link.copy }}" aria-label="Copy {{ link.name }} username">{{ icon("copy") }}</button>
+        </div>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+</div>
