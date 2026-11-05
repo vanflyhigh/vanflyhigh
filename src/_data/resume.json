@@ -1,0 +1,119 @@
+{
+  "experience": [
+    {
+      "role": "Computer Maintenance Technologist II",
+      "organization": "Ilocos Training and Regional Medical Center",
+      "start": "2024",
+      "end": "Present",
+      "responsibilities": [
+        "Manage, configure, and maintain local area networks (LAN), wide area networks (WAN), and wired and wireless connectivity.",
+        "Implement network security modules, anti-virus/anti-spam tools, firewalls, and security patches, and manage configuration backups, data files, and disaster recovery plans.",
+        "Provide tier-2 technical support for hardware, end-user devices, application systems (such as AD, DNS, SMTP, and email), and internet connectivity issues, escalating to service providers when necessary.",
+        "Install, upgrade, and perform preventive and corrective maintenance on computer systems, servers, peripherals, printers, and VoIP devices."
+      ]
+    },
+    {
+      "role": "Information System Analyst",
+      "organization": "Ilocos Training and Regional Medical Center",
+      "start": "2020",
+      "end": "2024",
+      "responsibilities": [
+        "Analyze current and past hospital data.",
+        "Review recent hospital performance and identify trends.",
+        "Prepare reports on these findings and communicate their insights.",
+        "Consult with the management team to develop a long-term information technology plan.",
+        "Suggest processes and improvements based on the analysis."
+      ]
+    },
+    {
+      "role": "Project Coordinator / Systems Support",
+      "organization": "Kaiser Dela-Cruz Consulting Inc. | Medsys",
+      "start": "2017",
+      "end": "2020",
+      "responsibilities": [
+        "Participate in and support development pilots during the initial phases of all projects.",
+        "Create operation test-based scenarios for operational and implementation scenarios.",
+        "Investigate, analyze, and solve unique or customer-related issues relating to test failures.",
+        "Track system issues and defects.",
+        "Develop and execute test scripts (Microsoft SQL), mentor team members, and give program presentations.",
+        "Facilitate, train, organize, and maintain new clients.",
+        "Modify stored procedures (Microsoft SQL) to satisfy client requests for customization.",
+        "Maintain test process documentation."
+      ]
+    },
+    {
+      "role": "Graphic Artist / Systems Developer (Intern)",
+      "organization": "Lorma Colleges Marketing Department",
+      "start": "2016",
+      "end": "2016",
+      "responsibilities": [
+        "Photographed, designed, edited, toned, and captioned marketing materials.",
+        "Developed and maintained the marketing repository system."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Lorma Colleges",
+      "credential": "Bachelor of Science in Information Technology",
+      "year": "Graduated 2016"
+    },
+    {
+      "school": "Saint Louis College",
+      "credential": "High School",
+      "year": "Graduated 2012"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certificate in Knowledge Management System",
+      "issuer": "Development Academy of the Philippines (DAP)",
+      "year": "2022"
+    },
+    {
+      "name": "Cisco Certified Network Engineer",
+      "issuer": "ITCert Training Solutions",
+      "year": "2016"
+    }
+  ],
+  "skills": {
+    "professional": [
+      "Microsoft SQL",
+      "Software Quality Assurance",
+      "IT Networking",
+      "Troubleshooting",
+      "Multimedia",
+      "Marketing"
+    ],
+    "tools": [
+      "LAN / WAN",
+      "Wireless networking",
+      "Firewalls & endpoint security",
+      "Active Directory",
+      "DNS & SMTP",
+      "VoIP",
+      "Backups & disaster recovery",
+      "SQL stored procedures",
+      "Test scripting",
+      "Data reporting",
+      "Graphic design",
+      "Photography"
+    ],
+    "soft": [
+      "Observation",
+      "Decision Making",
+      "Communication",
+      "Multi-tasking"
+    ]
+  },
+  "languages": [
+    {
+      "name": "English",
+      "level": 4
+    },
+    {
+      "name": "Filipino",
+      "level": 5
+    }
+  ]
+}

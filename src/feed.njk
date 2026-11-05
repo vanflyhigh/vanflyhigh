@@ -1,0 +1,25 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.language }}">
+  <title>{{ site.title }}: {{ site.updatesTitle }}</title>
+  <subtitle>{{ site.updatesIntro }}</subtitle>
+  <link href="{{ '/feed.xml' | absoluteUrl }}" rel="self"/>
+  <link href="{{ '/updates/' | absoluteUrl }}"/>
+  <id>{{ '/updates/' | absoluteUrl }}</id>
+  <updated>{% if collections.updates | length %}{{ collections.updates[0].date | isoDate }}{% else %}{{ page.date | isoDate }}{% endif %}</updated>
+  <author><name>{{ profile.name }}</name></author>
+  {%- for post in collections.updates | limit(30) %}
+  {%- set photos = post.data.photos | validPhotos %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ post.url | absoluteUrl }}"/>
+    <id>{{ post.url | absoluteUrl }}</id>
+    <updated>{{ post.date | isoDate }}</updated>
+    {%- set html %}{% for photo in photos %}<p><img src="{{ photo.image }}" alt=""></p>{% if photo.caption %}<p>{{ photo.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{{ post.content | safe }}{% endset %}
+    <content type="html">{{ html | absolutizeHtml }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

@@ -1,0 +1,151 @@
+---
+layout: layouts/base.njk
+bodyClass: page-home
+---
+{%- from "partials/macros.njk" import updateCard, icon %}
+{%- set latest = collections.updates | limit(3) %}
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      {%- if profile.availability %}
+      <p class="status-pill"><span class="status-dot" aria-hidden="true"></span>{{ profile.availability }}</p>
+      {%- endif %}
+      <h1 class="hero-name">
+        <span>{{ profile.name | allButLast }}</span>
+        <span class="hero-surname">{{ profile.name | lastWord }}</span>
+      </h1>
+      <p class="hero-role">{{ profile.role }}</p>
+      <p class="hero-lead">{{ profile.headline }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/resume/">View my resume</a>
+        <a class="btn btn-ghost" href="/updates/">{{ site.updatesTitle }}</a>
+      </div>
+    </div>
+
+    <aside class="hero-card" aria-label="Profile summary">
+      <div class="hero-photo">
+        <img src="{{ profile.photo }}" alt="Portrait of {{ profile.name }}" width="360" height="360">
+      </div>
+      <dl class="hero-facts">
+        <div>
+          <dt>Based in</dt>
+          <dd>{{ profile.location }}</dd>
+        </div>
+        {%- if resume.experience | length %}
+        <div>
+          <dt>Currently</dt>
+          <dd>{{ resume.experience[0].role }}, {{ resume.experience[0].organization }}</dd>
+        </div>
+        {%- endif %}
+        <div>
+          <dt>Speaks</dt>
+          <dd>{% for lang in resume.languages %}{{ lang.name }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>
+        </div>
+      </dl>
+    </aside>
+  </div>
+
+  {%- if profile.highlights | length %}
+  <div class="container">
+    <ul class="stats">
+      {%- for stat in profile.highlights %}
+      <li><strong>{{ stat.value }}</strong><span>{{ stat.label }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+</section>
+
+<section class="section" aria-labelledby="about-title">
+  <div class="container about-grid">
+    <div>
+      <p class="section-label">About me</p>
+      <h2 id="about-title" class="section-title">Dependable IT support, with a creative edge.</h2>
+    </div>
+    <div class="prose about-copy">
+      {{ profile.summary | md | safe }}
+    </div>
+  </div>
+</section>
+
+{%- if profile.services | length %}
+<section class="section section-alt" aria-labelledby="services-title">
+  <div class="container">
+    <p class="section-label">What I do</p>
+    <h2 id="services-title" class="section-title">Where I can help</h2>
+    <div class="service-grid">
+      {%- for service in profile.services %}
+      <article class="service-card">
+        <span class="service-icon">{{ icon(service.icon) }}</span>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section" aria-labelledby="exp-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">Experience</p>
+        <h2 id="exp-title" class="section-title">Where I've worked</h2>
+      </div>
+      <a class="link-arrow" href="/resume/">Full resume <span aria-hidden="true">→</span></a>
+    </div>
+    <ol class="timeline timeline-compact">
+      {%- for job in resume.experience %}
+      <li class="timeline-item">
+        <span class="timeline-years">{{ job.start }}{% if job.end and job.end != job.start %} – {{ job.end }}{% endif %}</span>
+        <div>
+          <h3>{{ job.role }}</h3>
+          <p>{{ job.organization }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="updates-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="section-label">{{ site.updatesTitle }}</p>
+        <h2 id="updates-title" class="section-title">Latest from my life</h2>
+      </div>
+      <a class="link-arrow" href="/updates/">See all updates <span aria-hidden="true">→</span></a>
+    </div>
+    {%- if latest | length %}
+    <div class="card-grid">
+      {%- for post in latest %}
+      {{ updateCard(post) }}
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-state">No updates yet. Check back soon!</p>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="contact-band">
+      <div>
+        <p class="section-label section-label-light">Contact</p>
+        <h2 id="contact-title">Let's work together.</h2>
+        <p>Need a dependable hand with networks, hospital systems, SQL, or QA? Send me a message.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+        {%- if profile.phone %}
+        <a class="btn btn-ghost-light" href="{{ profile.phone | telHref }}">{{ profile.phone }}</a>
+        {%- endif %}
+        <p class="contact-location">{{ profile.location }}</p>
+      </div>
+    </div>
+  </div>
+</section>

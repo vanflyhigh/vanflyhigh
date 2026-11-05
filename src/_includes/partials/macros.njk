@@ -1,0 +1,71 @@
+{#- Photo grid used in the Life Updates feed. Shows up to 4 photos; every photo
+    stays in the lightbox gallery, so "+3" opens the rest. -#}
+{% macro photoGrid(photos, galleryId, title) %}
+{%- set shown = 4 %}
+{%- set total = photos | length %}
+{%- if total %}
+<div class="photo-grid count-{{ total if total < 4 else 4 }}">
+  {%- for photo in photos %}
+  <a class="photo-link{% if loop.index > shown %} is-hidden{% endif %}" href="{{ photo.image }}" data-gallery="{{ galleryId }}" data-caption="{{ photo.caption or '' }}"{% if loop.index > shown %} hidden tabindex="-1" aria-hidden="true"{% endif %}>
+    {%- if loop.index <= shown %}
+    <img src="{{ photo.image }}" alt="{{ photo.alt or photo.caption or title }}" loading="lazy" decoding="async">
+    {%- if loop.index == shown and total > shown %}
+    <span class="photo-more" aria-label="{{ total - shown }} more photos">+{{ total - shown }}</span>
+    {%- endif %}
+    {%- endif %}
+  </a>
+  {%- endfor %}
+</div>
+{%- endif %}
+{% endmacro %}
+
+{#- Compact card used on the home page. -#}
+{% macro updateCard(post) %}
+{%- set photos = post.data.photos | validPhotos %}
+{%- set cover = photos | first %}
+<article class="update-card{% if not cover %} no-photo{% endif %}">
+  <a class="update-card-link" href="{{ post.url }}">
+    {%- if cover %}
+    <div class="update-card-media">
+      <img src="{{ cover.image }}" alt="{{ cover.alt or cover.caption or post.data.title }}" loading="lazy" decoding="async">
+      {%- if photos | length > 1 %}<span class="update-card-count">{{ photos | length }} photos</span>{% endif %}
+    </div>
+    {%- endif %}
+    <div class="update-card-body">
+      <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      <h3>{{ post.data.title }}</h3>
+      {%- set teaser = (cover.caption if cover and cover.caption else (post.content | plainText)) %}
+      {%- if teaser %}<p>{{ teaser | plainText | truncateWords(24) }}</p>{% endif %}
+    </div>
+  </a>
+</article>
+{% endmacro %}
+
+{% macro tagList(tags) %}
+{%- set list = tags | cleanTags %}
+{%- if list | length %}
+<ul class="tag-list" aria-label="Tags">
+  {%- for tag in list %}
+  <li><a href="/updates/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+  {%- endfor %}
+</ul>
+{%- endif %}
+{% endmacro %}
+
+{% macro icon(name) %}
+{%- if name == "network" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="5" rx="1.2"/><rect x="2.5" y="16.5" width="6" height="5" rx="1.2"/><rect x="15.5" y="16.5" width="6" height="5" rx="1.2"/><path d="M12 7.5V12M5.5 16.5V12h13v4.5"/></svg>
+{%- elif name == "data" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+{%- elif name == "qa" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v6c0 1.7 3.4 3 7.5 3M19.5 5.5V10M4.5 11.5v6c0 1.7 3.4 3 7.5 3"/><path d="m14.5 17.5 2.2 2.2 4.3-4.4"/></svg>
+{%- elif name == "design" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.3 0 2-.9 2-2 0-.6-.3-1-.6-1.4-.3-.4-.6-.8-.6-1.4 0-1.1.9-2 2-2H17a4 4 0 0 0 4-4c0-4-4-7.2-9-7.2Z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg>
+{%- elif name == "support" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.5 17.3a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.2-5.4l-2.4 2.4-2.3-.4-.4-2.3 2.4-2.4Z"/></svg>
+{%- elif name == "code" %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+{%- else %}
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7L12 3Z"/></svg>
+{%- endif %}
+{% endmacro %}

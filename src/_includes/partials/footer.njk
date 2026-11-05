@@ -1,0 +1,23 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">{{ profile.shortName | first }}</span>
+        <span class="brand-name">{{ profile.shortName }}</span>
+      </a>
+      <p>{{ profile.role }} · {{ profile.location }}</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>
+      {%- for social in profile.socials %}
+      {%- if social.url %}
+      <li><a href="{{ social.url }}" rel="me noopener" target="_blank">{{ social.label }}</a></li>
+      {%- endif %}
+      {%- endfor %}
+      <li><a href="/feed.xml">RSS feed</a></li>
+    </ul>
+  </div>
+  <div class="container footer-meta">
+    <p>© {{ build.year }} {{ profile.name }}</p>
+  </div>
+</footer>

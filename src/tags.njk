@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.updateTags
+  size: 1
+  alias: tag
+permalink: "/updates/tags/{{ tag.name | slugify }}/"
+eleventyComputed:
+  title: "#{{ tag.name }} · {{ site.updatesTitle }}"
+bodyClass: page-updates
+---
+{%- from "partials/macros.njk" import updateCard %}
+{%- set tagged = collections.updates | withTag(tag.name) %}
+
+<section class="page-hero page-hero-center">
+  <div class="container narrow">
+    <p class="section-label"><a href="/updates/">{{ site.updatesTitle }}</a></p>
+    <h1 class="page-title">#{{ tag.name }}</h1>
+    <p class="page-lead">{{ tagged | length }} {{ "update" if tagged | length == 1 else "updates" }} tagged “{{ tag.name }}”.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="card-grid">
+    {%- for post in tagged %}
+    {{ updateCard(post) }}
+    {%- endfor %}
+  </div>
+  <p class="center-link"><a class="link-arrow" href="/updates/">All updates <span aria-hidden="true">→</span></a></p>
+</div>

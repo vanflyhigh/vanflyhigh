@@ -1,0 +1,261 @@
+# Admin dashboard settings (Sveltia CMS). Open /admin/ on the live site to use it.
+# You sign in with a GitHub access token (see README.md). Only a token with
+# write access to this repository can sign in, so you are the only admin.
+
+backend:
+  name: github
+  repo: vanflyhigh/vanflyhigh
+  branch: main
+  # Token sign-in works on GitHub Pages without any extra login server.
+  auth_methods: [token]
+  commit_messages:
+    create: "Add {{collection}}: {{slug}}"
+    update: "Update {{collection}}: {{slug}}"
+    delete: "Delete {{collection}}: {{slug}}"
+    uploadMedia: "Upload {{path}}"
+    deleteMedia: "Delete {{path}}"
+
+app_title: Van's Admin
+logo:
+  src: https://vanflyhigh.github.io/vanflyhigh/favicon.svg
+site_url: https://vanflyhigh.github.io/vanflyhigh
+show_preview_links: true
+
+media_folder: src/images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 26214400 # 25 MB per file before resizing
+      slugify_filename: true
+      filename_template: "{{year}}{{month}}{{day}}-{{filename}}-{{uuid_short}}"
+      # Phone photos are resized and converted to WebP in your browser before
+      # upload, so the site stays fast and the repository stays small.
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2000
+          height: 2000
+
+collections:
+  # ------------------------------------------------------------------ blog
+  - name: updates
+    label: Life Updates
+    label_singular: Life Update
+    icon: photo_library
+    description: Your photo blog. Add photos with captions, write a few words, then click Save to publish. The site updates in about a minute.
+    folder: src/updates
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    preview_path: "updates/{{slug}}/"
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: descending
+    thumbnail: photos.*.image
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        hint: "Example: Sunset surf at Urbiztondo"
+      - name: date
+        label: Date
+        widget: datetime
+        default: "{{now}}"
+      - name: photos
+        label: Photos
+        label_singular: Photo
+        widget: list
+        required: false
+        collapsed: auto
+        summary: "{{fields.caption}}"
+        thumbnail: image
+        hint: Add as many as you like. Drag to reorder. The first photo is the cover.
+        fields:
+          - name: image
+            label: Photo
+            widget: image
+            choose_url: false
+          - name: caption
+            label: Caption
+            widget: text
+            required: false
+          - name: alt
+            label: Photo description (for screen readers, optional)
+            widget: string
+            required: false
+      - name: body
+        label: Story (optional)
+        widget: markdown
+        required: false
+        hint: Write as much or as little as you want.
+      - name: tags
+        label: Tags
+        label_singular: Tag
+        widget: list
+        required: false
+        hint: "e.g. travel, family, work"
+        field: { name: tag, label: Tag, widget: string }
+      - name: draft
+        label: Hide from site (draft)
+        widget: boolean
+        required: false
+        default: false
+
+  # ------------------------------------------------------------ site content
+  - name: content
+    label: Website Content
+    icon: badge
+    description: Your profile, resume, and site settings.
+    files:
+      - name: profile
+        label: Profile & Home Page
+        file: src/_data/profile.json
+        fields:
+          - { name: name, label: Full name, widget: string }
+          - { name: shortName, label: Short name (logo & nav), widget: string }
+          - { name: role, label: Job title, widget: string }
+          - { name: headline, label: Home page headline, widget: text }
+          - { name: summary, label: About me / summary, widget: text }
+          - { name: photo, label: Profile photo, widget: image }
+          - { name: location, label: Location, widget: string }
+          - { name: email, label: Email, widget: string }
+          - name: phone
+            label: Phone (leave empty to keep it private)
+            widget: string
+            required: false
+          - name: resumeFile
+            label: Resume PDF (optional, adds a Download button)
+            widget: file
+            required: false
+            accept: application/pdf
+          - name: availability
+            label: Status badge (leave empty to hide)
+            widget: string
+            required: false
+          - name: socials
+            label: Social links
+            label_singular: Link
+            widget: list
+            required: false
+            summary: "{{fields.label}}"
+            fields:
+              - { name: label, label: Label, widget: string, hint: "e.g. LinkedIn, Facebook, Instagram" }
+              - { name: url, label: URL, widget: string }
+          - name: highlights
+            label: Highlight numbers (home page)
+            label_singular: Highlight
+            widget: list
+            required: false
+            summary: "{{fields.value}} {{fields.label}}"
+            fields:
+              - { name: value, label: Number, widget: string }
+              - { name: label, label: Label, widget: string }
+          - name: services
+            label: What I do (home page cards)
+            label_singular: Card
+            widget: list
+            required: false
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - name: icon
+                label: Icon
+                widget: select
+                default: star
+                options:
+                  - { label: Network, value: network }
+                  - { label: Data / charts, value: data }
+                  - { label: Database / QA, value: qa }
+                  - { label: Design, value: design }
+                  - { label: Tech support, value: support }
+                  - { label: Code, value: code }
+                  - { label: Star, value: star }
+
+      - name: resume
+        label: Resume
+        file: src/_data/resume.json
+        fields:
+          - name: experience
+            label: Work experience (newest first)
+            label_singular: Job
+            widget: list
+            summary: "{{fields.role}} · {{fields.organization}} ({{fields.start}}–{{fields.end}})"
+            fields:
+              - { name: role, label: Role, widget: string }
+              - { name: organization, label: Organization, widget: string }
+              - { name: start, label: Start year, widget: string }
+              - { name: end, label: End year (or Present), widget: string }
+              - name: responsibilities
+                label: Key responsibilities
+                label_singular: Responsibility
+                widget: list
+                required: false
+                field: { name: item, label: Responsibility, widget: text }
+          - name: education
+            label: Education
+            label_singular: School
+            widget: list
+            summary: "{{fields.school}}"
+            fields:
+              - { name: school, label: School, widget: string }
+              - { name: credential, label: Degree / level, widget: string }
+              - { name: year, label: Year, widget: string, hint: "e.g. Graduated 2016" }
+          - name: certifications
+            label: Certifications
+            label_singular: Certification
+            widget: list
+            required: false
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: Certificate, widget: string }
+              - { name: issuer, label: Issued by, widget: string }
+              - { name: year, label: Year completed, widget: string }
+          - name: skills
+            label: Skills
+            widget: object
+            fields:
+              - name: professional
+                label: Professional skills
+                widget: list
+                field: { name: skill, label: Skill, widget: string }
+              - name: tools
+                label: Tools & technologies
+                widget: list
+                required: false
+                field: { name: skill, label: Skill, widget: string }
+              - name: soft
+                label: Soft skills
+                widget: list
+                field: { name: skill, label: Skill, widget: string }
+          - name: languages
+            label: Languages
+            label_singular: Language
+            widget: list
+            summary: "{{fields.name}} ({{fields.level}}/5)"
+            fields:
+              - { name: name, label: Language, widget: string }
+              - { name: level, label: Level (1–5), widget: number, value_type: int, min: 1, max: 5, default: 3 }
+
+      - name: settings
+        label: Site Settings
+        file: src/_data/site.json
+        fields:
+          - { name: title, label: Site title, widget: string }
+          - { name: description, label: Site description (for Google & link previews), widget: text }
+          - { name: updatesTitle, label: Blog name, widget: string, default: Life Updates }
+          - { name: updatesIntro, label: Blog intro, widget: text }
+          - { name: language, label: Language code, widget: hidden, default: en }
+          - { name: timezone, label: Time zone, widget: hidden, default: Asia/Manila }
