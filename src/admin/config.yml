@@ -112,6 +112,14 @@ collections:
             label: Caption
             widget: text
             required: false
+      - name: storyPosition
+        label: Story position
+        widget: select
+        default: after
+        hint: Choose "Before the photos" when your story is the introduction.
+        options:
+          - { label: After the photos, value: after }
+          - { label: Before the photos (introduction), value: before }
       - name: body
         label: Story (optional)
         widget: markdown

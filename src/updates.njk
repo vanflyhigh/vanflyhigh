@@ -38,13 +38,17 @@ bodyClass: page-updates
         {%- if post.data.draft %}<span class="badge">Draft (only visible locally)</span>{% endif %}
         <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
       </header>
+      {%- set text = post.content | plainText %}
+      {%- set storyFirst = post.data.storyPosition == "before" %}
+      {%- if text and storyFirst %}
+      <p class="post-card-text">{{ text | truncateWords(45) }}</p>
+      {%- endif %}
       {{ photoGrid(photos, "post-" + loop.index + "-" + pagination.pageNumber, post.data.title) }}
       {%- if videos | length %}{{ videoEmbed(videos[0], post.data.title) }}{% endif %}
       {%- if photos | length == 1 and photos[0].caption %}
       <div class="post-card-caption">{{ photos[0].caption | mdInline | safe }}</div>
       {%- endif %}
-      {%- set text = post.content | plainText %}
-      {%- if text %}
+      {%- if text and not storyFirst %}
       <p class="post-card-text">{{ text | truncateWords(45) }}</p>
       {%- endif %}
       <footer class="post-card-foot">

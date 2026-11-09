@@ -23,6 +23,14 @@ bodyClass: page-post
     </p>
   </header>
 
+  {%- set storyFirst = storyPosition == "before" %}
+  {%- set hasStory = content | plainText %}
+  {%- if storyFirst and hasStory %}
+  <div class="post-body post-intro prose container narrow">
+    {{ content | safe }}
+  </div>
+  {%- endif %}
+
   {%- if photos | length %}
   <div class="post-photos container narrow">
     {%- for photo in photos %}
@@ -44,7 +52,7 @@ bodyClass: page-post
   </div>
   {%- endif %}
 
-  {%- if content | plainText %}
+  {%- if hasStory and not storyFirst %}
   <div class="post-body prose container narrow">
     {{ content | safe }}
   </div>

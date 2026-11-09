@@ -15,6 +15,7 @@ photos:
     caption: 'Just like my main logos, the gaming logo has a second version too. I adapted it so I can use it across other platforms: profile pictures, banners, stream overlays, thumbnails, and anywhere else my gaming content ends up. One look, many places. 🕹️'
     alt: ''
 videos: []
+storyPosition: before
 tags:
   - ideas
 draft: false

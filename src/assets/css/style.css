@@ -809,6 +809,7 @@ a.social-card:hover .social-card-go { color: var(--brand); }
 .post-photo img { width: 100%; height: auto; }
 .post-photo figcaption { color: var(--ink-2); font-size: 1rem; padding: 0 4px; }
 .post-body { margin-top: 30px; }
+.post-body.post-intro { margin-top: 0; margin-bottom: 32px; }
 .post-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
 .post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 26px; }
 .post-nav-link {
