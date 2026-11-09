@@ -1,8 +1,8 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <a class="brand" href="/">
-        <span class="brand-mark" aria-hidden="true">{{ profile.shortName | first }}</span>
+      <a class="brand" href="/" aria-label="{{ profile.shortName }}, home">
+        <span class="brand-logo">{% include "partials/logo-mark.njk" %}</span>
         <span class="brand-name">{{ profile.shortName }}</span>
       </a>
       <p>{{ profile.role }} · {{ profile.location }}</p>

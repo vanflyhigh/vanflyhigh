@@ -157,14 +157,14 @@ figure { margin: 0; }
 }
 .header-inner { display: flex; align-items: center; gap: 16px; min-height: 66px; }
 
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-head); font-weight: 700; min-width: 0; }
-.brand-mark {
-  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; flex: none;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-  color: #0a0f1a; font-size: 1.1rem; font-weight: 800;
-  box-shadow: 0 0 22px -6px color-mix(in srgb, var(--accent-2) 70%, transparent);
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); min-width: 0; }
+.brand-logo { display: grid; place-items: center; flex: none; }
+.logo-mark { height: 30px; width: auto; fill: currentColor; transition: transform 0.2s ease; }
+.brand:hover .logo-mark { transform: translateY(-1px); }
+.brand-name {
+  font-family: var(--font-head); font-weight: 500; font-size: 0.8rem; white-space: nowrap;
+  text-transform: uppercase; letter-spacing: 0.32em; margin-right: -0.32em;
 }
-.brand-name { font-size: 1.02rem; white-space: nowrap; }
 
 .site-nav { margin-left: auto; }
 .site-nav ul { list-style: none; display: flex; gap: 4px; }
