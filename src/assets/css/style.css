@@ -252,7 +252,7 @@ figure { margin: 0; }
 .bento {
   display: grid; gap: 12px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "status" "updates" "ribbon" "role" "services" "interests";
+  grid-template-areas: "photo" "status" "updates" "ribbon" "interests" "role" "services";
 }
 .card-photo { grid-area: photo; }
 .card-ribbon { grid-area: ribbon; }
@@ -269,8 +269,8 @@ figure { margin: 0; }
       "photo photo photo ribbon ribbon ribbon"
       "photo photo photo status status status"
       "updates updates updates updates updates updates"
-      "role role role services services services"
-      "interests interests interests interests interests interests";
+      "interests interests interests interests interests interests"
+      "role role role services services services";
   }
 }
 @media (min-width: 1040px) {
@@ -279,7 +279,8 @@ figure { margin: 0; }
     grid-template-areas:
       "photo photo photo ribbon ribbon ribbon updates updates updates updates updates updates"
       "photo photo photo status status status updates updates updates updates updates updates"
-      "role role role role services services services services interests interests interests interests";
+      "interests interests interests interests interests interests interests interests interests interests interests interests"
+      "role role role role role role services services services services services services";
   }
 }
 
@@ -323,7 +324,7 @@ figure { margin: 0; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* Interests */
-.interests { list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr)); }
+.interests { list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
 .interests li { --tone: var(--accent); }
 .interest {
   display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; height: 100%;
