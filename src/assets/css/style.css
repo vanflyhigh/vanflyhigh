@@ -857,7 +857,10 @@ a.social-card:hover .social-card-go { color: var(--brand); }
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding: 34px 0 26px; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px 40px; }
-.footer-brand p { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+.footer-quote {
+  margin-top: 14px; max-width: 46ch; padding-left: 12px; border-left: 2px solid var(--brand-dot);
+  color: var(--ink-2); font-family: var(--font-head); font-size: 0.98rem; font-weight: 500; line-height: 1.5;
+}
 .footer-links { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; }
 .footer-links a { color: var(--ink-2); text-decoration: none; font-size: 0.93rem; overflow-wrap: anywhere; }
 .footer-links a:hover { color: var(--ink); text-decoration: underline; }

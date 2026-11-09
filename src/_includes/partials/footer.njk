@@ -4,7 +4,9 @@
       <a class="brand" href="/" aria-label="{{ profile.shortName }}, home">
         <span class="brand-logo">{% include "partials/logo-mark.njk" %}</span>
       </a>
-      <p>{{ profile.role }} · {{ profile.location }}</p>
+      {%- if site.footerQuote %}
+      <p class="footer-quote">“{{ site.footerQuote }}”</p>
+      {%- endif %}
     </div>
     <ul class="footer-links">
       <li><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></li>

@@ -427,5 +427,10 @@ collections:
           - { name: description, label: Site description (for Google & link previews), widget: text }
           - { name: updatesTitle, label: Blog name, widget: string, default: Life Updates }
           - { name: updatesIntro, label: Blog intro, widget: text }
+          - name: footerQuote
+            label: Footer quote
+            widget: string
+            required: false
+            hint: A short motto shown at the bottom of every page. Leave empty to hide it.
           - { name: language, label: Language code, widget: hidden, default: en }
           - { name: timezone, label: Time zone, widget: hidden, default: Asia/Manila }
