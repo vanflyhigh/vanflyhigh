@@ -69,28 +69,6 @@
       "label": "professional certificates"
     }
   ],
-  "services": [
-    {
-      "title": "Network & Infrastructure",
-      "description": "LAN/WAN, wired and wireless connectivity, firewalls, security patching, backups and disaster recovery for a regional medical center.",
-      "icon": "network"
-    },
-    {
-      "title": "Healthcare Information Systems",
-      "description": "Analyzing hospital data, spotting performance trends, and reporting insights that shape long-term IT plans with management.",
-      "icon": "data"
-    },
-    {
-      "title": "Software QA & Microsoft SQL",
-      "description": "Test scenarios and scripts, defect tracking, and stored-procedure customization for hospital information systems.",
-      "icon": "qa"
-    },
-    {
-      "title": "Design & Multimedia",
-      "description": "Photography, graphic design, and marketing materials, with a designer's eye for clean, usable systems.",
-      "icon": "design"
-    }
-  ],
   "interests": [
     {
       "name": "Gaming",

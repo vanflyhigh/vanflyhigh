@@ -321,28 +321,6 @@ collections:
             fields:
               - { name: value, label: Number, widget: string }
               - { name: label, label: Label, widget: string }
-          - name: services
-            label: What I do (home page)
-            label_singular: Card
-            widget: list
-            required: false
-            summary: "{{fields.title}}"
-            fields:
-              - { name: title, label: Title, widget: string }
-              - { name: description, label: Description, widget: text }
-              - name: icon
-                label: Icon
-                widget: select
-                default: star
-                options:
-                  - { label: Network, value: network }
-                  - { label: Data / charts, value: data }
-                  - { label: Database / QA, value: qa }
-                  - { label: Design, value: design }
-                  - { label: Tech support, value: support }
-                  - { label: Code, value: code }
-                  - { label: Star, value: star }
-
           - name: interests
             label: Interests (home page)
             label_singular: Interest
@@ -419,7 +397,7 @@ collections:
             widget: object
             fields:
               - name: professional
-                label: Professional skills
+                label: Professional skills (shown on the Resume page)
                 widget: list
                 field: { name: skill, label: Skill, widget: string }
               - name: tools

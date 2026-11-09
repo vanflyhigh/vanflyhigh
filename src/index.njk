@@ -103,67 +103,29 @@ bodyClass: page-home
         <div class="tape tape-b" aria-hidden="true"><div class="tape-track"><span>{{ line | safe }}{{ line | safe }}</span><span>{{ line | safe }}{{ line | safe }}</span></div></div>
       </div>
 
-      {#- Skills -#}
-      <section class="card card-skills" aria-labelledby="skills-title">
-        <header class="card-head">
-          <h2 id="skills-title">Core Skills</h2>
-          <span class="card-icon">{{ icon("chip") }}</span>
-        </header>
-        <ul class="chips">
-          {%- for skill in resume.skills.professional %}<li>{{ skill }}</li>{% endfor %}
-        </ul>
-      </section>
-
-      {#- Current role (featured) -#}
+      {#- Current role: kept simple and quiet -#}
       {%- if current %}
-      <section class="card card-featured" aria-labelledby="featured-title">
+      <section class="card card-role" aria-labelledby="role-title">
         <header class="card-head">
-          <h2 id="featured-title">Current Role</h2>
-          <span class="card-icon card-icon-glow">{{ icon("activity") }}</span>
+          <h2 id="role-title">Current Role</h2>
+          <span class="card-icon">{{ icon("briefcase") }}</span>
         </header>
-        <div class="featured-body">
-          <div class="featured-visual">{% include "partials/network-visual.njk" %}</div>
-          <div class="featured-text">
-            <h3>{{ current.role }}</h3>
-            <p class="featured-org">{{ current.organization }}<br>{{ current.start }}{% if current.end and current.end != current.start %} – {{ current.end }}{% endif %}</p>
-            {%- if profile.featuredText %}<p class="featured-desc">{{ profile.featuredText }}</p>{% endif %}
-            {%- set roleTools = resume.skills.tools | limit(6) %}
-            {%- if roleTools | length %}
-            <ul class="role-tags" aria-label="Key tools">
-              {%- for t in roleTools %}<li>{{ t }}</li>{% endfor %}
-            </ul>
-            {%- endif %}
-          </div>
-          {%- if profile.highlights | length %}
-          <ul class="mini-stats">
-            {%- for stat in profile.highlights %}
-            <li><strong>{{ stat.value }}</strong><span>{{ stat.label }}</span></li>
-            {%- endfor %}
-          </ul>
-          {%- endif %}
-        </div>
-      </section>
-      {%- endif %}
-
-
-      {#- What I do -#}
-      {%- if profile.services | length %}
-      <section class="card card-services" aria-labelledby="services-title">
-        <header class="card-head">
-          <h2 id="services-title">What I do</h2>
-          <span class="card-icon">{{ icon("support") }}</span>
-        </header>
-        <ul class="services">
-          {%- for service in profile.services %}
-          <li>
-            <span class="service-icon">{{ icon(service.icon) }}</span>
-            <div>
-              <h3>{{ service.title }}</h3>
-              <p>{{ service.description }}</p>
-            </div>
-          </li>
+        <h3 class="role-title">{{ current.role }}</h3>
+        <p class="role-org">{{ current.organization }} · {{ current.start }}{% if current.end and current.end != current.start %} – {{ current.end }}{% endif %}</p>
+        {%- if profile.featuredText %}<p class="role-desc">{{ profile.featuredText }}</p>{% endif %}
+        {%- set roleTools = resume.skills.tools | limit(6) %}
+        {%- if roleTools | length %}
+        <ul class="role-tags" aria-label="Key tools">
+          {%- for t in roleTools %}<li>{{ t }}</li>{% endfor %}
+        </ul>
+        {%- endif %}
+        {%- if profile.highlights | length %}
+        <ul class="role-stats">
+          {%- for stat in profile.highlights %}
+          <li><strong>{{ stat.value }}</strong> {{ stat.label }}</li>
           {%- endfor %}
         </ul>
+        {%- endif %}
       </section>
       {%- endif %}
 
