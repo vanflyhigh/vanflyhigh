@@ -62,6 +62,26 @@
     }
   });
 
+  // GIF-style loops: play only while on screen; stay paused if the visitor prefers less motion.
+  const loops = document.querySelectorAll("video.gif-loop");
+  const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  loops.forEach((v) => {
+    if (reduceMotion) {
+      v.removeAttribute("autoplay");
+      v.pause();
+      v.controls = true;
+    }
+  });
+  if (!reduceMotion && "IntersectionObserver" in window && loops.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.play().catch(() => {});
+        else e.target.pause();
+      });
+    }, { threshold: 0.15 });
+    loops.forEach((v) => io.observe(v));
+  }
+
   // Copy an email address / username to the clipboard.
   document.querySelectorAll("[data-copy-text]").forEach((btn) => {
     btn.addEventListener("click", async () => {

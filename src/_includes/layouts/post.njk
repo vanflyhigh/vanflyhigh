@@ -15,7 +15,10 @@ bodyClass: page-post
     <p class="post-meta">
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(site.timezone) }}</time>
       {%- if photos | length %}<span>{{ photos | length }} {{ "photo" if photos | length == 1 else "photos" }}</span>{% endif %}
-      {%- if videoList | length %}<span>{{ videoList | length }} {{ "video" if videoList | length == 1 else "videos" }}</span>{% endif %}
+      {%- set gifCount = videoList | gifCount %}
+      {%- set videoCount = (videoList | length) - gifCount %}
+      {%- if videoCount %}<span>{{ videoCount }} {{ "video" if videoCount == 1 else "videos" }}</span>{% endif %}
+      {%- if gifCount %}<span>{{ gifCount }} {{ "GIF" if gifCount == 1 else "GIFs" }}</span>{% endif %}
       {%- if draft %}<span class="badge">Draft (only visible locally)</span>{% endif %}
     </p>
   </header>

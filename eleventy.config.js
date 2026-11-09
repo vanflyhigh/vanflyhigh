@@ -195,6 +195,7 @@ export default function (eleventyConfig) {
   );
   // Video links (YouTube, Facebook, Instagram, TikTok, Vimeo) turned into embeddable players.
   eleventyConfig.addFilter("validVideos", validVideos);
+  eleventyConfig.addFilter("gifCount", (list) => (list || []).filter((v) => v.kind === "loop" || v.kind === "image").length);
   eleventyConfig.addWatchTarget("./lib/");
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
   eleventyConfig.addFilter("cleanTags", (tags) =>

@@ -834,6 +834,9 @@ a.social-card:hover .social-card-go { color: var(--brand); }
 .video-embed.is-vertical figcaption { max-width: 340px; }
 .video-source { color: var(--muted); font-size: 0.82rem; text-decoration: none; white-space: nowrap; }
 .video-source:hover { color: var(--accent-2-ink); }
+.gif-loop { display: block; width: 100%; height: auto; max-height: 640px; object-fit: contain; border-radius: 16px; border: 1px solid var(--line); background: var(--surface-3); }
+.video-embed.is-narrow .video-frame { max-width: 420px; }
+.video-embed.is-narrow { justify-items: center; }
 .video-linkcard {
   display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; text-decoration: none;
   background: var(--surface-2); border: 1px solid var(--line);
@@ -856,6 +859,10 @@ a.social-card:hover .social-card-go { color: var(--brand); }
   position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px;
   display: grid; place-items: center; background: var(--accent); color: var(--on-accent);
   font: 700 0.7rem/1 var(--font-body); font-style: normal;
+}
+.gif-badge {
+  width: auto !important; height: auto !important; padding: 5px 10px; border-radius: 8px !important;
+  font: 800 0.78rem/1 var(--font-head); letter-spacing: 0.08em;
 }
 .thumb-media { position: relative; }
 .thumb-media .play-badge { width: 34px; height: 34px; border-width: 1.5px; }

@@ -62,7 +62,7 @@ bodyClass: page-home
           <span class="update-hero-media{% if not heroSrc %} thumb-empty{% endif %}">
             {%- if heroSrc %}<img src="{{ heroSrc }}" alt="{{ (heroCover.alt or heroCover.caption or hero.data.title) if heroCover else hero.data.title }}" decoding="async">{% else %}{{ icon("images") }}{% endif %}
           </span>
-          {%- if heroVideos | length %}{{ playBadge(heroVideos | length) }}{% endif %}
+          {%- if heroVideos | length %}{{ playBadge(heroVideos | length, heroVideos) }}{% endif %}
           {%- if heroPhotos | length > 1 %}<span class="update-hero-count">{{ heroPhotos | length }} photos</span>{% endif %}
           <span class="update-hero-text">
             <span class="update-hero-badge">Latest</span>
@@ -79,7 +79,7 @@ bodyClass: page-home
             <a class="thumb" href="{{ post.url }}">
               <span class="thumb-media{% if not thumbSrc %} thumb-empty{% endif %}">
                 {%- if thumbSrc %}<img src="{{ thumbSrc }}" alt="" loading="lazy" decoding="async">{% else %}{{ icon("images") }}{% endif %}
-                {%- if vids | length %}{{ playBadge(vids | length) }}{% endif %}
+                {%- if vids | length %}{{ playBadge(vids | length, vids) }}{% endif %}
               </span>
               <span class="thumb-title">{{ post.data.title }}</span>
             </a>

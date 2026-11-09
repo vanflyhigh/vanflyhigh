@@ -19,10 +19,22 @@
 {%- endif %}
 {% endmacro %}
 
-{#- One embedded video (or a link card for sites that can't be embedded). -#}
+{#- One video: a player, a silent looping GIF-style clip, or a link card. -#}
 {% macro videoEmbed(video, title) %}
-{%- if video.embed %}
-<figure class="video-embed{% if video.vertical %} is-vertical{% endif %} video-{{ video.provider }}">
+{%- if video.kind == "loop" or video.kind == "image" %}
+<figure class="video-embed video-gif video-{{ video.provider }}">
+  {%- if video.kind == "loop" %}
+  <video class="gif-loop" src="{{ video.src }}"{% if video.fallback %} data-fallback="{{ video.fallback }}" onerror="window.gifFallback && gifFallback(this)"{% endif %} autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="{{ video.caption or title }}"></video>
+  {%- else %}
+  <img class="gif-loop" src="{{ video.src }}" alt="{{ video.caption or title }}" loading="lazy" decoding="async">
+  {%- endif %}
+  <figcaption>
+    {%- if video.caption %}<span>{{ video.caption | mdInline | safe }}</span>{% endif %}
+    {%- if video.provider != "file" %}<a class="video-source" href="{{ video.link }}" target="_blank" rel="noopener">via {{ video.name }} ↗</a>{% endif %}
+  </figcaption>
+</figure>
+{%- elif video.kind == "embed" %}
+<figure class="video-embed{% if video.vertical %} is-vertical{% endif %}{% if video.narrow %} is-narrow{% endif %} video-{{ video.provider }}">
   <div class="video-frame" style="aspect-ratio: {{ video.ratio }}">
     <iframe src="{{ video.embed }}" title="{{ video.caption or title }} ({{ video.name }} video)" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
@@ -39,9 +51,14 @@
 {%- endif %}
 {% endmacro %}
 
-{#- Small "play" badge drawn over a cover image. -#}
-{% macro playBadge(count) %}
+{#- Small badge drawn over a cover image: ▶ for videos, "GIF" for looping GIFs. -#}
+{% macro playBadge(count, videos) %}
+{%- set first = videos | first if videos else null %}
+{%- if first and (first.kind == "loop" or first.kind == "image") %}
+<span class="play-badge gif-badge" aria-hidden="true">GIF</span>
+{%- else %}
 <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>{% if count > 1 %}<em>{{ count }}</em>{% endif %}</span>
+{%- endif %}
 {% endmacro %}
 
 {#- Compact card used on the home page. -#}
@@ -55,7 +72,7 @@
     {%- if coverSrc %}
     <div class="update-card-media">
       <img src="{{ coverSrc }}" alt="{{ (cover.alt or cover.caption) if cover else '' }}" loading="lazy" decoding="async">
-      {%- if videos | length %}{{ playBadge(videos | length) }}{% endif %}
+      {%- if videos | length %}{{ playBadge(videos | length, videos) }}{% endif %}
       {%- if photos | length > 1 %}<span class="update-card-count">{{ photos | length }} photos</span>{% endif %}
     </div>
     {%- endif %}

@@ -33,6 +33,14 @@
         if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
       } catch (e) {}
     })();
+    window.gifFallback = function (v) {
+      var src = v.getAttribute("data-fallback");
+      if (!src || v.getAttribute("data-failed")) return;
+      v.setAttribute("data-failed", "1");
+      var img = document.createElement("img");
+      img.className = v.className; img.src = src; img.alt = v.getAttribute("aria-label") || ""; img.loading = "lazy";
+      v.replaceWith(img);
+    };
   </script>
   <script src="/assets/js/main.js?v={{ build.version }}" defer></script>
 </head>

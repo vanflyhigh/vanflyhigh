@@ -96,18 +96,18 @@ collections:
             widget: string
             required: false
       - name: videos
-        label: Video links
-        label_singular: Video
+        label: Videos & GIFs (links)
+        label_singular: Video or GIF
         widget: list
         required: false
         collapsed: auto
         summary: "{{fields.url}}"
-        hint: Paste a link from YouTube, Facebook, Instagram, TikTok or Vimeo. The video plays inside your post. Upload the video there first; don't upload video files here.
+        hint: "Videos: paste a YouTube, Facebook, Instagram, TikTok or Vimeo link; it plays inside your post. GIFs: paste an Imgur, GIPHY or Tenor link; it plays silently on a loop. Upload them on those sites first; don't upload video files here."
         fields:
           - name: url
             label: Video link
             widget: string
-            hint: "e.g. https://youtu.be/abc123, a Facebook or Instagram reel link, or a TikTok video link"
+            hint: "e.g. https://youtu.be/abc123, a Facebook/Instagram reel, a TikTok video, or a GIF like https://i.imgur.com/abc123.gifv or a giphy.com link"
           - name: caption
             label: Caption
             widget: text
