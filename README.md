@@ -7,7 +7,7 @@ My personal website: a portfolio built from my resume, plus **Life Updates**, a 
 
 | Page | What's on it |
 | --- | --- |
-| `/` | Home: photo, roles, status, latest life updates, current role, what I do, interests |
+| `/` | Home: photo, roles, status, latest life updates, interests, then current role and what I do |
 | `/resume/` | Full resume with a PDF view/download button (linked from the Contact page) |
 | `/contact/` | Email, location, resume and every social/contact link |
 | `/updates/` | Life Updates feed with photo grids, captions, tags and a lightbox |
