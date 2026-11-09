@@ -206,7 +206,7 @@ collections:
             label: Status (home page)
             widget: select
             default: open
-            hint: Busy and On vacation hide the Hire me button; your resume stays in the menu.
+            hint: Busy and On vacation hide the Hire me button (it opens your Contact page, which links to your resume).
             options:
               - { label: Open to opportunities, value: open }
               - { label: Busy, value: busy }

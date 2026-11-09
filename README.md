@@ -8,7 +8,7 @@ My personal website: a portfolio built from my resume, plus **Life Updates**, a 
 | Page | What's on it |
 | --- | --- |
 | `/` | Home: photo, roles, skills, current role, status, latest life updates, what I do, interests |
-| `/resume/` | Full resume with a PDF view/download button |
+| `/resume/` | Full resume with a PDF view/download button (linked from the Contact page) |
 | `/contact/` | Email, location, resume and every social/contact link |
 | `/updates/` | Life Updates feed with photo grids, captions, tags and a lightbox |
 | `/updates/<post>/` | A single post with every photo and caption |
@@ -80,7 +80,7 @@ Good to know:
 In `/admin/` → **Status, Profile & Resume**:
 
 - **Status, Profile Photo & Contacts**
-  - **Status**: Open to opportunities, Busy, or On vacation, plus an optional note. *Busy* and *On vacation* hide the **Hire me** button (your resume stays in the menu).
+  - **Status**: Open to opportunities, Busy, or On vacation, plus an optional note. *Busy* and *On vacation* hide the **Hire me** button, which opens your Contact page (and your resume from there).
   - **Job preference**: tick Full-time and/or Part-time; shown under your status while you're open to opportunities.
   - **Profile photo** and its position in the frame, name, job title, ribbon words, current-role description, location, email, phone.
   - **Contact & social links**: add Facebook, Facebook Page, Instagram, Steam, LinkedIn, TikTok, Discord and more. They appear on the **Contact** page; the first five with a link also show on the home page. Leave the link empty to show a username with a **Copy** button (handy for Discord).
