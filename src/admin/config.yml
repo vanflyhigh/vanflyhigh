@@ -15,7 +15,7 @@ backend:
     uploadMedia: "Upload {{path}}"
     deleteMedia: "Delete {{path}}"
 
-app_title: Van's Admin
+app_title: vanfontanilla.
 logo:
   src: https://vanfontanilla.com/favicon.svg
 site_url: https://vanfontanilla.com
@@ -161,7 +161,10 @@ collections:
               - { label: Top, value: top }
               - { label: Bottom, value: bottom }
           - { name: name, label: Full name, widget: string }
-          - { name: shortName, label: Short name (logo & nav), widget: string }
+          - name: shortName
+            label: Short name (wordmark & logo)
+            widget: string
+            hint: "Shown as the big wordmark on the home page: the first word is light, the rest bold, e.g. van**fontanilla**."
           - { name: role, label: Job title, widget: string }
           - name: taglines
             label: Ribbon words (moving banner on the home page)
@@ -344,6 +347,7 @@ collections:
                 label: Tools & technologies
                 widget: list
                 required: false
+                hint: The first six also appear on the home page's Current Role card.
                 field: { name: skill, label: Skill, widget: string }
               - name: soft
                 label: Soft skills

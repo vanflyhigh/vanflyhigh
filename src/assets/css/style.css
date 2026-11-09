@@ -22,13 +22,14 @@
   --on-accent-2: #021219;
   --good: #34d399;
   --focus: #74e4ff;
+  --brand-dot: #e0703f;
   --glow-a: rgb(56 214 255 / 0.1);
   --glow-b: rgb(255 138 61 / 0.07);
   --shadow: 0 18px 40px -18px rgb(0 0 0 / 0.7);
   --radius: 18px;
   --radius-sm: 12px;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-head: "Poppins", "Inter", system-ui, sans-serif;
+  --font-head: "Manrope", "Inter", system-ui, sans-serif;
   --gutter: 16px;
   color-scheme: dark;
 }
@@ -51,6 +52,7 @@
   --on-accent-2: #021219;
   --good: #059669;
   --focus: #2563eb;
+  --brand-dot: #b5532e;
   --glow-a: rgb(11 180 216 / 0.08);
   --glow-b: rgb(251 127 45 / 0.06);
   --shadow: 0 16px 36px -18px rgb(15 23 42 / 0.25);
@@ -212,7 +214,7 @@ figure { margin: 0; }
 }
 .card:hover { border-color: var(--line-strong); }
 .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.card-head h2 { font-size: 1.05rem; font-weight: 600; }
+.card-head h2 { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.01em; }
 .card-head h2 a { text-decoration: none; }
 .card-head h2 a:hover { color: var(--accent-2-ink); }
 .card-icon {
@@ -228,14 +230,32 @@ figure { margin: 0; }
 }
 
 /* ---------- Home ---------- */
-.home { padding: 26px 0 72px; }
-.home-name {
-  text-align: center; text-transform: uppercase; font-weight: 800;
-  font-size: clamp(2.5rem, 0.6rem + 8.4vw, 6.2rem); line-height: 0.98; letter-spacing: -0.02em;
-  background: linear-gradient(180deg, var(--ink) 30%, color-mix(in srgb, var(--ink) 62%, transparent));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+.home { padding: 34px 0 72px; }
+.home-hero { text-align: center; margin-bottom: 30px; }
+.wordmark { margin: 0; line-height: 1; }
+.wordmark-text {
+  display: inline-flex; align-items: baseline;
+  font-family: "Manrope", var(--font-head); color: var(--ink);
+  font-size: clamp(2.7rem, 0.9rem + 7.6vw, 6.4rem); letter-spacing: -0.035em;
 }
-.home-sub { text-align: center; color: var(--muted); font-size: 0.95rem; margin: 10px 0 26px; }
+.wm-light { font-weight: 300; }
+.wm-bold { font-weight: 700; }
+.wm-dot {
+  display: inline-block; width: 0.17em; height: 0.17em; margin-left: 0.07em;
+  background: var(--brand-dot); align-self: baseline;
+}
+.home-tagline {
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; margin-top: 16px;
+  color: var(--muted); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.home-tagline-sep { color: var(--brand-dot); }
+@media (max-width: 520px) {
+  .home-tagline { flex-direction: column; align-items: center; gap: 6px; letter-spacing: 0.16em; }
+  .home-tagline-sep { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+}
 
 .bento {
   display: grid; gap: 12px;
@@ -341,6 +361,12 @@ figure { margin: 0; }
 .featured-text h3 { font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem); font-weight: 700; }
 .featured-org { color: var(--muted); font-size: 0.9rem; margin-top: 6px; line-height: 1.45; }
 .featured-desc { color: var(--ink-2); font-size: 0.95rem; margin-top: 12px; }
+.role-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.role-tags li {
+  padding: 4px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 600;
+  color: var(--accent-2-ink); background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 28%, transparent);
+}
 .mini-stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
 .mini-stats li { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); }
 .mini-stats strong { font-family: var(--font-head); font-size: 1.3rem; line-height: 1.1; color: var(--ink); }

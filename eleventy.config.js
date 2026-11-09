@@ -197,6 +197,11 @@ export default function (eleventyConfig) {
     (Array.isArray(tags) ? tags : []).filter((t) => typeof t === "string" && t.trim()).map((t) => t.trim()),
   );
   eleventyConfig.addFilter("telHref", (phone) => `tel:${String(phone || "").replace(/[^\d+]/g, "")}`);
+  // Wordmark: first word light, the rest bold ("van" + "fontanilla").
+  eleventyConfig.addFilter("wordmarkParts", (name) => {
+    const words = String(name || "").trim().split(/\s+/).filter(Boolean);
+    return words.length > 1 ? [words[0], words.slice(1).join("")] : ["", words[0] || ""];
+  });
   eleventyConfig.addFilter("firstWords", (name, n = 1) => String(name || "").split(/\s+/).slice(0, n).join(" "));
   eleventyConfig.addFilter("lastWord", (name) => String(name || "").trim().split(/\s+/).pop());
   eleventyConfig.addFilter("allButLast", (name) => String(name || "").trim().split(/\s+/).slice(0, -1).join(" "));

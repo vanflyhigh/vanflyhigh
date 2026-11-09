@@ -10,8 +10,14 @@ bodyClass: page-home
 
 <section class="home">
   <div class="container">
-    <h1 class="home-name">{{ profile.shortName }}</h1>
-    <p class="home-sub">{{ profile.name }} · {{ profile.role }}</p>
+    <header class="home-hero">
+      {%- set nameParts = (profile.shortName or profile.name) | lower | wordmarkParts %}
+      <h1 class="wordmark">
+        <span class="wordmark-text" aria-hidden="true"><span class="wm-light">{{ nameParts[0] }}</span><span class="wm-bold">{{ nameParts[1] }}</span><span class="wm-dot"></span></span>
+        <span class="sr-only">{{ profile.name }}</span>
+      </h1>
+      <p class="home-tagline"><span>{{ profile.role }}</span><span class="home-tagline-sep" aria-hidden="true">·</span><span>{{ profile.location | replace(", Philippines", "") }}</span></p>
+    </header>
 
     <div class="bento">
       {#- Photo -#}
@@ -115,6 +121,12 @@ bodyClass: page-home
             <h3>{{ current.role }}</h3>
             <p class="featured-org">{{ current.organization }}<br>{{ current.start }}{% if current.end and current.end != current.start %} – {{ current.end }}{% endif %}</p>
             {%- if profile.featuredText %}<p class="featured-desc">{{ profile.featuredText }}</p>{% endif %}
+            {%- set roleTools = resume.skills.tools | limit(6) %}
+            {%- if roleTools | length %}
+            <ul class="role-tags" aria-label="Key tools">
+              {%- for t in roleTools %}<li>{{ t }}</li>{% endfor %}
+            </ul>
+            {%- endif %}
           </div>
           {%- if profile.highlights | length %}
           <ul class="mini-stats">
