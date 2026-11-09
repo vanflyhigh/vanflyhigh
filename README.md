@@ -12,6 +12,7 @@ My personal website: a portfolio built from my resume, plus **Life Updates**, a 
 | `/contact/` | Email, location, resume and every social/contact link |
 | `/updates/` | Life Updates feed with photo grids, captions, tags and a lightbox |
 | `/updates/<post>/` | A single post with every photo and caption |
+| `/privacy/` | Privacy & Disclaimer (linked at the bottom of every page) |
 | `/feed.xml` | RSS/Atom feed so people can follow my updates |
 | `/admin/` | The dashboard where I post and edit everything (only I can sign in) |
 
@@ -87,7 +88,7 @@ In `/admin/` → **Status, Profile & Resume**:
   - **Resume PDF**: used by the **View / download PDF** button on the Resume page.
   - Highlight numbers (shown in the Current Role card), **What I do** (short one-line items) and **Interests** (pick an icon for each). Each interest links to the Life Updates with the same tag: tag a post `gaming` and it shows under **Gaming** (capital letters don't matter).
 - **Resume**: jobs, responsibilities, education, certifications, skills, and languages.
-- **Site Settings**: site title, the description shown on Google and in link previews, blog name, and intro.
+- **Site Settings**: site title, the description shown on Google and in link previews, blog name, intro, footer quote, and the **Privacy & Disclaimer page** (open it to edit the text, and set **Last updated** to *Today* when you change it).
 
 > Your **phone number is hidden** on the site by default. Add it under **Phone** if you want it shown. The resume PDF includes it, so upload a copy without it if you'd rather keep it private.
 

@@ -6,7 +6,7 @@ pagination:
   alias: posts
 permalink: "/updates/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}"
 eleventyComputed:
-  title: "{{ site.updatesTitle }}{% if pagination.pageNumber > 0 %} (page {{ pagination.pageNumber + 1 }}){% endif %}"
+  title: "{{ site.updatesTitle | safe }}{% if pagination.pageNumber > 0 %} (page {{ pagination.pageNumber + 1 }}){% endif %}"
 bodyClass: page-updates
 ---
 {%- from "partials/macros.njk" import photoGrid, tagList, videoEmbed %}

@@ -6,7 +6,7 @@ pagination:
   alias: tag
 permalink: "/updates/tags/{{ tag.slug }}/"
 eleventyComputed:
-  title: "#{{ tag.name }} · {{ site.updatesTitle }}"
+  title: "#{{ tag.name | safe }} · {{ site.updatesTitle | safe }}"
 bodyClass: page-updates
 ---
 {%- from "partials/macros.njk" import updateCard %}

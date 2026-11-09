@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+permalink: /privacy/
+bodyClass: page-legal
+eleventyComputed:
+  title: "{{ (site.privacy.title or 'Privacy & Disclaimer') | safe }}"
+  description: "How {{ site.title | safe }} handles your privacy, plus a short disclaimer."
+---
+<section class="page-hero">
+  <div class="container narrow">
+    <p class="section-label">The fine print</p>
+    <h1 class="page-title">{{ title }}</h1>
+    {%- if site.privacy.updated %}
+    <p class="page-lead">Last updated <time datetime="{{ site.privacy.updated | isoDate }}">{{ site.privacy.updated | readableDate(site.timezone) }}</time></p>
+    {%- endif %}
+  </div>
+</section>
+
+<div class="container narrow">
+  <article class="prose legal">
+    {{ site.privacy.body | md | safe }}
+  </article>
+
+  <aside class="card legal-contact" aria-label="Questions">
+    <p><strong>Questions, or want something removed?</strong> Send me a message and I’ll get back to you.</p>
+    <div class="legal-contact-actions">
+      <a class="btn btn-primary btn-small" href="mailto:{{ profile.email }}">Email me</a>
+      <a class="btn btn-ghost btn-small" href="/contact/">All contacts</a>
+    </div>
+  </aside>
+</div>

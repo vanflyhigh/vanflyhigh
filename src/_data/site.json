@@ -4,6 +4,11 @@
   "updatesTitle": "Life Updates",
   "updatesIntro": "Photos, little stories, and what I've been up to lately, on and off the job.",
   "footerQuote": "Stay connected, keep learning, and always fly high.",
+  "privacy": {
+    "title": "Privacy & Disclaimer",
+    "updated": "2026-11-09",
+    "body": "**The short version:** this is my personal website. I don't track you, I don't show ads, and I don't collect your personal information.\n\n## Disclaimer\n\n- Everything here, including my Life Updates, is my own opinion. It doesn't represent any employer, past or present, or any organization I'm part of.\n- I share what I know in good faith, from personal experience. It isn't professional advice, so double-check anything important.\n- Links to other websites are there for convenience. I'm not responsible for what's on them.\n\n## Privacy\n\n### What I collect\n\nNothing. This site has no sign-ups, comments, contact forms, analytics or ads. If you email or message me, I only use what you send to reply to you.\n\n### Cookies\n\nThis site doesn't set any cookies. It remembers whether you picked the light or dark theme, but that choice is saved only in your own browser and is never sent to me.\n\n### Services this site uses\n\n- **Hosting:** the site runs on GitHub Pages. GitHub logs visitors' IP addresses for security ([GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)).\n- **Fonts:** the text fonts load from Google Fonts ([Google Privacy Policy](https://policies.google.com/privacy)).\n- **Videos and GIFs:** some posts show videos or GIFs from YouTube, Facebook, Instagram, TikTok, Vimeo, Imgur, GIPHY or Tenor. These load from those sites, which follow their own privacy policies and may set cookies. YouTube videos use YouTube's privacy-enhanced mode.\n\n## Photos and content\n\n- Photos and writing on this site are mine unless noted. Please ask before reusing them.\n- If you're in one of my photos and would like it taken down, message me and I'll remove it.\n\n## Changes\n\nI may update this page now and then. The date at the top shows the last change."
+  },
   "language": "en",
   "timezone": "Asia/Manila"
 }

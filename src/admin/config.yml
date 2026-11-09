@@ -446,5 +446,23 @@ collections:
             widget: string
             required: false
             hint: A short motto shown at the bottom of every page. Leave empty to hide it.
+          - name: privacy
+            label: Privacy & Disclaimer page
+            widget: object
+            collapsed: true
+            hint: "The page linked at the bottom of every page (/privacy/). Your email and a link to your contacts are added at the end automatically."
+            fields:
+              - { name: title, label: Page title, widget: string, default: "Privacy & Disclaimer" }
+              - name: updated
+                label: Last updated
+                widget: datetime
+                time_format: false
+                format: YYYY-MM-DD
+                required: false
+                hint: Change this whenever you edit the text below.
+              - name: body
+                label: Text
+                widget: markdown
+                hint: "Use Heading 2 for main sections (Disclaimer, Privacy) and Heading 3 for smaller ones."
           - { name: language, label: Language code, widget: hidden, default: en }
           - { name: timezone, label: Time zone, widget: hidden, default: Asia/Manila }
