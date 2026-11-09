@@ -163,10 +163,6 @@ figure { margin: 0; }
 .brand-logo { display: grid; place-items: center; flex: none; }
 .logo-mark { height: 30px; width: auto; fill: currentColor; transition: transform 0.2s ease; }
 .brand:hover .logo-mark { transform: translateY(-1px); }
-.brand-name {
-  font-family: var(--font-head); font-weight: 500; font-size: 0.8rem; white-space: nowrap;
-  text-transform: uppercase; letter-spacing: 0.32em; margin-right: -0.32em;
-}
 
 .site-nav { margin-left: auto; }
 .site-nav ul { list-style: none; display: flex; gap: 4px; }
@@ -200,9 +196,6 @@ figure { margin: 0; }
   .site-nav ul { flex-direction: column; gap: 2px; }
   .site-nav a { padding: 12px 4px; font-size: 1rem; }
   .site-nav a[aria-current="page"]::after { left: 4px; right: auto; width: 24px; bottom: 6px; }
-}
-@media (max-width: 420px) {
-  .brand-name { display: none; }
 }
 
 /* ---------- Cards (shared) ---------- */
