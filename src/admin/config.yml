@@ -445,7 +445,7 @@ collections:
         label: Site Settings
         file: src/_data/site.json
         fields:
-          - { name: title, label: Site title, widget: string }
+          - { name: title, label: "Site title (shown in the browser tab)", widget: string }
           - { name: description, label: Site description (for Google & link previews), widget: text }
           - { name: updatesTitle, label: Blog name, widget: string, default: Life Updates }
           - { name: updatesIntro, label: Blog intro, widget: text }

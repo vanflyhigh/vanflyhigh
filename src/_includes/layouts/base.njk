@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {%- set pageTitle = (title + " · " + site.title) if title else (profile.name + " · " + profile.role) %}
+  {%- set pageTitle = (title + " · " + site.title) if title else site.title %}
   {%- set pageDescription = description or site.description %}
   {%- set pageImage = ogImage or profile.photo %}
   <title>{{ pageTitle }}</title>
