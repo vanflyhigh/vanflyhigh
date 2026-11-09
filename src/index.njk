@@ -124,6 +124,26 @@ bodyClass: page-home
       </section>
       {%- endif %}
 
+      {#- What I do: short, resume-based -#}
+      {%- if profile.services | length %}
+      <section class="card card-services" aria-labelledby="services-title">
+        <header class="card-head">
+          <h2 id="services-title">What I do</h2>
+          <span class="card-icon">{{ icon("support") }}</span>
+        </header>
+        <ul class="services">
+          {%- for service in profile.services %}
+          {%- if service.title %}
+          <li>
+            <span class="service-icon">{{ icon(service.icon or "star") }}</span>
+            <span class="service-text"><strong>{{ service.title }}</strong>{% if service.description %}<span>{{ service.description }}</span>{% endif %}</span>
+          </li>
+          {%- endif %}
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+
       {#- Interests -#}
       {%- if profile.interests | length %}
       <section class="card card-interests" aria-labelledby="interests-title">

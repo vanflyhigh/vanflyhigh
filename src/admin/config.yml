@@ -313,6 +313,29 @@ collections:
             fields:
               - { name: value, label: Number, widget: string }
               - { name: label, label: Label, widget: string }
+          - name: services
+            label: What I do (home page)
+            label_singular: Item
+            widget: list
+            required: false
+            collapsed: auto
+            summary: "{{fields.title}}"
+            hint: Keep each description to one short line.
+            fields:
+              - { name: title, label: Title, widget: string, hint: "e.g. Networks & IT Support" }
+              - { name: description, label: Short description, widget: string, required: false, hint: "e.g. LAN/WAN, security and tier-2 support" }
+              - name: icon
+                label: Icon
+                widget: select
+                default: star
+                options:
+                  - { label: Network, value: network }
+                  - { label: Data / charts, value: data }
+                  - { label: Database / QA, value: qa }
+                  - { label: Design, value: design }
+                  - { label: Tech support, value: support }
+                  - { label: Code, value: code }
+                  - { label: Star, value: star }
           - name: interests
             label: Interests (home page)
             label_singular: Interest

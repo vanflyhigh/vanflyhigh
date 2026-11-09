@@ -68,6 +68,28 @@
       "label": "professional certificates"
     }
   ],
+  "services": [
+    {
+      "title": "Networks & IT Support",
+      "description": "LAN/WAN, security and tier-2 support",
+      "icon": "network"
+    },
+    {
+      "title": "Data & Reporting",
+      "description": "Hospital data, trends and insights",
+      "icon": "data"
+    },
+    {
+      "title": "Software QA & SQL",
+      "description": "Test scripts, defects and stored procedures",
+      "icon": "qa"
+    },
+    {
+      "title": "Design & Multimedia",
+      "description": "Photos, graphics and marketing materials",
+      "icon": "design"
+    }
+  ],
   "interests": [
     {
       "name": "Gaming",

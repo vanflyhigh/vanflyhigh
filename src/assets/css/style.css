@@ -252,7 +252,7 @@ figure { margin: 0; }
 .bento {
   display: grid; gap: 12px;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: "photo" "status" "updates" "ribbon" "role" "interests";
+  grid-template-areas: "photo" "status" "updates" "ribbon" "role" "services" "interests";
 }
 .card-photo { grid-area: photo; }
 .card-ribbon { grid-area: ribbon; }
@@ -260,6 +260,7 @@ figure { margin: 0; }
 .card-status { grid-area: status; }
 .card-role { grid-area: role; }
 .card-interests { grid-area: interests; }
+.card-services { grid-area: services; }
 
 @media (min-width: 680px) {
   .bento {
@@ -268,7 +269,8 @@ figure { margin: 0; }
       "photo photo photo ribbon ribbon ribbon"
       "photo photo photo status status status"
       "updates updates updates updates updates updates"
-      "role role role interests interests interests";
+      "role role role services services services"
+      "interests interests interests interests interests interests";
   }
 }
 @media (min-width: 1040px) {
@@ -277,7 +279,7 @@ figure { margin: 0; }
     grid-template-areas:
       "photo photo photo ribbon ribbon ribbon updates updates updates updates updates updates"
       "photo photo photo status status status updates updates updates updates updates updates"
-      "role role role role interests interests interests interests interests interests interests interests";
+      "role role role role services services services services interests interests interests interests";
   }
 }
 
@@ -345,6 +347,18 @@ figure { margin: 0; }
   background: color-mix(in srgb, var(--tone) 16%, transparent); color: var(--tone);
 }
 .interest-icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* What I do (compact) */
+.services { list-style: none; display: grid; gap: 14px; }
+.services li { display: flex; align-items: center; gap: 12px; }
+.service-icon {
+  display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 10px;
+  background: var(--surface-2); border: 1px solid var(--line); color: var(--accent);
+}
+.service-icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.service-text { display: grid; gap: 1px; min-width: 0; }
+.service-text strong { font-family: var(--font-head); font-weight: 700; font-size: 0.93rem; line-height: 1.3; }
+.service-text span { color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
 
 /* Status (home card + contact page pill) */
 .status-open { --status: var(--good); }
