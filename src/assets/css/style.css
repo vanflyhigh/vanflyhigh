@@ -237,15 +237,14 @@ figure { margin: 0; }
   display: inline-block; width: 0.17em; height: 0.17em; margin-left: 0.07em;
   background: var(--brand-dot); align-self: baseline;
 }
-.home-tagline {
-  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px 12px; margin-top: 16px;
-  color: var(--muted); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+.home-divider {
+  display: flex; align-items: center; gap: 12px;
+  width: min(460px, 72%); margin: 26px auto 0;
 }
-.home-tagline-sep { color: var(--brand-dot); }
-@media (max-width: 520px) {
-  .home-tagline { flex-direction: column; align-items: center; gap: 6px; letter-spacing: 0.16em; }
-  .home-tagline-sep { display: none; }
-}
+.home-divider i { flex: 1; height: 1px; }
+.home-divider i:first-child { background: linear-gradient(90deg, transparent, var(--line-strong)); }
+.home-divider i:last-child { background: linear-gradient(90deg, var(--line-strong), transparent); }
+.home-divider span { width: 7px; height: 7px; flex: none; background: var(--brand-dot); }
 @media (prefers-reduced-motion: no-preference) {
   .home-hero { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 }
