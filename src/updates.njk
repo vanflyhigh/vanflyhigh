@@ -18,9 +18,9 @@ bodyClass: page-updates
     <p class="page-lead">{{ site.updatesIntro }}</p>
     {%- if collections.updateTags | length %}
     <ul class="tag-cloud" aria-label="Browse by tag">
-      {%- for tag in collections.updateTags | limit(12) %}
-      <li><a href="/updates/tags/{{ tag.name | slugify }}/">#{{ tag.name }} <span>{{ tag.count }}</span></a></li>
-      {%- endfor %}
+      {%- for tag in collections.updateTags %}{% if tag.count and loop.index0 < 40 %}
+      <li><a href="/updates/tags/{{ tag.slug }}/">#{{ tag.name }} <span>{{ tag.count }}</span></a></li>
+      {%- endif %}{% endfor %}
     </ul>
     {%- endif %}
   </div>

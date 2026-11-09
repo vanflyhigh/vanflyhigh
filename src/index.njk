@@ -103,7 +103,7 @@ bodyClass: page-home
         <div class="tape tape-b" aria-hidden="true"><div class="tape-track"><span>{{ line | safe }}{{ line | safe }}</span><span>{{ line | safe }}{{ line | safe }}</span></div></div>
       </div>
 
-      {#- Current role: kept simple and quiet -#}
+      {#- Current role: small and quiet -#}
       {%- if current %}
       <section class="card card-role" aria-labelledby="role-title">
         <header class="card-head">
@@ -111,14 +111,8 @@ bodyClass: page-home
           <span class="card-icon">{{ icon("briefcase") }}</span>
         </header>
         <h3 class="role-title">{{ current.role }}</h3>
-        <p class="role-org">{{ current.organization }} · {{ current.start }}{% if current.end and current.end != current.start %} – {{ current.end }}{% endif %}</p>
-        {%- if profile.featuredText %}<p class="role-desc">{{ profile.featuredText }}</p>{% endif %}
-        {%- set roleTools = resume.skills.tools | limit(6) %}
-        {%- if roleTools | length %}
-        <ul class="role-tags" aria-label="Key tools">
-          {%- for t in roleTools %}<li>{{ t }}</li>{% endfor %}
-        </ul>
-        {%- endif %}
+        <p class="role-org">{{ current.organization }}</p>
+        <p class="role-years">{{ current.start }}{% if current.end and current.end != current.start %} – {{ current.end }}{% endif %}</p>
         {%- if profile.highlights | length %}
         <ul class="role-stats">
           {%- for stat in profile.highlights %}
@@ -126,6 +120,7 @@ bodyClass: page-home
           {%- endfor %}
         </ul>
         {%- endif %}
+        <a class="link-arrow role-link" href="/resume/">View resume <span aria-hidden="true">→</span></a>
       </section>
       {%- endif %}
 
@@ -139,7 +134,8 @@ bodyClass: page-home
         <ul class="interests">
           {%- for item in profile.interests %}
           {%- if item.name %}
-          <li><span class="interest-icon">{{ icon(item.icon or "star") }}</span>{{ item.name }}</li>
+          {%- set info = collections.updateTags | tagInfo(item.name) %}
+          <li><a class="interest" href="/updates/tags/{{ item.name | tagSlug }}/" aria-label="{{ item.name }}: {{ info.count }} {{ 'update' if info.count == 1 else 'updates' }}"><span class="interest-icon">{{ icon(item.icon or "star") }}</span><span class="interest-name">{{ item.name }}</span>{% if info.count %}<span class="interest-count">{{ info.count }}</span>{% endif %}</a></li>
           {%- endif %}
           {%- endfor %}
         </ul>

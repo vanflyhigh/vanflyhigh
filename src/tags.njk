@@ -4,23 +4,26 @@ pagination:
   data: collections.updateTags
   size: 1
   alias: tag
-permalink: "/updates/tags/{{ tag.name | slugify }}/"
+permalink: "/updates/tags/{{ tag.slug }}/"
 eleventyComputed:
   title: "#{{ tag.name }} · {{ site.updatesTitle }}"
 bodyClass: page-updates
 ---
 {%- from "partials/macros.njk" import updateCard %}
-{%- set tagged = collections.updates | withTag(tag.name) %}
+{%- set tagged = collections.updates | withTag(tag.slug) %}
 
 <section class="page-hero page-hero-center">
   <div class="container narrow">
     <p class="section-label"><a href="/updates/">{{ site.updatesTitle }}</a></p>
     <h1 class="page-title">#{{ tag.name }}</h1>
-    <p class="page-lead">{{ tagged | length }} {{ "update" if tagged | length == 1 else "updates" }} tagged “{{ tag.name }}”.</p>
+    <p class="page-lead">{% if tagged | length %}{{ tagged | length }} {{ "update" if tagged | length == 1 else "updates" }} tagged “{{ tag.name }}”.{% else %}Life updates tagged “{{ tag.name }}” will show up here.{% endif %}</p>
   </div>
 </section>
 
 <div class="container">
+  {%- if not tagged | length %}
+  <p class="empty-state">No #{{ tag.name }} updates yet. Check back soon!</p>
+  {%- endif %}
   <div class="card-grid">
     {%- for post in tagged %}
     {{ updateCard(post) }}

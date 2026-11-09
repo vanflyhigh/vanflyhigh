@@ -22,6 +22,16 @@ const joinPrefix = (path = "/") => {
 
 const toDate = (value) => (value instanceof Date ? value : new Date(value));
 
+// URL-friendly tag name: "La Union" -> "la-union", "Gaming" -> "gaming".
+const tagSlug = (name) =>
+  String(name || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
 
@@ -50,19 +60,30 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date),
   );
 
+  // Tags are matched by their slug, so "Gaming", "gaming" and "GAMING" are the same tag.
+  // Every Interest from the profile also gets a tag page (empty until a post uses it).
   eleventyConfig.addCollection("updateTags", (api) => {
-    const counts = new Map();
+    const tags = new Map();
+    const add = (name, counts, isInterest = false) => {
+      const slug = tagSlug(name);
+      if (!slug) return;
+      const t = tags.get(slug) || { name: name.trim(), slug, count: 0, interest: false };
+      if (isInterest) { t.interest = true; t.name = name.trim(); }
+      if (counts) t.count += 1;
+      tags.set(slug, t);
+    };
+    const all = api.getAll();
+    const interests = (all[0] && all[0].data.profile && all[0].data.profile.interests) || [];
+    for (const i of interests) if (i && typeof i.name === "string") add(i.name, false, true);
     for (const item of api.getFilteredByGlob("src/updates/*.md").filter(isVisible)) {
+      const seen = new Set();
       for (const tag of item.data.tags || []) {
-        if (typeof tag === "string" && tag.trim()) {
-          const name = tag.trim();
-          counts.set(name, (counts.get(name) || 0) + 1);
-        }
+        if (typeof tag !== "string" || !tag.trim() || seen.has(tagSlug(tag))) continue;
+        seen.add(tagSlug(tag));
+        add(tag, true);
       }
     }
-    return [...counts.entries()]
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    return [...tags.values()].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
   });
 
   // ---------- Filters ----------
@@ -138,9 +159,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("validPhotos", (photos) =>
     (Array.isArray(photos) ? photos : []).filter((p) => p && typeof p.image === "string" && p.image.trim()),
   );
-  eleventyConfig.addFilter("withTag", (posts, tag) =>
-    (posts || []).filter((post) => (post.data.tags || []).some((t) => typeof t === "string" && t.trim() === tag)),
+  eleventyConfig.addFilter("tagSlug", tagSlug);
+  eleventyConfig.addFilter("withTag", (posts, slug) =>
+    (posts || []).filter((post) => (post.data.tags || []).some((t) => typeof t === "string" && tagSlug(t) === slug)),
   );
+  eleventyConfig.addFilter("tagInfo", (tags, name) => (tags || []).find((t) => t.slug === tagSlug(name)) || { count: 0 });
   eleventyConfig.addFilter("isActiveNav", (itemUrl, pageUrl) => {
     if (typeof pageUrl !== "string" || itemUrl.includes("#")) return false;
     return itemUrl === "/" ? pageUrl === "/" : pageUrl.startsWith(itemUrl);

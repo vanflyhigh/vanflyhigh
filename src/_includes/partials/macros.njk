@@ -100,7 +100,7 @@
 {%- if list | length %}
 <ul class="tag-list" aria-label="Tags">
   {%- for tag in list %}
-  <li><a href="/updates/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+  <li><a href="/updates/tags/{{ tag | tagSlug }}/">#{{ tag }}</a></li>
   {%- endfor %}
 </ul>
 {%- endif %}

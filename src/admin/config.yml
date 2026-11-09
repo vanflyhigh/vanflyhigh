@@ -251,14 +251,6 @@ collections:
             widget: list
             required: false
             field: { name: tagline, label: Word or phrase, widget: string }
-          - name: featuredText
-            label: Current role description (home page)
-            widget: text
-            required: false
-            hint: Your current job title and workplace come from the Resume section.
-          - { name: summary, label: About me / summary, widget: text }
-          - { name: location, label: Location, widget: string }
-          - { name: email, label: Email, widget: string }
           - name: phone
             label: Phone (leave empty to keep it private)
             widget: string
@@ -328,7 +320,7 @@ collections:
             required: false
             collapsed: auto
             summary: "{{fields.name}}"
-            hint: Add as many as you like and drag to reorder.
+            hint: "Add as many as you like and drag to reorder. Each interest links to the Life Updates with the same tag, so tag a post \"gaming\" to list it under Gaming (capital letters don't matter)."
             fields:
               - { name: name, label: Interest, widget: string, hint: "e.g. Gaming, Gym, Travel" }
               - name: icon
@@ -404,7 +396,6 @@ collections:
                 label: Tools & technologies
                 widget: list
                 required: false
-                hint: The first six also appear on the home page's Current Role card.
                 field: { name: skill, label: Skill, widget: string }
               - name: soft
                 label: Soft skills
