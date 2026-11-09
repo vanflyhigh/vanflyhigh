@@ -241,7 +241,7 @@ collections:
               - { label: Bottom, value: bottom }
           - { name: name, label: Full name, widget: string }
           - name: shortName
-            label: Short name (wordmark & logo)
+            label: Short name (home page wordmark)
             widget: string
             hint: "Shown as the big wordmark on the home page: the first word is light, the rest bold, e.g. van**fontanilla**."
           - { name: role, label: Job title, widget: string }
