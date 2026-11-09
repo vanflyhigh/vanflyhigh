@@ -62,7 +62,7 @@ Keep the token private, like a password. If it ever leaks, delete it on the GitH
 1. Open `/admin/` → **Life Updates** → **New Life Update**.
 2. Give it a **Title**. The **Date** fills in automatically.
 3. Under **Photos**, click **Add Photo** for each picture. Upload or drag it in, and write a **Caption**. Drag items to reorder; the first photo is the cover.
-4. Optionally add **Videos & GIFs (links)**: upload a video to YouTube, Facebook, Instagram, TikTok or Vimeo, or a GIF to Imgur, GIPHY or Tenor, then paste its link. Videos play inside your post; GIFs play silently on a loop. (Don't upload video files to the site itself; they're too big.)
+4. Optionally add **Videos & GIFs (links)**: upload a video to YouTube, Facebook, Instagram, TikTok or Vimeo, or a GIF to Imgur, GIPHY or Tenor, then paste its link. Videos play inside your post; GIFs play silently on a loop. For Imgur, the normal share link (`imgur.com/a/…`) works; the site finds the GIF inside the post when it rebuilds, or shows Imgur's own player if it can't. (Don't upload video files to the site itself; they're too big.)
 5. Optionally write a **Story** (the text editor supports bold, links, lists…) and add **Tags** like `travel` or `family`. Set **Story position** to *Before the photos* when your story is the introduction.
 6. Click **Save**. The site updates in about a minute.
 

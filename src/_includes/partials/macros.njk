@@ -33,6 +33,15 @@
     {%- if video.provider != "file" %}<a class="video-source" href="{{ video.link }}" target="_blank" rel="noopener">via {{ video.name }} ↗</a>{% endif %}
   </figcaption>
 </figure>
+{%- elif video.kind == "imgur-post" %}
+<figure class="video-embed video-imgur-post">
+  <blockquote class="imgur-embed-pub" lang="en" data-id="a/{{ video.postId }}" data-context="false"><a href="{{ video.link }}" target="_blank" rel="noopener">{{ video.caption or "View on Imgur" }}</a></blockquote>
+  <script>if(!window.__imgurEmbed){window.__imgurEmbed=1;var s=document.createElement("script");s.async=true;s.src="https://s.imgur.com/min/embed.js";s.charset="utf-8";document.head.appendChild(s);}</script>
+  <figcaption>
+    {%- if video.caption %}<span>{{ video.caption | mdInline | safe }}</span>{% endif %}
+    <a class="video-source" href="{{ video.link }}" target="_blank" rel="noopener">via Imgur ↗</a>
+  </figcaption>
+</figure>
 {%- elif video.kind == "embed" %}
 <figure class="video-embed{% if video.vertical %} is-vertical{% endif %}{% if video.narrow %} is-narrow{% endif %} video-{{ video.provider }}">
   <div class="video-frame" style="aspect-ratio: {{ video.ratio }}">
@@ -54,7 +63,7 @@
 {#- Small badge drawn over a cover image: ▶ for videos, "GIF" for looping GIFs. -#}
 {% macro playBadge(count, videos) %}
 {%- set first = videos | first if videos else null %}
-{%- if first and (first.kind == "loop" or first.kind == "image") %}
+{%- if first and (first.kind == "loop" or first.kind == "image" or first.kind == "imgur-post") %}
 <span class="play-badge gif-badge" aria-hidden="true">GIF</span>
 {%- else %}
 <span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>{% if count > 1 %}<em>{{ count }}</em>{% endif %}</span>

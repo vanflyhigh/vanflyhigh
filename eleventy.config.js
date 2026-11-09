@@ -1,6 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
 import { validVideos } from "./lib/video.js";
+import { lookupImgurPosts } from "./lib/imgur.js";
 import { normalizeBlocks, combinedPhotos, combinedVideos, blocksText, startsWithText } from "./lib/post.js";
 
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
@@ -23,6 +24,12 @@ const toDate = (value) => (value instanceof Date ? value : new Date(value));
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
+
+  // Before each build, find the GIF inside any Imgur post links (imgur.com/a/ID)
+  // so they play like a GIF. Falls back to Imgur's embed if Imgur can't be reached.
+  eleventyConfig.on("eleventy.before", async () => {
+    await lookupImgurPosts();
+  });
   eleventyConfig.setLibrary("md", md);
 
   eleventyConfig.addPassthroughCopy({
@@ -202,7 +209,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("postVideos", (data = {}) => combinedVideos(data.blocks, data.videos));
   eleventyConfig.addFilter("blocksText", blocksText);
   eleventyConfig.addFilter("startsWithText", startsWithText);
-  eleventyConfig.addFilter("gifCount", (list) => (list || []).filter((v) => v.kind === "loop" || v.kind === "image").length);
+  eleventyConfig.addFilter("gifCount", (list) => (list || []).filter((v) => ["loop", "image", "imgur-post"].includes(v.kind)).length);
   eleventyConfig.addWatchTarget("./lib/");
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
   eleventyConfig.addFilter("cleanTags", (tags) =>

@@ -859,6 +859,10 @@ a.social-card:hover .social-card-go { color: var(--brand); }
 .video-source:hover { color: var(--accent-2-ink); }
 .gif-loop { display: block; width: 100%; height: auto; max-height: 640px; object-fit: contain; border-radius: 16px; border: 1px solid var(--line); background: var(--surface-3); }
 .video-embed.is-narrow .video-frame { max-width: 420px; }
+.video-imgur-post { justify-items: center; }
+.video-imgur-post .imgur-embed-pub, .video-imgur-post iframe { width: 100% !important; max-width: 540px !important; margin: 0 auto !important; border-radius: 14px; }
+.video-imgur-post blockquote.imgur-embed-pub { padding: 18px; background: var(--surface-2); border: 1px solid var(--line); text-align: center; }
+.video-imgur-post figcaption { max-width: 540px; }
 .video-embed.is-narrow { justify-items: center; }
 .video-linkcard {
   display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; text-decoration: none;
