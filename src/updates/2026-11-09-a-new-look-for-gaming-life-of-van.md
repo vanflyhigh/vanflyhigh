@@ -1,6 +1,14 @@
 ---
 title: A New Look for Gaming Life of Van 🎮
 date: 2026-11-09T13:36:00
+blocks:
+  - type: text
+    text: |-
+      For a while now, I’ve been running a Facebook page where I shared my gaming life: the wins, the losses, the late-night sessions, and everything in between. It was a fun little corner of the internet, but lately I’ve wanted it to be more than that.
+
+      So I’m revamping it. **Gaming Life of Van** is turning into a Facebook vlog and page that works more like a personal blog. Gaming is still the main thing, but I’ll also be sharing my daily life: trips, food, weekends, random adventures, and the small moments in between.
+
+      A new chapter needs a new look, so I designed my own logos. Here they are. 👇
 photos:
   - image: /images/uploads/20261109-logo-68f71308154e.webp
     caption: 'This is my main logo, and it’s the heart of everything. It’s simple and built from my initials, because I wanted something that feels personal and clean and that will still look right years from now. No crazy effects or extra details, just me. This is the mark I’ll use for my personal brand: the blog, the vlogs, and everything.'
@@ -14,13 +22,11 @@ photos:
   - image: /images/uploads/20261109-gaming-logo-b-581c54a99aa7.webp
     caption: 'Just like my main logos, the gaming logo has a second version too. I adapted it so I can use it across other platforms: profile pictures, banners, stream overlays, thumbnails, and anywhere else my gaming content ends up. One look, many places. 🕹️'
     alt: ''
-videos: []
+videos:
+  - url: https://imgur.com/a/VheQKlZ
+    caption: Meanwhile this is what it looks with animated Gaming Logos.
 storyPosition: before
 tags:
   - ideas
 draft: false
 ---
-
-For a while now, I’ve been running a Facebook page where I shared my gaming life: the wins, the losses, the late-night sessions, and everything in between. It was a fun little corner of the internet, but lately I’ve wanted it to be more than that.
-
-So I’m revamping it. **Gaming Life of Van** is turning into a Facebook vlog and page that works more like a personal blog. Gaming is still the main thing, but I’ll also be sharing my daily life: trips, food, weekends, random adventures, and the small moments in between.
