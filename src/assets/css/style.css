@@ -820,6 +820,28 @@ a.social-card:hover .social-card-go { color: var(--brand); }
 .post-nav-link:hover { border-color: var(--accent-2); }
 .post-nav-older { text-align: right; }
 
+/* ---------- Story blocks ---------- */
+.post-blocks { display: grid; gap: 28px; margin-bottom: 30px; }
+.block-text > :first-child { margin-top: 0; }
+.block-gallery { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.block-gallery.count-1 { grid-template-columns: 1fr; }
+.block-gallery.count-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 560px) { .block-gallery.count-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .block-gallery.count-3 > :first-child { grid-column: 1 / -1; } }
+.block-gallery-item { margin: 0; display: grid; gap: 6px; align-content: start; }
+.block-gallery-item .photo-link { display: block; aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: var(--surface-3); border: 1px solid var(--line); cursor: zoom-in; }
+.block-gallery.count-1 .photo-link { aspect-ratio: auto; }
+.block-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.block-gallery-item .photo-link:hover img { transform: scale(1.03); }
+.block-gallery-item figcaption { color: var(--muted); font-size: 0.86rem; padding: 0 2px; }
+.block-quote {
+  margin: 0; padding: 18px 22px; border-radius: 14px; border-left: 4px solid var(--brand-dot);
+  background: var(--surface); border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.block-quote p { font-family: var(--font-head); font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem); font-weight: 600; line-height: 1.4; color: var(--ink); }
+.block-quote cite { display: block; margin-top: 8px; color: var(--muted); font-style: normal; font-size: 0.9rem; }
+.block-quote cite::before { content: "— "; }
+.post-blocks + .post-photos, .post-blocks + .post-videos { margin-top: 0; }
+
 /* ---------- Videos ---------- */
 .post-videos { display: grid; gap: 30px; margin-top: 30px; }
 .video-embed { display: grid; gap: 10px; margin: 0; }

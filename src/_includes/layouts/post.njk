@@ -3,8 +3,11 @@ layout: layouts/base.njk
 bodyClass: page-post
 ---
 {%- from "partials/macros.njk" import tagList, videoEmbed %}
-{%- set photos = photos | validPhotos %}
-{%- set videoList = videos | validVideos %}
+{%- set blockList = blocks | postBlocks %}
+{%- set simplePhotos = photos | validPhotos %}
+{%- set simpleVideos = videos | validVideos %}
+{%- set allPhotos = { blocks: blocks, photos: photos } | postPhotos %}
+{%- set videoList = { blocks: blocks, videos: videos } | postVideos %}
 {%- set newer = collections.updates | getPreviousCollectionItem(page) %}
 {%- set older = collections.updates | getNextCollectionItem(page) %}
 
@@ -14,7 +17,7 @@ bodyClass: page-post
     <h1 class="post-title">{{ title }}</h1>
     <p class="post-meta">
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(site.timezone) }}</time>
-      {%- if photos | length %}<span>{{ photos | length }} {{ "photo" if photos | length == 1 else "photos" }}</span>{% endif %}
+      {%- if allPhotos | length %}<span>{{ allPhotos | length }} {{ "photo" if allPhotos | length == 1 else "photos" }}</span>{% endif %}
       {%- set gifCount = videoList | gifCount %}
       {%- set videoCount = (videoList | length) - gifCount %}
       {%- if videoCount %}<span>{{ videoCount }} {{ "video" if videoCount == 1 else "videos" }}</span>{% endif %}
@@ -23,6 +26,44 @@ bodyClass: page-post
     </p>
   </header>
 
+  {#- Story blocks: the post is built in exactly the order they were arranged in the admin. -#}
+  {%- if blockList | length %}
+  <div class="post-blocks container narrow">
+    {%- for b in blockList %}
+    {%- if b.type == "text" %}
+    <div class="block-text prose">{{ b.text | md | safe }}</div>
+    {%- elif b.type == "photo" %}
+    <figure class="post-photo block-photo">
+      <a class="photo-link" href="{{ b.image }}" data-gallery="post" data-caption="{{ b.caption or '' }}">
+        <img src="{{ b.image }}" alt="{{ b.alt or b.caption or title }}" {% if not loop.first %}loading="lazy" {% endif %}decoding="async">
+      </a>
+      {%- if b.caption %}<figcaption>{{ b.caption | mdInline | safe }}</figcaption>{% endif %}
+    </figure>
+    {%- elif b.type == "gallery" %}
+    <div class="block-gallery count-{{ b.photos | length if b.photos | length < 4 else 'many' }}">
+      {%- for photo in b.photos %}
+      <figure class="block-gallery-item">
+        <a class="photo-link" href="{{ photo.image }}" data-gallery="post" data-caption="{{ photo.caption or '' }}">
+          <img src="{{ photo.image }}" alt="{{ photo.alt or photo.caption or title }}" loading="lazy" decoding="async">
+        </a>
+        {%- if photo.caption %}<figcaption>{{ photo.caption | mdInline | safe }}</figcaption>{% endif %}
+      </figure>
+      {%- endfor %}
+    </div>
+    {%- elif b.type == "video" %}
+    {{ videoEmbed(b.video, title) }}
+    {%- elif b.type == "quote" %}
+    <blockquote class="block-quote">
+      <p>{{ b.text | mdInline | safe }}</p>
+      {%- if b.by %}<cite>{{ b.by }}</cite>{% endif %}
+    </blockquote>
+    {%- endif %}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- set photos = simplePhotos %}
+  {%- set videoListSimple = simpleVideos %}
   {%- set storyFirst = storyPosition == "before" %}
   {%- set hasStory = content | plainText %}
   {%- if storyFirst and hasStory %}
@@ -46,9 +87,9 @@ bodyClass: page-post
   </div>
   {%- endif %}
 
-  {%- if videoList | length %}
+  {%- if videoListSimple | length %}
   <div class="post-videos container narrow">
-    {%- for video in videoList %}{{ videoEmbed(video, title) }}{% endfor %}
+    {%- for video in videoListSimple %}{{ videoEmbed(video, title) }}{% endfor %}
   </div>
   {%- endif %}
 

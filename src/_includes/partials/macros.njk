@@ -63,8 +63,8 @@
 
 {#- Compact card used on the home page. -#}
 {% macro updateCard(post) %}
-{%- set photos = post.data.photos | validPhotos %}
-{%- set videos = post.data.videos | validVideos %}
+{%- set photos = post.data | postPhotos %}
+{%- set videos = post.data | postVideos %}
 {%- set cover = photos | first %}
 {%- set coverSrc = cover.image if cover else ((videos | selectattr("thumb") | first).thumb if videos | length else "") %}
 <article class="update-card{% if not coverSrc %} no-photo{% endif %}">
@@ -79,7 +79,7 @@
     <div class="update-card-body">
       <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
       <h3>{{ post.data.title }}</h3>
-      {%- set teaser = (cover.caption if cover and cover.caption else (post.content | plainText)) %}
+      {%- set teaser = (post.data.blocks | blocksText) or (cover.caption if cover and cover.caption else (post.content | plainText)) %}
       {%- if teaser %}<p>{{ teaser | plainText | truncateWords(24) }}</p>{% endif %}
     </div>
   </a>

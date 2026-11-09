@@ -1,9 +1,8 @@
 // Shared settings for every Life Update post in this folder.
-import { validVideos } from "../../lib/video.js";
+import { combinedPhotos, combinedVideos, blocksText } from "../../lib/post.js";
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 
-const firstPhoto = (data) =>
-  (Array.isArray(data.photos) ? data.photos : []).find((p) => p && typeof p.image === "string" && p.image.trim());
+const firstPhoto = (data) => combinedPhotos(data.blocks, data.photos)[0];
 
 export default {
   layout: "layouts/post.njk",
@@ -16,10 +15,10 @@ export default {
       const name = data.page.inputPath.split("/").pop().replace(/\.md$/i, "");
       return `/updates/${name}/`;
     },
-    ogImage: (data) => firstPhoto(data)?.image || validVideos(data.videos).find((v) => v.thumb)?.thumb || data.ogImage,
+    ogImage: (data) => firstPhoto(data)?.image || combinedVideos(data.blocks, data.videos).find((v) => v.thumb)?.thumb || data.ogImage,
     description: (data) => {
-      const caption = firstPhoto(data)?.caption;
-      return caption ? String(caption).replace(/\s+/g, " ").trim().slice(0, 200) : data.description;
+      const text = blocksText(data.blocks) || firstPhoto(data)?.caption;
+      return text ? String(text).replace(/\s+/g, " ").trim().slice(0, 200) : data.description;
     },
   },
 };

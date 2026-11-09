@@ -66,6 +66,8 @@ Keep the token private, like a password. If it ever leaks, delete it on the GitH
 5. Optionally write a **Story** (the text editor supports bold, links, lists…) and add **Tags** like `travel` or `family`. Set **Story position** to *Before the photos* when your story is the introduction.
 6. Click **Save**. The site updates in about a minute.
 
+**Step-by-step stories (Story blocks):** instead of Photos + Story, use **Story blocks**. Click **Add Story blocks** and pick **Text**, **Photo**, **Photo group (side by side)**, **Video or GIF (link)** or **Quote**; drag the blocks (or use ↑ ↓) into any order. The post shows them in exactly that order, e.g. intro → photo → paragraph → photo group → video. Quick posts can keep using Photos + Story.
+
 Good to know:
 
 - **Phone photos are shrunk automatically.** Photos are resized to at most 2000 px and converted to WebP in your browser before upload, so the site stays fast.

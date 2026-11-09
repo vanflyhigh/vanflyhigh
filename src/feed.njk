@@ -13,12 +13,13 @@ eleventyExcludeFromCollections: true
   <author><name>{{ profile.name }}</name></author>
   {%- for post in collections.updates | limit(30) %}
   {%- set photos = post.data.photos | validPhotos %}
+  {%- set blockList = post.data.blocks | postBlocks %}
   <entry>
     <title>{{ post.data.title }}</title>
     <link href="{{ post.url | absoluteUrl }}"/>
     <id>{{ post.url | absoluteUrl }}</id>
     <updated>{{ post.date | isoDate }}</updated>
-    {%- set html %}{% for photo in photos %}<p><img src="{{ photo.image }}" alt=""></p>{% if photo.caption %}<p>{{ photo.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{% for v in post.data.videos | validVideos %}<p><a href="{{ v.link }}">{{ v.caption or ("Watch the video on " + v.name) }}</a></p>{% endfor %}{{ post.content | safe }}{% endset %}
+    {%- set html %}{% for b in blockList %}{% if b.type == "text" %}{{ b.text | md | safe }}{% elif b.type == "photo" %}<p><img src="{{ b.image }}" alt=""></p>{% if b.caption %}<p>{{ b.caption | mdInline | safe }}</p>{% endif %}{% elif b.type == "gallery" %}{% for ph in b.photos %}<p><img src="{{ ph.image }}" alt=""></p>{% if ph.caption %}<p>{{ ph.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{% elif b.type == "video" %}<p><a href="{{ b.video.link }}">{{ b.video.caption or ("Watch on " + b.video.name) }}</a></p>{% elif b.type == "quote" %}<blockquote><p>{{ b.text | mdInline | safe }}</p>{% if b.by %}<p>— {{ b.by }}</p>{% endif %}</blockquote>{% endif %}{% endfor %}{% for photo in photos %}<p><img src="{{ photo.image }}" alt=""></p>{% if photo.caption %}<p>{{ photo.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{% for v in post.data.videos | validVideos %}<p><a href="{{ v.link }}">{{ v.caption or ("Watch the video on " + v.name) }}</a></p>{% endfor %}{{ post.content | safe }}{% endset %}
     <content type="html">{{ html | absolutizeHtml }}</content>
   </entry>
   {%- endfor %}

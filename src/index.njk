@@ -54,9 +54,9 @@ bodyClass: page-home
         </header>
         {%- if latest | length %}
         {%- set hero = latest[0] %}
-        {%- set heroPhotos = hero.data.photos | validPhotos %}
+        {%- set heroPhotos = hero.data | postPhotos %}
         {%- set heroCover = heroPhotos | first %}
-        {%- set heroVideos = hero.data.videos | validVideos %}
+        {%- set heroVideos = hero.data | postVideos %}
         {%- set heroSrc = heroCover.image if heroCover else ((heroVideos | selectattr("thumb") | first).thumb if heroVideos | length else "") %}
         <a class="update-hero" href="{{ hero.url }}">
           <span class="update-hero-media{% if not heroSrc %} thumb-empty{% endif %}">
@@ -72,8 +72,8 @@ bodyClass: page-home
         </a>
         <ul class="thumbs">
           {%- for post in latest.slice(1, 4) %}
-          {%- set cover = (post.data.photos | validPhotos) | first %}
-          {%- set vids = post.data.videos | validVideos %}
+          {%- set cover = (post.data | postPhotos) | first %}
+          {%- set vids = post.data | postVideos %}
           {%- set thumbSrc = cover.image if cover else ((vids | selectattr("thumb") | first).thumb if vids | length else "") %}
           <li>
             <a class="thumb" href="{{ post.url }}">

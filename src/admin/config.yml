@@ -73,6 +73,60 @@ collections:
         label: Date
         widget: datetime
         default: "{{now}}"
+      - name: blocks
+        label: Story blocks
+        widget: list
+        required: false
+        collapsed: auto
+        hint: "For step-by-step stories: add Text, Photo, Photo group, Video or GIF, and Quote blocks, and drag them into any order. The post shows them in exactly this order. For a quick post, leave this empty and use Photos and Story below."
+        types:
+          - name: text
+            label: Text
+            widget: object
+            summary: "{{fields.text}}"
+            fields:
+              - { name: text, label: Text, widget: markdown }
+          - name: photo
+            label: Photo
+            widget: object
+            summary: "{{fields.caption}}"
+            fields:
+              - { name: image, label: Photo, widget: image, choose_url: false }
+              - { name: caption, label: Caption, widget: text, required: false }
+              - { name: alt, label: "Photo description (for screen readers, optional)", widget: string, required: false }
+          - name: gallery
+            label: Photo group (side by side)
+            widget: object
+            summary: Photo group
+            fields:
+              - name: photos
+                label: Photos
+                label_singular: Photo
+                widget: list
+                collapsed: auto
+                summary: "{{fields.caption}}"
+                thumbnail: image
+                fields:
+                  - { name: image, label: Photo, widget: image, choose_url: false }
+                  - { name: caption, label: Caption, widget: text, required: false }
+                  - { name: alt, label: Photo description (optional), widget: string, required: false }
+          - name: video
+            label: Video or GIF (link)
+            widget: object
+            summary: "{{fields.url}}"
+            fields:
+              - name: url
+                label: Link
+                widget: string
+                hint: "YouTube, Facebook, Instagram, TikTok or Vimeo video, or an Imgur / GIPHY / Tenor GIF"
+              - { name: caption, label: Caption, widget: text, required: false }
+          - name: quote
+            label: Quote
+            widget: object
+            summary: "{{fields.text}}"
+            fields:
+              - { name: text, label: Quote, widget: text }
+              - { name: by, label: Who said it (optional), widget: string, required: false }
       - name: photos
         label: Photos
         label_singular: Photo

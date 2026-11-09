@@ -1,6 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
 import { validVideos } from "./lib/video.js";
+import { normalizeBlocks, combinedPhotos, combinedVideos, blocksText, startsWithText } from "./lib/post.js";
 
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 const pathPrefix = process.env.PATH_PREFIX || "/";
@@ -195,6 +196,12 @@ export default function (eleventyConfig) {
   );
   // Video links (YouTube, Facebook, Instagram, TikTok, Vimeo) turned into embeddable players.
   eleventyConfig.addFilter("validVideos", validVideos);
+  // Story blocks (text, photo, photo group, video/GIF, quote).
+  eleventyConfig.addFilter("postBlocks", normalizeBlocks);
+  eleventyConfig.addFilter("postPhotos", (data = {}) => combinedPhotos(data.blocks, data.photos));
+  eleventyConfig.addFilter("postVideos", (data = {}) => combinedVideos(data.blocks, data.videos));
+  eleventyConfig.addFilter("blocksText", blocksText);
+  eleventyConfig.addFilter("startsWithText", startsWithText);
   eleventyConfig.addFilter("gifCount", (list) => (list || []).filter((v) => v.kind === "loop" || v.kind === "image").length);
   eleventyConfig.addWatchTarget("./lib/");
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
