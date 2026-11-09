@@ -18,7 +18,7 @@ eleventyExcludeFromCollections: true
     <link href="{{ post.url | absoluteUrl }}"/>
     <id>{{ post.url | absoluteUrl }}</id>
     <updated>{{ post.date | isoDate }}</updated>
-    {%- set html %}{% for photo in photos %}<p><img src="{{ photo.image }}" alt=""></p>{% if photo.caption %}<p>{{ photo.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{{ post.content | safe }}{% endset %}
+    {%- set html %}{% for photo in photos %}<p><img src="{{ photo.image }}" alt=""></p>{% if photo.caption %}<p>{{ photo.caption | mdInline | safe }}</p>{% endif %}{% endfor %}{% for v in post.data.videos | validVideos %}<p><a href="{{ v.link }}">{{ v.caption or ("Watch the video on " + v.name) }}</a></p>{% endfor %}{{ post.content | safe }}{% endset %}
     <content type="html">{{ html | absolutizeHtml }}</content>
   </entry>
   {%- endfor %}

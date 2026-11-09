@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 bodyClass: page-home
 ---
-{%- from "partials/macros.njk" import icon %}
+{%- from "partials/macros.njk" import icon, playBadge %}
 {%- set latest = collections.updates | limit(4) %}
 {%- set st = profile | statusInfo %}
 {%- set current = resume.experience[0] %}
@@ -56,10 +56,13 @@ bodyClass: page-home
         {%- set hero = latest[0] %}
         {%- set heroPhotos = hero.data.photos | validPhotos %}
         {%- set heroCover = heroPhotos | first %}
+        {%- set heroVideos = hero.data.videos | validVideos %}
+        {%- set heroSrc = heroCover.image if heroCover else ((heroVideos | selectattr("thumb") | first).thumb if heroVideos | length else "") %}
         <a class="update-hero" href="{{ hero.url }}">
-          <span class="update-hero-media{% if not heroCover %} thumb-empty{% endif %}">
-            {%- if heroCover %}<img src="{{ heroCover.image }}" alt="{{ heroCover.alt or heroCover.caption or hero.data.title }}" decoding="async">{% else %}{{ icon("images") }}{% endif %}
+          <span class="update-hero-media{% if not heroSrc %} thumb-empty{% endif %}">
+            {%- if heroSrc %}<img src="{{ heroSrc }}" alt="{{ (heroCover.alt or heroCover.caption or hero.data.title) if heroCover else hero.data.title }}" decoding="async">{% else %}{{ icon("images") }}{% endif %}
           </span>
+          {%- if heroVideos | length %}{{ playBadge(heroVideos | length) }}{% endif %}
           {%- if heroPhotos | length > 1 %}<span class="update-hero-count">{{ heroPhotos | length }} photos</span>{% endif %}
           <span class="update-hero-text">
             <span class="update-hero-badge">Latest</span>
@@ -70,10 +73,13 @@ bodyClass: page-home
         <ul class="thumbs">
           {%- for post in latest.slice(1, 4) %}
           {%- set cover = (post.data.photos | validPhotos) | first %}
+          {%- set vids = post.data.videos | validVideos %}
+          {%- set thumbSrc = cover.image if cover else ((vids | selectattr("thumb") | first).thumb if vids | length else "") %}
           <li>
             <a class="thumb" href="{{ post.url }}">
-              <span class="thumb-media{% if not cover %} thumb-empty{% endif %}">
-                {%- if cover %}<img src="{{ cover.image }}" alt="" loading="lazy" decoding="async">{% else %}{{ icon("images") }}{% endif %}
+              <span class="thumb-media{% if not thumbSrc %} thumb-empty{% endif %}">
+                {%- if thumbSrc %}<img src="{{ thumbSrc }}" alt="" loading="lazy" decoding="async">{% else %}{{ icon("images") }}{% endif %}
+                {%- if vids | length %}{{ playBadge(vids | length) }}{% endif %}
               </span>
               <span class="thumb-title">{{ post.data.title }}</span>
             </a>

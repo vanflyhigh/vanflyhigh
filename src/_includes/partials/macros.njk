@@ -19,15 +19,43 @@
 {%- endif %}
 {% endmacro %}
 
+{#- One embedded video (or a link card for sites that can't be embedded). -#}
+{% macro videoEmbed(video, title) %}
+{%- if video.embed %}
+<figure class="video-embed{% if video.vertical %} is-vertical{% endif %} video-{{ video.provider }}">
+  <div class="video-frame" style="aspect-ratio: {{ video.ratio }}">
+    <iframe src="{{ video.embed }}" title="{{ video.caption or title }} ({{ video.name }} video)" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <figcaption>
+    {%- if video.caption %}<span>{{ video.caption | mdInline | safe }}</span>{% endif %}
+    <a class="video-source" href="{{ video.link }}" target="_blank" rel="noopener">Watch on {{ video.name }} ↗</a>
+  </figcaption>
+</figure>
+{%- else %}
+<a class="video-linkcard" href="{{ video.link }}" target="_blank" rel="noopener">
+  <span class="video-linkcard-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
+  <span><strong>{{ video.caption or "Watch video" }}</strong><small>{{ video.name }} ↗</small></span>
+</a>
+{%- endif %}
+{% endmacro %}
+
+{#- Small "play" badge drawn over a cover image. -#}
+{% macro playBadge(count) %}
+<span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>{% if count > 1 %}<em>{{ count }}</em>{% endif %}</span>
+{% endmacro %}
+
 {#- Compact card used on the home page. -#}
 {% macro updateCard(post) %}
 {%- set photos = post.data.photos | validPhotos %}
+{%- set videos = post.data.videos | validVideos %}
 {%- set cover = photos | first %}
-<article class="update-card{% if not cover %} no-photo{% endif %}">
+{%- set coverSrc = cover.image if cover else ((videos | selectattr("thumb") | first).thumb if videos | length else "") %}
+<article class="update-card{% if not coverSrc %} no-photo{% endif %}">
   <a class="update-card-link" href="{{ post.url }}">
-    {%- if cover %}
+    {%- if coverSrc %}
     <div class="update-card-media">
-      <img src="{{ cover.image }}" alt="{{ cover.alt or cover.caption or post.data.title }}" loading="lazy" decoding="async">
+      <img src="{{ coverSrc }}" alt="{{ (cover.alt or cover.caption) if cover else '' }}" loading="lazy" decoding="async">
+      {%- if videos | length %}{{ playBadge(videos | length) }}{% endif %}
       {%- if photos | length > 1 %}<span class="update-card-count">{{ photos | length }} photos</span>{% endif %}
     </div>
     {%- endif %}

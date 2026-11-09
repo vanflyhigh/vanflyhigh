@@ -95,6 +95,23 @@ collections:
             label: Photo description (for screen readers, optional)
             widget: string
             required: false
+      - name: videos
+        label: Video links
+        label_singular: Video
+        widget: list
+        required: false
+        collapsed: auto
+        summary: "{{fields.url}}"
+        hint: Paste a link from YouTube, Facebook, Instagram, TikTok or Vimeo. The video plays inside your post. Upload the video there first; don't upload video files here.
+        fields:
+          - name: url
+            label: Video link
+            widget: string
+            hint: "e.g. https://youtu.be/abc123, a Facebook or Instagram reel link, or a TikTok video link"
+          - name: caption
+            label: Caption
+            widget: text
+            required: false
       - name: body
         label: Story (optional)
         widget: markdown

@@ -62,8 +62,9 @@ Keep the token private, like a password. If it ever leaks, delete it on the GitH
 1. Open `/admin/` → **Life Updates** → **New Life Update**.
 2. Give it a **Title**. The **Date** fills in automatically.
 3. Under **Photos**, click **Add Photo** for each picture. Upload or drag it in, and write a **Caption**. Drag items to reorder; the first photo is the cover.
-4. Optionally write a **Story** (the text editor supports bold, links, lists…) and add **Tags** like `travel` or `family`.
-5. Click **Save**. The site updates in about a minute.
+4. Optionally add **Video links**: upload the video to YouTube, Facebook, Instagram, TikTok or Vimeo first, then paste its link. The video plays inside your post. (Don't upload video files to the site itself; they're too big.)
+5. Optionally write a **Story** (the text editor supports bold, links, lists…) and add **Tags** like `travel` or `family`.
+6. Click **Save**. The site updates in about a minute.
 
 Good to know:
 

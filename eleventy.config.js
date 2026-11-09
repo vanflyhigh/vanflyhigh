@@ -1,5 +1,6 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
+import { validVideos } from "./lib/video.js";
 
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 const pathPrefix = process.env.PATH_PREFIX || "/";
@@ -192,6 +193,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("prettyUrl", (url) =>
     String(url || "").replace(/^https?:\/\/(www\.)?/i, "").replace(/\/$/, ""),
   );
+  // Video links (YouTube, Facebook, Instagram, TikTok, Vimeo) turned into embeddable players.
+  eleventyConfig.addFilter("validVideos", validVideos);
+  eleventyConfig.addWatchTarget("./lib/");
   eleventyConfig.addFilter("limit", (arr, n) => (Array.isArray(arr) ? arr.slice(0, n) : []));
   eleventyConfig.addFilter("cleanTags", (tags) =>
     (Array.isArray(tags) ? tags : []).filter((t) => typeof t === "string" && t.trim()).map((t) => t.trim()),

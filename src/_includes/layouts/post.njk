@@ -2,8 +2,9 @@
 layout: layouts/base.njk
 bodyClass: page-post
 ---
-{%- from "partials/macros.njk" import tagList %}
+{%- from "partials/macros.njk" import tagList, videoEmbed %}
 {%- set photos = photos | validPhotos %}
+{%- set videoList = videos | validVideos %}
 {%- set newer = collections.updates | getPreviousCollectionItem(page) %}
 {%- set older = collections.updates | getNextCollectionItem(page) %}
 
@@ -14,6 +15,7 @@ bodyClass: page-post
     <p class="post-meta">
       <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate(site.timezone) }}</time>
       {%- if photos | length %}<span>{{ photos | length }} {{ "photo" if photos | length == 1 else "photos" }}</span>{% endif %}
+      {%- if videoList | length %}<span>{{ videoList | length }} {{ "video" if videoList | length == 1 else "videos" }}</span>{% endif %}
       {%- if draft %}<span class="badge">Draft (only visible locally)</span>{% endif %}
     </p>
   </header>
@@ -30,6 +32,12 @@ bodyClass: page-post
       {%- endif %}
     </figure>
     {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- if videoList | length %}
+  <div class="post-videos container narrow">
+    {%- for video in videoList %}{{ videoEmbed(video, title) }}{% endfor %}
   </div>
   {%- endif %}
 

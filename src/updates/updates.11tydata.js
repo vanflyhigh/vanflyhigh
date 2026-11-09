@@ -1,4 +1,5 @@
 // Shared settings for every Life Update post in this folder.
+import { validVideos } from "../../lib/video.js";
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 
 const firstPhoto = (data) =>
@@ -15,7 +16,7 @@ export default {
       const name = data.page.inputPath.split("/").pop().replace(/\.md$/i, "");
       return `/updates/${name}/`;
     },
-    ogImage: (data) => firstPhoto(data)?.image || data.ogImage,
+    ogImage: (data) => firstPhoto(data)?.image || validVideos(data.videos).find((v) => v.thumb)?.thumb || data.ogImage,
     description: (data) => {
       const caption = firstPhoto(data)?.caption;
       return caption ? String(caption).replace(/\s+/g, " ").trim().slice(0, 200) : data.description;
