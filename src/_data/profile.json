@@ -46,8 +46,13 @@
     },
     {
       "platform": "whatsapp",
-      "handle": "Van Fontanilla",
-      "url": "+639278219037"
+      "handle": "+639278219037",
+      "url": ""
+    },
+    {
+      "platform": "viber",
+      "handle": "+639278219037",
+      "url": ""
     }
   ],
   "highlights": [
