@@ -17,11 +17,8 @@
     "Microsoft SQL",
     "Creative"
   ],
-  "summary": "IT professional with nearly 10 years of experience in network administration, healthcare information systems, and software quality assurance. I'm skilled in Microsoft SQL, LAN/WAN management, system security, and data-driven reporting, and I'm known for dependable technical support and turning data into practical insights for management. I also bring a creative edge from my background in graphic design and multimedia.",
-  "location": "San Fernando City, La Union, Philippines",
-  "email": "vanfontanillavf@gmail.com",
   "phone": "",
-  "resumeFile": "/files/Van-Fontanilla-Resume.pdf",
+  "resumeFile": "/files/20261111-resume-website-b5da3c26be2c.pdf",
   "contacts": [
     {
       "platform": "instagram",
@@ -111,5 +108,8 @@
       "name": "Photography",
       "icon": "camera"
     }
-  ]
+  ],
+  "email": "vanfontanillavf@gmail.com",
+  "location": "San Fernando City, La Union, Philippines",
+  "summary": "IT professional with nearly 10 years of experience in network administration, healthcare information systems, and software quality assurance. I'm skilled in Microsoft SQL, LAN/WAN management, system security, and data-driven reporting, and I'm known for dependable technical support and turning data into practical insights for management. I also bring a creative edge from my background in graphic design and multimedia."
 }
