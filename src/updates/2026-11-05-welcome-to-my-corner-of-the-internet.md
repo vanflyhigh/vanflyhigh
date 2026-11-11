@@ -1,5 +1,6 @@
 ---
 title: Yo! First Website Featuring "Me" (vanfontanilla.com)
+active: true
 date: 2026-11-05T09:00:00+08:00
 photos:
   - image: /images/uploads/20261105-first-website-photo-a0b995b94735.webp
@@ -11,7 +12,6 @@ photos:
     alt: Actual Work Setup with the "Bantay"
 tags:
   - beginning
-draft: false
 ---
 
 Here’s a quick peek at what’s on the site right now:

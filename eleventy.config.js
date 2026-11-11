@@ -2,7 +2,7 @@ import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
 import { validVideos } from "./lib/video.js";
 import { lookupImgurPosts } from "./lib/imgur.js";
-import { normalizeBlocks, combinedPhotos, combinedVideos, blocksText, startsWithText } from "./lib/post.js";
+import { normalizeBlocks, combinedPhotos, combinedVideos, blocksText, startsWithText, isHiddenPost } from "./lib/post.js";
 
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 const pathPrefix = process.env.PATH_PREFIX || "/";
@@ -51,7 +51,7 @@ export default function (eleventyConfig) {
   });
 
   // ---------- Collections ----------
-  const isVisible = (item) => !(isProduction && item.data.draft);
+  const isVisible = (item) => !(isProduction && isHiddenPost(item.data));
 
   eleventyConfig.addCollection("updates", (api) =>
     api
@@ -140,6 +140,7 @@ export default function (eleventyConfig) {
     return JSON.stringify(data).replace(/</g, "\\u003c");
   });
 
+  eleventyConfig.addFilter("isHidden", (data) => isHiddenPost(data));
   eleventyConfig.addFilter("md", (text) => (text ? md.render(String(text)) : ""));
   eleventyConfig.addFilter("mdInline", (text) => (text ? md.renderInline(String(text)) : ""));
 

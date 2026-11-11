@@ -1,5 +1,6 @@
 ---
 title: A New Look for Gaming Life of Van 🎮
+active: true
 date: 2026-11-09T13:36:00
 blocks:
   - type: text
@@ -28,5 +29,4 @@ videos:
 storyPosition: before
 tags:
   - ideas
-draft: false
 ---

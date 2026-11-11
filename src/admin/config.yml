@@ -56,7 +56,7 @@ collections:
     extension: md
     format: frontmatter
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    summary: "{{title}}"
+    summary: "{{title}}{{active | ternary('', '  ·  INACTIVE (hidden)')}}"
     preview_path: "updates/{{slug}}/"
     sortable_fields:
       fields: [date, title]
@@ -64,11 +64,18 @@ collections:
         field: date
         direction: descending
     thumbnail: photos.*.image
+    view_filters:
+      - { name: inactive, label: Inactive posts only, field: active, eq: false }
     fields:
       - name: title
         label: Title
         widget: string
         hint: "Example: Sunset surf at Urbiztondo"
+      - name: active
+        label: Active (shown on the site)
+        widget: boolean
+        default: true
+        hint: "Switch off and Save to hide this post from the site. Switch it back on anytime to show it again. Nothing is deleted."
       - name: date
         label: Date
         widget: datetime
@@ -186,11 +193,6 @@ collections:
         required: false
         hint: "e.g. travel, family, work"
         field: { name: tag, label: Tag, widget: string }
-      - name: draft
-        label: Hide from site (draft)
-        widget: boolean
-        required: false
-        default: false
 
   # ------------------------------------------------------------ site content
   - name: content

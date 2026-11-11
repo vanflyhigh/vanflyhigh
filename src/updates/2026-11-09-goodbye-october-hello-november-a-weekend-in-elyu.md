@@ -1,5 +1,6 @@
 ---
 title: 'Goodbye October, Hello November: A Weekend in Elyu'
+active: true
 date: 2026-11-09T11:12:00
 photos:
   - image: /images/uploads/20261109-img_6304-9c12fcd29e34.webp
@@ -19,7 +20,6 @@ photos:
     alt: ''
 tags:
   - lakwatsa
-draft: false
 ---
 
 Ended October and started November the slow way, in Elyu. 🌅

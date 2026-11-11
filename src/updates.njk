@@ -35,7 +35,7 @@ bodyClass: page-updates
     <article class="post-card">
       <header class="post-card-head">
         <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate(site.timezone) }}</time>
-        {%- if post.data.draft %}<span class="badge">Draft (only visible locally)</span>{% endif %}
+        {%- if post.data | isHidden %}<span class="badge">Inactive · hidden on the live site</span>{% endif %}
         <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
       </header>
       {%- set text = ((post.data.blocks | blocksText) + " " + (post.content | plainText)) | trim %}

@@ -1,5 +1,5 @@
 // Shared settings for every Life Update post in this folder.
-import { combinedPhotos, combinedVideos, blocksText } from "../../lib/post.js";
+import { combinedPhotos, combinedVideos, blocksText, isHiddenPost } from "../../lib/post.js";
 const isProduction = process.env.ELEVENTY_RUN_MODE === "build";
 
 const firstPhoto = (data) => combinedPhotos(data.blocks, data.photos)[0];
@@ -9,9 +9,9 @@ export default {
   ogType: "article",
   eleventyComputed: {
     // Use the full file name (which starts with the date) so two posts with the
-    // same title never collide. Drafts are not published on the live site.
+    // same title never collide. Inactive posts are not published on the live site.
     permalink: (data) => {
-      if (isProduction && data.draft) return false;
+      if (isProduction && isHiddenPost(data)) return false;
       const name = data.page.inputPath.split("/").pop().replace(/\.md$/i, "");
       return `/updates/${name}/`;
     },

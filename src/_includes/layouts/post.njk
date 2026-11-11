@@ -22,7 +22,7 @@ bodyClass: page-post
       {%- set videoCount = (videoList | length) - gifCount %}
       {%- if videoCount %}<span>{{ videoCount }} {{ "video" if videoCount == 1 else "videos" }}</span>{% endif %}
       {%- if gifCount %}<span>{{ gifCount }} {{ "GIF" if gifCount == 1 else "GIFs" }}</span>{% endif %}
-      {%- if draft %}<span class="badge">Draft (only visible locally)</span>{% endif %}
+      {%- if active === false or draft %}<span class="badge">Inactive · hidden on the live site</span>{% endif %}
     </p>
   </header>
 

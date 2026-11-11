@@ -72,7 +72,7 @@ Keep the token private, like a password. If it ever leaks, delete it on the GitH
 Good to know:
 
 - **Phone photos are shrunk automatically.** Photos are resized to at most 2000 px and converted to WebP in your browser before upload, so the site stays fast.
-- **Drafts:** turn on **Hide from site (draft)** to save a post without publishing it.
+- **Show or hide a post (Active switch):** every post has an **Active** switch near the top. Switch it off and click **Save** to hide the post. It disappears from the home page, Life Updates, tag pages and the RSS feed, and its link stops working. Switch it back on and **Save** to show it again. Nothing is deleted. In the post list, hidden posts are marked **INACTIVE**, and **Filter → Inactive posts only** lists just those. (A hidden post's photos stay stored; they just aren't shown anywhere.)
 - **Edit or delete** any post from the same list. Changes go live the same way.
 - A post can be photos only, text only, or both.
 
@@ -100,7 +100,7 @@ The site is built with [Eleventy](https://www.11ty.dev/) and the dashboard is [S
 
 ```bash
 npm install
-npm start        # local preview at http://localhost:8080 (drafts are shown here)
+npm start        # local preview at http://localhost:8080 (inactive posts are shown here, marked)
 npm run build    # production build into _site/
 ```
 
